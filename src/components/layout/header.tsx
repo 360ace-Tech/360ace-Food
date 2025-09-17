@@ -1,0 +1,74 @@
+'use client';
+
+import Link from 'next/link';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { MenuIcon } from '@/components/ui/menu-icon';
+import { Logo } from '@/components/ui/logo';
+
+const navItems = [
+  { href: '/#home', label: 'Home' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#process', label: 'Process' },
+  { href: '/insights', label: 'Insights' },
+  { href: '/contact', label: 'Contact' }
+];
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-40 backdrop-blur-lg">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-5 rounded-full border border-emerald-900/5 bg-white/90 px-6 py-4 shadow-brand transition-all">
+        <Link href="/#home" className="font-display flex items-center gap-2 text-sm font-semibold tracking-[0.2em] text-slate/80">
+          <span className="sr-only">360ace.Food</span>
+          <Logo size="md" />
+          <span className="hidden sm:inline-block">360ACE.FOOD</span>
+        </Link>
+        <nav className="hidden items-center gap-7 text-sm font-medium text-slate/80 md:flex">
+          {navItems.map((item) => (
+            <Link key={item.label} href={item.href} className="relative transition hover:text-midnight">
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/contact"
+            className="hidden rounded-full bg-ember px-5 py-2 text-sm font-semibold text-white shadow-brand transition hover:-translate-y-0.5 hover:shadow-lg md:inline-flex"
+          >
+            Book Consultation
+          </Link>
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            onClick={() => setOpen((prev) => !prev)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate/20 text-slate md:hidden"
+          >
+            <MenuIcon open={open} />
+          </button>
+        </div>
+      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            className="mx-auto mt-2 w-[calc(100%-2rem)] max-w-3xl rounded-2xl border border-slate/10 bg-white/95 px-6 py-6 shadow-xl md:hidden"
+          >
+            <ul className="grid gap-4 text-base font-medium text-slate/80">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} onClick={() => setOpen(false)} className="block py-2">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}

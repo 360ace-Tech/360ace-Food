@@ -1,0 +1,22 @@
+[
+  {
+    "step": "Assess",
+    "description": "Diagnostics, site walks, and stakeholder interviews map your controls, culture, and vulnerabilities."
+  },
+  {
+    "step": "Design",
+    "description": "Prioritized roadmaps translate insights into SOPs, training, and technology recommendations."
+  },
+  {
+    "step": "Implement",
+    "description": "Hands-on deployment embeds workflows, digital tools, and coaching for compliant operations."
+  },
+  {
+    "step": "Monitor",
+    "description": "Continuous auditing, performance tracking, and improvement sprints sustain stakeholder confidence."
+  },
+  {
+    "step": "Elevate",
+    "description": "Strategic reviews identify growth opportunities, certifications, and product innovations."
+  }
+]

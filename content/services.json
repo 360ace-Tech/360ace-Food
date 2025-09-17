@@ -1,0 +1,56 @@
+[
+  {
+    "category": "Training & Capability Building",
+    "summary": "On-site and virtual programs that embed best practices into daily operations.",
+    "services": [
+      "On-site and off-site food handling/GMP training",
+      "Custom SOP and SSOP workshops",
+      "Laboratory protocol development and training"
+    ]
+  },
+  {
+    "category": "Quality Systems Architecture",
+    "summary": "Design, documentation, and maintenance of resilient quality frameworks.",
+    "services": [
+      "Standard Operating Procedure and sanitation program development",
+      "Create and maintain quality systems",
+      "GMP, site, and establishment licensing support"
+    ]
+  },
+  {
+    "category": "Regulatory & Audit Readiness",
+    "summary": "Confidence for inspections, certifications, and regulatory milestones.",
+    "services": [
+      "Inspection, pre-audit, and audit preparation",
+      "HACCP, BRC, and GMP guidance",
+      "Regulatory and labeling submission management"
+    ]
+  },
+  {
+    "category": "Quality Assurance Partnership",
+    "summary": "Long-term stewardship of compliance, risk, and continuous improvement.",
+    "services": [
+      "Quality assurance and compliance programs",
+      "Ongoing GMP and HARPC advisory",
+      "Supplier and site performance monitoring"
+    ]
+  },
+  {
+    "category": "Research & Product Development",
+    "summary": "Translating science into accelerated product pipelines and safer launches.",
+    "services": [
+      "Nutritional value calculation and determination",
+      "Product development and shelf-life studies",
+      "Scientific research planning and literature reviews"
+    ]
+  },
+  {
+    "category": "Conference & Insight Support",
+    "summary": "Elevating thought leadership moments with evidence-rich storytelling.",
+    "services": [
+      "Conference support and presentation development",
+      "Training facilitation across stakeholder groups",
+      "Impact reporting and capacity building"
+    ]
+  }
+]
