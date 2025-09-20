@@ -1,18 +1,24 @@
 'use client';
 
 import Link from 'next/link';
+import type { Route } from 'next';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MenuIcon } from '@/components/ui/menu-icon';
 import { Logo } from '@/components/ui/logo';
 
-const navItems = [
-  { href: '/#home', label: 'Home' },
-  { href: '/#services', label: 'Services' },
-  { href: '/#process', label: 'Process' },
-  { href: '/insights', label: 'Insights' },
-  { href: '/contact', label: 'Contact' }
+const navConfig = [
+  { path: '#home', label: 'Home' },
+  { path: '#services', label: 'Services' },
+  { path: '#process', label: 'Process' },
+  { path: '/insights', label: 'Insights' },
+  { path: '/contact', label: 'Contact' }
 ];
+
+const navItems: Array<{ href: Route; label: string }> = navConfig.map(({ path, label }) => ({
+  label,
+  href: (path.startsWith('#') ? (`/${path}` as Route) : (path as Route))
+}));
 
 export function Header() {
   const [open, setOpen] = useState(false);
