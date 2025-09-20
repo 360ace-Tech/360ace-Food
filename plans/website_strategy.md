@@ -9,7 +9,7 @@
 - **Styling**: Tailwind CSS layered with a custom design token system (`tokens.css` exported as CSS variables) to reflect the palette and typography from the brief.
 - **State & Data**: Minimal global state via React Context for theming/reduced motion toggle; services and testimonials sourced from MDX or CMS.
 - **Animations**: Framer Motion + GSAP-lite (via `gsap/ScrollTrigger`) for hero, scroll-triggered reveals, and micro-interactions; respect `prefers-reduced-motion`.
-- **Forms & Email**: Resend API integration through Next.js Route Handlers for server-side email delivery.
+- **Forms & Email**: MailerSend API integration through Next.js Route Handlers for server-side email delivery.
 - **Deployment**: Vercel with preview deployments for QA, leveraging Incremental Static Regeneration for content pages.
 
 ## Content Templating & Management
@@ -32,10 +32,10 @@
 - Micro-interactions: Hover tilt using `react-use-gesture`, magnetic buttons with transform translate, parallax backgrounds via CSS `transform: translateZ` layers.
 - Reduced motion: wrap animations in `useReducedMotion` checks and provide static alternatives.
 
-## Contact & Resend Integration
+## Contact & MailerSend Integration
 - Create `app/api/contact/route.ts` handling POST requests, validating payload (name, email, organization, serviceNeed, message) with Zod.
-- Use Resend Node SDK (`@resend/node`) to send emails; template stored in `emails/contact-request.tsx` (React Email component) referencing brand styling.
-- Environment setup: require `RESEND_API_KEY` (securely via `.env.local`), `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.
+- Call MailerSend's REST Email API via `fetch` to deliver transactional messages; template stored in `emails/contact-request.tsx` (string-based) referencing brand styling.
+- Environment setup: require `MAILERSEND_API_TOKEN` (securely via `.env.local` or Netlify env vars), `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.
 - Frontend form component (`ContactForm.tsx`) with client-side validation, loading states, error handling, and success toast.
 - Include spam prevention (bot-field honeypot + rate limiting via `@upstash/ratelimit` or custom middleware if desired).
 
@@ -48,7 +48,7 @@
    - Coordinate asset production (logos, photography) and ensure accessibility of language.
 3. **Engineering Agent**
    - Scaffold Next.js project, integrate Tailwind, motion library, and content layer.
-   - Implement components, connect Resend, configure deployment pipeline.
+   - Implement components, connect MailerSend, configure deployment pipeline.
 4. **QA & Performance Agent**
    - Run automation (Playwright/Lighthouse) on preview builds, enforce accessibility and performance budgets.
 
@@ -56,14 +56,14 @@
 1. **Week 0** – Kickoff: approve strategy, confirm palette/logo direction, set up repositories and Vercel project.
 2. **Week 1** – Design System & Content Modeling: finalize tokens, create component library in Figma, define content schemas/MDX structure.
 3. **Week 2** – Build Core Pages: implement homepage sections, navigation, footer, CTA band, integrate content data.
-4. **Week 3** – Motion & Integrations: layer in animations, build contact page with Resend, wire up analytics and scheduling embeds; introduce hover/gesture micro-interactions across hero, services, process, testimonials.
+4. **Week 3** – Motion & Integrations: layer in animations, build contact page with MailerSend, wire up analytics and scheduling embeds; introduce hover/gesture micro-interactions across hero, services, process, testimonials.
 5. **Week 4** – QA & Launch Prep: cross-browser testing, SEO/performance audits, finalize assets, plan rollout.
 
 ## Deliverables & Checkpoints
 - Architecture diagram and repo scaffold (`docs/architecture.md`).
 - Content model reference sheets and sample MDX entries.
 - Component Storybook showcasing hero, cards, timelines, sliders with motion states.
-- Resend integration checklist: env variables verified, template tests passed, fallback email copy.
+- MailerSend integration checklist: env variables verified, template tests passed, fallback email copy.
 - Launch readiness report summarizing testing results, performance scores, and outstanding tasks.
 
 ## Dependencies & Open Questions

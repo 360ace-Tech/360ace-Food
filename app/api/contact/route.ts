@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { Resend } from 'resend';
 import ContactRequestEmail from '../../../emails/contact-request';
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const mailerSendToken = process.env.MAILERSEND_API_TOKEN;
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -23,8 +22,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ status: 'ok' });
     }
 
-    if (!resend) {
-      console.warn('Resend API key missing.');
+    if (!mailerSendToken) {
+      console.warn('MailerSend API token missing.');
       return NextResponse.json({ error: 'Email service not configured' }, { status: 503 });
     }
 
@@ -36,18 +35,30 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email service not configured' }, { status: 503 });
     }
 
-    await resend.emails.send({
-      from,
-      to,
-      subject: `New inquiry from ${data.name}`,
-      react: ContactRequestEmail({
-        name: data.name,
-        email: data.email,
-        organization: data.organization,
-        serviceNeed: data.serviceNeed,
-        message: data.message
+    const response = await fetch('https://api.mailersend.com/v1/email', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${mailerSendToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: { email: from, name: '360ace.Food' },
+        to: [{ email: to, name: '360ace.Food' }],
+        subject: `New inquiry from ${data.name}`,
+        html: ContactRequestEmail({
+          name: data.name,
+          email: data.email,
+          organization: data.organization,
+          serviceNeed: data.serviceNeed,
+          message: data.message
+        })
       })
     });
+
+    if (!response.ok) {
+      console.error('MailerSend error', await response.text());
+      return NextResponse.json({ error: 'Failed to send message' }, { status: 502 });
+    }
 
     return NextResponse.json({ status: 'ok' });
   } catch (error) {

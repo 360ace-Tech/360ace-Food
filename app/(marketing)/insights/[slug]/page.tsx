@@ -37,10 +37,10 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
   }
 
   return (
-    <article className="mx-auto w-full max-w-4xl px-6 pb-24 pt-24">
+    <article className="mx-auto w-full max-w-4xl px-5 pb-24 pt-24 sm:px-6">
       <Link href="/insights" className="text-sm text-ember">← Back to insights</Link>
       <Reveal variant="fade-in">
-        <div className="mt-6 rounded-3xl border border-emerald-900/10 bg-white/95 p-10 shadow-brand">
+        <div className="mt-6 rounded-3xl border border-emerald-900/10 bg-white/95 p-6 shadow-brand sm:p-10">
           <Reveal variant="fade-up">
             <h1 className="font-display text-4xl text-midnight md:text-5xl">{post.frontmatter.title}</h1>
           </Reveal>

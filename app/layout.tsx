@@ -9,6 +9,7 @@ import { PageTransition } from '@/components/layout/page-transition';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
 const manrope = Manrope({ subsets: ['latin'], display: 'swap', variable: '--font-manrope' });
+const maintenanceEnabled = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
 
 export const metadata: Metadata = {
   title: '360ace.Food | Precision Food Safety Consulting',
@@ -41,14 +42,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={clsx(inter.variable, manrope.variable, 'bg-[var(--background)] text-[var(--foreground)]')}>
-        <SkipToContent />
-        <Header />
+        {!maintenanceEnabled && <SkipToContent />}
+        {!maintenanceEnabled && <Header />}
         <PageTransition>
           <main id="main-content" className="relative">
             {children}
           </main>
         </PageTransition>
-        <Footer />
+        {!maintenanceEnabled && <Footer />}
       </body>
     </html>
   );

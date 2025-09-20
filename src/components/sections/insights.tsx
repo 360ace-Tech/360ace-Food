@@ -28,7 +28,7 @@ export function Insights({ posts }: InsightsProps) {
         {posts.map((post, index) => (
           <Reveal key={post.slug} delay={0.05 * index}>
             <article
-              className="group rounded-3xl border border-emerald-900/10 bg-white/90 p-8 shadow-brand transition hover:-translate-y-1 hover:border-ember/40"
+              className="group rounded-3xl border border-emerald-900/10 bg-white/90 p-6 shadow-brand transition hover:-translate-y-1 hover:border-ember/40 sm:p-8"
             >
               <div className="text-xs uppercase tracking-[0.28em] text-slate/60">{formatDate(post.date)}</div>
               <h3 className="mt-4 font-display text-2xl text-midnight group-hover:text-ember">{post.title}</h3>

@@ -30,14 +30,14 @@ export function ProcessTimeline() {
       <Reveal delay={0.1}>
         <div className="mt-12 grid gap-6 md:grid-cols-5">
           {steps.map((step, index) => (
-            <motion.div
-              key={step.step}
-              initial="initial"
-              whileHover="hover"
-              variants={itemVariants}
-              className="relative rounded-3xl border border-emerald-900/10 bg-white/90 p-6 text-slate shadow-sm"
-            >
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-ember/90 text-sm font-semibold text-midnight shadow-brand">
+          <motion.div
+            key={step.step}
+            initial="initial"
+            whileHover="hover"
+            variants={itemVariants}
+            className="relative rounded-3xl border border-emerald-900/10 bg-white/90 p-5 text-slate shadow-sm sm:p-6"
+          >
+            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-ember/90 text-sm font-semibold text-midnight shadow-brand">
                 {index + 1}
               </div>
               <h3 className="font-display text-lg text-midnight">{step.step}</h3>

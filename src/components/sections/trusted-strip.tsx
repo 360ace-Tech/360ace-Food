@@ -48,7 +48,7 @@ export function TrustedStrip() {
   return (
     <section className="mt-24">
       <Reveal>
-        <div className="mx-auto grid w-full max-w-5xl gap-6 rounded-3xl border border-emerald-900/10 bg-white/90 px-6 py-10 text-slate shadow-brand md:grid-cols-4">
+        <div className="mx-auto grid w-full max-w-5xl gap-5 rounded-3xl border border-emerald-900/10 bg-white/90 px-5 py-8 text-slate shadow-brand sm:gap-6 sm:px-6 sm:py-10 md:grid-cols-4">
           {stats.map((stat) => (
             <StatCard key={stat.label} value={stat.value} label={stat.label} />
           ))}

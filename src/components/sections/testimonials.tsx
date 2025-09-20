@@ -22,7 +22,7 @@ export function Testimonials() {
       <Reveal delay={0.1}>
         <motion.div
           whileHover={{ boxShadow: '0 30px 80px -50px rgba(20, 60, 30, 0.35)' }}
-          className="mt-12 rounded-3xl border border-emerald-900/10 bg-white px-8 py-12 text-slate shadow-brand"
+          className="mt-12 rounded-3xl border border-emerald-900/10 bg-white px-6 py-8 text-slate shadow-brand sm:px-8 sm:py-12"
         >
           <AnimatePresence mode="wait">
             <motion.blockquote

@@ -7,7 +7,8 @@ A Next.js 14 marketing experience for Dr. Ifeoluwa Adekoya’s food consultancy.
 - Tailwind CSS with design tokens
 - Framer Motion for transitions
 - MDX/JSON content layer
-- Resend for contact form email delivery
+- MailerSend Email API for contact form delivery
+- dayjs for countdown timing utilities
 
 ## Getting Started
 ```bash
@@ -35,18 +36,43 @@ Brand assets should live under `public/`.
 
 Swap the files with new exports and keep the same filenames to update branding.
 
-## Contact Form & Resend
-Create `.env.local` with:
-```
-RESEND_API_KEY=your-resend-api-key
-CONTACT_FROM_EMAIL=360ace@yourdomain.com
-CONTACT_TO_EMAIL=hello@360acefood.com
-```
-Emails render via `emails/contact-request.tsx`.
+## Contact Form & MailerSend
+The contact API uses [MailerSend](https://www.mailersend.com/) to deliver notifications.
+
+1. Verify your sending domain inside MailerSend.
+2. Generate an **API Token** with `Full access` to the Email API.
+3. Create `.env.local` (ignored by git) with:
+   ```env
+   MAILERSEND_API_TOKEN=your-mailersend-api-token
+   CONTACT_FROM_EMAIL=notifications@360acefood.com
+   CONTACT_TO_EMAIL=hello@360acefood.com
+   ```
+4. Start the dev server – submissions from `ContactForm.tsx` will POST to `app/api/contact/route.ts`, render `emails/contact-request.tsx`, and send via MailerSend.
+
+### Deploying on Netlify
+1. In **Site settings → Environment variables**, add the three variables above.
+2. Redeploy to inject them into the build.
+3. Netlify functions will read them at runtime; no additional configuration is required.
 
 ## Deployment Notes
 - Run `npm run build` for lint/build.
 - The repo uses Next.js fonts; ensure outbound network is allowed or replace with self-hosted fonts when building in restricted environments.
+- When deploying to Netlify, add `MAILERSEND_API_TOKEN`, `CONTACT_FROM_EMAIL`, and `CONTACT_TO_EMAIL` to the dashboard before publishing.
+
+## Temporary Maintenance Mode
+The homepage can display a launch countdown while the site is under construction.
+
+### Enable
+1. Set an environment variable locally or on your host:
+   ```env
+   NEXT_PUBLIC_MAINTENANCE_MODE=true
+   NEXT_PUBLIC_LAUNCH_AT=2024-11-01T09:00:00Z # optional ISO timestamp
+   ```
+2. Restart the server. The maintenance page with countdown and notify form will appear.
+
+### Disable
+1. Remove `NEXT_PUBLIC_MAINTENANCE_MODE` or set it to `false`.
+2. Redeploy/restart – the full marketing site returns instantly.
 
 ## Git & Hosting
 1. `git init`

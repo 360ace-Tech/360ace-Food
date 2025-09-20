@@ -36,7 +36,7 @@ export function ServicesGrid() {
               whileHover="hover"
               variants={cardVariants}
               transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-              className="group relative overflow-hidden rounded-3xl border border-emerald-900/10 bg-white/90 p-8 text-slate shadow-brand"
+            className="group relative overflow-hidden rounded-3xl border border-emerald-900/10 bg-white/90 p-6 text-slate shadow-brand sm:p-8"
             >
               <div className="pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100">
                 <div className="absolute -inset-px bg-gradient-to-br from-ember/10 via-transparent to-transparent" />
