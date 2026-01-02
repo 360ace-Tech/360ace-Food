@@ -5,8 +5,7 @@ function buildCSP(nonce: string) {
   const scriptSrc = [
     "'self'",
     `'nonce-${nonce}'`,
-    "'strict-dynamic'",
-    dev ? "'unsafe-eval'" : "",
+    dev ? "'unsafe-eval' 'wasm-unsafe-eval'" : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -35,8 +34,18 @@ export function middleware(req: NextRequest) {
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const nonce = btoa(String.fromCharCode(...bytes));
-  const res = NextResponse.next();
-  res.headers.set("Content-Security-Policy", buildCSP(nonce));
+  const csp = buildCSP(nonce);
+
+  // Forward CSP as a request header so Next can pick nonce and stamp it on inline scripts
+  const fwdHeaders = new Headers(req.headers);
+  fwdHeaders.set("content-security-policy", csp);
+
+  const res = NextResponse.next({
+    request: { headers: fwdHeaders },
+  });
+
+  // And also set CSP on the actual response to the browser
+  res.headers.set("Content-Security-Policy", csp);
   return res;
 }
 
