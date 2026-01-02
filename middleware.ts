@@ -34,6 +34,28 @@ function buildCSP(nonce: string) {
 }
 
 export function middleware(req: NextRequest) {
+  // No-op in static export mode
+  if (process.env.NEXT_STATIC_EXPORT === "1") {
+    return NextResponse.next();
+  }
+  // Localhost CSP bypass: ensure production builds render locally without CSP blocking
+  try {
+    const host = req.nextUrl.hostname || "";
+    const isLocalHostname =
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host === "::1" ||
+      host.endsWith(".local") ||
+      host.endsWith(".lan");
+    const isRFC1918 =
+      /^10\./.test(host) ||
+      /^192\.168\./.test(host) ||
+      /^172\.(1[6-9]|2[0-9]|3[01])\./.test(host) ||
+      /^169\.254\./.test(host);
+    if (isLocalHostname || isRFC1918) {
+      return NextResponse.next();
+    }
+  } catch {}
   // Fix accidental attempts to load Next's internal output as a route
   if (req.nextUrl.pathname.startsWith("/server/app")) {
     const url = req.nextUrl.clone();
@@ -44,6 +66,10 @@ export function middleware(req: NextRequest) {
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const nonce = btoa(String.fromCharCode(...bytes));
+  // Allow disabling CSP with an env override if needed
+  if (process.env.DISABLE_CSP === "1") {
+    return NextResponse.next();
+  }
   const csp = buildCSP(nonce);
 
   // Forward CSP as a request header so Next can pick nonce and stamp it on inline scripts

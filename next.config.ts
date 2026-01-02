@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
+const isStaticExport = process.env.NEXT_STATIC_EXPORT === "1";
+
 const nextConfig: NextConfig = {
+  ...(isStaticExport ? { output: "export", trailingSlash: true } : {}),
   async headers() {
     return [
       {
@@ -38,6 +41,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
+    ...(isStaticExport ? { unoptimized: true } : {}),
   },
 };
 

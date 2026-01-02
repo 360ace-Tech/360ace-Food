@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+export const dynamic = "force-static";
 import site from "@/data/site";
 
 export default function robots(): MetadataRoute.Robots {
@@ -12,4 +13,3 @@ export default function robots(): MetadataRoute.Robots {
     host: site.url,
   };
 }
-

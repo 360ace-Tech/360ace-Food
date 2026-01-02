@@ -31,7 +31,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
+// For static export, generate the list of article paths at build time
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return (articles as any[]).map((a) => ({ slug: a.slug }));
+}
+
 export default function ArticleLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
-

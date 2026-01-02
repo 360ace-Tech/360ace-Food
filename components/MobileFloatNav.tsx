@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Home, Briefcase, GitBranch, Mail, Newspaper } from "lucide-react";
+import { Home, Briefcase, GitBranch, Mail, Newspaper, Users } from "lucide-react";
 
 export default function MobileFloatNav() {
   const pathname = usePathname();
-  const [active, setActive] = useState<"home" | "services" | "process" | "insights" | "contact" | null>(null);
+  const [active, setActive] = useState<
+    "home" | "services" | "process" | "experts" | "insights" | "contact" | null
+  >(null);
   const [hintAll, setHintAll] = useState<boolean>(true);
   const [hovered, setHovered] = useState<number | null>(null);
 
@@ -16,14 +18,15 @@ export default function MobileFloatNav() {
     const t = setTimeout(() => setHintAll(false), 3000);
 
     // Single observer that picks the most-visible section
-    type SectionKey = "home" | "services" | "process" | "contact";
+    type SectionKey = "home" | "services" | "process" | "experts" | "contact";
     const map: Record<SectionKey, SectionKey> = {
       home: "home",
       services: "services",
       process: "process",
+      experts: "experts",
       contact: "contact",
     };
-    const ids: SectionKey[] = ["home", "services", "process", "contact"];
+    const ids: SectionKey[] = ["home", "services", "process", "experts", "contact"];
     const els = ids
       .map((id) => ({ id, el: document.getElementById(id) as HTMLElement | null }))
       .filter((x): x is { id: SectionKey; el: HTMLElement } => !!x.el);
@@ -159,9 +162,10 @@ export default function MobileFloatNav() {
         </Link>
 
         <Link
-          href="/insights"
-          aria-label="Insights"
-          className={btn(pathname.startsWith("/insights"))}
+          href="/#experts"
+          scroll={false}
+          aria-label="Experts"
+          className={btn(pathname === "/" ? active === "experts" : false)}
           onMouseEnter={() => enter(3)}
           onMouseLeave={leave}
           onFocus={() => enter(3)}
@@ -170,14 +174,14 @@ export default function MobileFloatNav() {
           onTouchEnd={leave}
           onClick={() => { setHovered(null); setHintAll(false); }}
         >
-          <Newspaper className="h-4 w-4" />
-          <span className={tip("Insights", 3)}><span className={dot} />Insights</span>
+          <Users className="h-4 w-4" />
+          <span className={tip("Experts", 3)}><span className={dot} />Experts</span>
         </Link>
 
         <Link
-          href="/contact"
-          aria-label="Contact"
-          className={btn(pathname === "/contact")}
+          href="/insights"
+          aria-label="Insights"
+          className={btn(pathname.startsWith("/insights"))}
           onMouseEnter={() => enter(4)}
           onMouseLeave={leave}
           onFocus={() => enter(4)}
@@ -186,8 +190,24 @@ export default function MobileFloatNav() {
           onTouchEnd={leave}
           onClick={() => { setHovered(null); setHintAll(false); }}
         >
+          <Newspaper className="h-4 w-4" />
+          <span className={tip("Insights", 4)}><span className={dot} />Insights</span>
+        </Link>
+
+        <Link
+          href="/contact"
+          aria-label="Contact"
+          className={btn(pathname === "/contact")}
+          onMouseEnter={() => enter(5)}
+          onMouseLeave={leave}
+          onFocus={() => enter(5)}
+          onBlur={leave}
+          onTouchStart={() => enter(5)}
+          onTouchEnd={leave}
+          onClick={() => { setHovered(null); setHintAll(false); }}
+        >
           <Mail className="h-4 w-4" />
-          <span className={tip("Contact", 4)}><span className={dot} />Contact</span>
+          <span className={tip("Contact", 5)}><span className={dot} />Contact</span>
         </Link>
 
         {showTop && (
@@ -196,17 +216,17 @@ export default function MobileFloatNav() {
             scroll={false}
             aria-label="Back to top"
             className={btn(false)}
-            onMouseEnter={() => enter(5)}
+            onMouseEnter={() => enter(6)}
             onMouseLeave={leave}
-            onFocus={() => enter(5)}
+            onFocus={() => enter(6)}
             onBlur={leave}
-            onTouchStart={() => enter(5)}
+            onTouchStart={() => enter(6)}
             onTouchEnd={leave}
           >
             <svg viewBox="0 0 24 24" width="16" height="16" className="text-current" aria-hidden>
               <path d="M12 5l7 7H5z" fill="currentColor" />
             </svg>
-            <span className={tip("Top", 5)}><span className={dot} />Top</span>
+            <span className={tip("Top", 6)}><span className={dot} />Top</span>
           </Link>
         )}
       </div>
