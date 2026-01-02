@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# legacy/reference HTML not part of v2 branch
+archive/
+
 # vercel
 .vercel
 

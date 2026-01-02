@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "tag": "PhD-led expertise",
+    "title": [
+      "Science-led protection",
+      "for resilient, trusted",
+      "food systems."
+    ],
+    "description": "Dr. Ifeoluwa Adekoya helps quality leaders anticipate risk, engineer compliant operations, and build consumer confidence through evidence-based strategy, training, and research partnerships.",
+    "cta": {
+      "primary": "Book a consultation",
+      "secondary": "Explore capabilities"
+    },
+    "stats": {
+      "value": "10+",
+      "description": "Years delivering quality systems across food, pharma, and research — with ISO 9001:2015 and Lean Six Sigma Green Belt expertise."
+    }
+  },
+  "impact": {
+    "title": "Impact at a glance.",
+    "description": "We deliver science-led food safety, regulatory, and quality assurance consulting for organizations ready to elevate compliance and consumer trust.",
+    "highlights": [
+      "ISO 9001:2015 Lead Auditor & Lean Six Sigma Green Belt.",
+      "30+ peer-reviewed publications guiding food safety innovation.",
+      "Trusted advisor to SMEs, laboratories, and multinational brands."
+    ],
+    "metrics": [
+      {
+        "value": "10+",
+        "description": "Years delivering quality systems across food, pharma, and research."
+      },
+      {
+        "value": "30+",
+        "description": "Peer-reviewed publications and technical papers driving innovation."
+      },
+      {
+        "value": "10",
+        "description": "African countries supported with training and compliance programs."
+      },
+      {
+        "value": "5+",
+        "description": "Certifications including ISO 9001:2015 Lead Auditor & Lean Six Sigma Green Belt."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Ready to elevate your food safety posture?",
+    "description": "Let's co-design a roadmap that aligns compliance, capability, and innovation across your value chain. Share your current challenges and we will respond with a clear, science-backed path forward.",
+    "cta": {
+      "primary": "Book a consultation",
+      "secondary": "Explore services"
+    }
+  }
+}

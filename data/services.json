@@ -1,0 +1,123 @@
+[
+  {
+    "id": "food-safety-gmp-training",
+    "title": "Food Safety & GMP Training",
+    "description": "From compliance to excellence — onsite and virtual programs that embed Good Manufacturing and Hygienic Practices into daily operations and strengthen food-safety culture.",
+    "icon": "users",
+    "iconColor": "emerald",
+    "features": [
+      "GMP/GHP & Food Safety training for production, QA, and leadership teams.",
+      "Training records, certificates, and audit-ready documentation.",
+      "Competency evaluation and follow-up refresher sessions.",
+      "Real-world examples and guidance tailored to each facility."
+    ]
+  },
+  {
+    "id": "technical-training",
+    "title": "Technical Training",
+    "description": "Building technical confidence from farm to fork — specialized trainings that strengthen analytical, processing, and quality skills.",
+    "icon": "beaker",
+    "iconColor": "orange",
+    "features": [
+      "Food Safety and Microbiology.",
+      "Food Processing and Preservation.",
+      "Food Laws and Legislation.",
+      "Quality and Regulatory Compliance.",
+      "Allergen Management and Label Control.",
+      "Root Cause Analysis and Internal Auditing."
+    ]
+  },
+  {
+    "id": "quality-system-documentation",
+    "title": "Quality System Documentation",
+    "description": "Clear, practical, and audit-ready documentation that fits your operations.",
+    "icon": "file-text",
+    "iconColor": "slate",
+    "features": [
+      "SOP & SSOP development aligned with CFIA, Health Canada, and global standards.",
+      "Tailored, workflow-based procedures for every department.",
+      "Records designed for easy audit presentation."
+    ]
+  },
+  {
+    "id": "laboratory-methods-advisory",
+    "title": "Laboratory Methods Advisory & Training",
+    "description": "From testing to trust — building reliable, compliant laboratory systems through practical, results-focused programs.",
+    "icon": "test-tube-2",
+    "iconColor": "emerald",
+    "features": [
+      "Guidance on selection of food-testing methods.",
+      "Training in sampling, analysis, and data interpretation.",
+      "Coordination with accredited third-party laboratories.",
+      "Ongoing technical troubleshooting and method optimization."
+    ]
+  },
+  {
+    "id": "research-support",
+    "title": "Research Support",
+    "description": "From concept to publication — structured guidance that enhances scientific rigor and credibility.",
+    "icon": "book-open-check",
+    "iconColor": "orange",
+    "features": [
+      "Research design, data organization, and protocol development.",
+      "Statistical analysis and data interpretation.",
+      "Experimental method development for food & agri-food studies.",
+      "Manuscript formatting and journal submission support.",
+      "Academic and technical manuscript review and plagiarism check."
+    ]
+  },
+  {
+    "id": "proposal-grant-development",
+    "title": "Proposal & Grant Development",
+    "description": "From ideas to impact — transforming research and industry concepts into funder-ready proposals.",
+    "icon": "file-badge-2",
+    "iconColor": "slate",
+    "features": [
+      "Proposal review for clarity, alignment, and technical accuracy.",
+      "Grant-writing support for research, community, or industry projects.",
+      "Advisory assistance for reporting, resubmission, and funder feedback."
+    ]
+  },
+  {
+    "id": "conference-insight-support",
+    "title": "Conference & Insight Support",
+    "description": "Elevating thought leadership through evidence-rich storytelling and impactful knowledge sharing.",
+    "icon": "mic",
+    "iconColor": "emerald",
+    "features": [
+      "Conference planning, session coordination, and speaker management.",
+      "Presentation & poster development with data-driven visuals.",
+      "Training & workshop facilitation for diverse audiences.",
+      "Impact reporting and capacity-building documentation."
+    ],
+    "link": {
+      "text": "View conferences we have supported",
+      "url": "#contact"
+    }
+  },
+  {
+    "id": "food-import-readiness",
+    "title": "Food Import Readiness & Compliance",
+    "description": "From source to shelf — ensuring imported food products meet Canadian safety and labeling standards.",
+    "icon": "ship",
+    "iconColor": "orange",
+    "features": [
+      "CFIA & Health Canada guidance for specific product categories.",
+      "Import permits, documentation, and compliance preparation.",
+      "Advisory on food product analysis to ensure safety and quality.",
+      "Packaging, labeling, and market-entry advisory."
+    ]
+  },
+  {
+    "id": "regulatory-audit-readiness",
+    "title": "Regulatory & Audit Readiness",
+    "description": "From compliance to confidence — systems, documentation, and training that keep you inspection-ready.",
+    "icon": "clipboard-list",
+    "iconColor": "slate",
+    "features": [
+      "Advisory and on-site audit support (CFIA, BRCGS, customer, and internal audits).",
+      "Local and international regulatory compliance interpretation and implementation.",
+      "Nutritional value calculation & compliant labeling for retail markets."
+    ]
+  }
+]
