@@ -69,6 +69,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Control HTML caching of prerendered pages (helps avoid month-long caches)
+export const revalidate = 300; // 5 minutes
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,
