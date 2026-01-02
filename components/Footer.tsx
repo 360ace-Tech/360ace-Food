@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
   return (
     <footer className="bg-white pt-16 pb-8 px-6 border-t border-neutral/10">
       <div className="max-w-[1400px] mx-auto">
@@ -65,7 +66,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-neutral/10 gap-4">
           <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-neutral/60">
-            © 2025 360ace.Food Consulting. All rights reserved.
+            © {year} 360ace.Food Consulting. All rights reserved.
           </p>
           <div className="flex gap-5">
             <Link
