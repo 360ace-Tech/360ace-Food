@@ -5,6 +5,7 @@ function buildCSP(nonce: string) {
   const scriptSrc = [
     "'self'",
     `'nonce-${nonce}'`,
+    "'unsafe-inline'",
     dev ? "'unsafe-eval' 'wasm-unsafe-eval'" : "",
   ]
     .filter(Boolean)
@@ -13,6 +14,8 @@ function buildCSP(nonce: string) {
   const directives = {
     "default-src": "'self'",
     "script-src": scriptSrc,
+    "script-src-elem": scriptSrc,
+    "script-src-attr": "'none'",
     "style-src": "'self' 'unsafe-inline'",
     "img-src": "'self' data: blob:",
     "font-src": "'self' data:",
