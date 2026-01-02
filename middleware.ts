@@ -34,6 +34,13 @@ function buildCSP(nonce: string) {
 }
 
 export function middleware(req: NextRequest) {
+  // Fix accidental attempts to load Next's internal output as a route
+  if (req.nextUrl.pathname.startsWith("/server/app")) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url);
+  }
+
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const nonce = btoa(String.fromCharCode(...bytes));
