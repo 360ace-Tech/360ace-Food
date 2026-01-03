@@ -65,8 +65,8 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-neutral/10 gap-4">
-          <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-neutral/60">
-            © {year} 360ace.Food Consulting. All rights reserved.
+          <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-neutral/60 footer-copy">
+            © {year} 360ace.Food Consulting. <span className="copy-extra">All rights reserved.</span>
           </p>
           <div className="flex gap-5">
             <Link

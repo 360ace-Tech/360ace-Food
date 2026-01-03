@@ -147,3 +147,27 @@ body {
 .leaf-float {
   animation: leaf-float var(--dur, 10s) ease-in-out var(--delay, 0s) infinite;
 }
+
+/* Defaults for responsive swaps */
+.cta-text-short { display: none; }
+
+/* Small-screen adjustments (<= 494px)
+   Reverted to defaults for header/footer sizing per request. */
+
+/* Compact header/footer (<= 490px) */
+@media (max-width: 490px) {
+  /* Header tweaks */
+  .nav-shell { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .brand-link { gap: 0.2rem; padding-left: 0.5rem; padding-right: 0.5rem; }
+  /* Keep logo default size */
+  .site-title { font-size: 1rem; white-space: nowrap; }
+  .book-cta { font-size: 0.6rem; letter-spacing: 0.1em; padding-left: 0.5rem; padding-right: 0.5rem; }
+
+  /* Footer tweaks */
+  .footer-copy {
+    font-size: 0.56rem; /* ~9px */
+    letter-spacing: 0.2em;
+    white-space: nowrap;
+  }
+  .footer-copy .copy-extra { display: none; }
+}

@@ -53,7 +53,7 @@ export default function InsightsPage() {
     <>
       <Navigation />
 
-      {/* Hero Section */}
+      
       <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1400px] mx-auto">
           <div className="insights-hero max-w-3xl">
@@ -73,7 +73,7 @@ export default function InsightsPage() {
               emerging risks, regulatory changes, and industry best practices.
             </p>
 
-            {/* Category filters */}
+            
             <div className="flex flex-wrap gap-3">
               <button className="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-brand text-white">
                 All Articles
@@ -91,7 +91,7 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* Articles Grid */}
+      
       <section className="py-16 md:py-24 px-6 md:px-16 lg:px-24 bg-light">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -102,7 +102,7 @@ export default function InsightsPage() {
                 className="article-card group"
               >
                 <article className="card p-0 overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/10 transition-all duration-300">
-                  {/* Image */}
+                  
                   <div className="relative h-56 bg-slate-100 overflow-hidden">
                     <Image
                       src={article.image}
@@ -117,9 +117,9 @@ export default function InsightsPage() {
                     </div>
                   </div>
 
-                  {/* Content */}
+                  
                   <div className="p-6">
-                    {/* Meta */}
+                    
                     <div className="flex items-center gap-4 text-xs text-neutral mb-4">
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5" />
@@ -137,15 +137,15 @@ export default function InsightsPage() {
                       </div>
                     </div>
 
-                    {/* Title */}
+                    
                     <h2 className="font-display font-semibold text-xl mb-3 text-dark group-hover:text-brand transition-colors line-clamp-2">
                       {article.title}
                     </h2>
 
-                    {/* Excerpt */}
+                    
                     <p className="text-sm text-neutral mb-4 line-clamp-3">{article.excerpt}</p>
 
-                    {/* Author */}
+                    
                     <div className="flex items-center justify-between pt-4 border-t border-neutral/10">
                       <span className="text-xs font-medium text-neutral">
                         By {article.author}
@@ -163,7 +163,7 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      
       <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1000px] mx-auto text-center">
           <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tight text-dark mb-4">

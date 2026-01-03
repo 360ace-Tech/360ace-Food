@@ -27,7 +27,6 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     lenisRef.current = lenis;
 
-    // Integrate Lenis with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
     const raf = (time: number) => lenis.raf(time * 1000);
     rafRef.current = raf;
@@ -35,7 +34,6 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     gsap.ticker.lagSmoothing(0);
 
-    // Smooth anchor link handling
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target?.closest("a") as HTMLAnchorElement | null;
@@ -57,11 +55,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       const hash = window.location.hash;
       if (!hash) return;
       const start = performance.now();
-      const maxMs = 3000; // robust retry to outlast loader/images
+      const maxMs = 3000;
       const step = () => {
         const el = document.querySelector(hash) as HTMLElement | null;
         if (el) {
-          lenis.scrollTo(el, { offset: -88 }); // account for fixed nav
+          lenis.scrollTo(el, { offset: -88 });
         }
         if (performance.now() - start < maxMs) requestAnimationFrame(step);
       };
@@ -71,7 +69,6 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const onHashChange = () => smoothToHash();
     window.addEventListener("hashchange", onHashChange);
 
-    // If page loads with a hash, scroll to it smoothly
     if (window.location.hash) smoothToHash();
 
     return () => {
@@ -82,12 +79,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  // After any route change, if a hash exists, scroll to it smoothly once the DOM is ready.
   useEffect(() => {
     const lenis = lenisRef.current;
     if (!lenis) return;
     if (!window.location.hash) return;
-    // after route change, perform the robust hash scroll
     const raf = () => {
       const hash = window.location.hash;
       const start = performance.now();

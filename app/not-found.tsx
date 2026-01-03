@@ -5,32 +5,32 @@ export default function NotFound() {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-6">
       <div className="max-w-2xl text-center">
-        {/* 404 Number */}
+        
         <div className="mb-8">
           <h1 className="font-display font-bold text-[15vw] md:text-[12rem] leading-none tracking-tighter text-brand opacity-20">
             404
           </h1>
         </div>
 
-        {/* Icon */}
+        
         <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-light">
           <div className="w-8 h-8 rounded-full border-2 border-brand flex items-center justify-center">
             <div className="w-2 h-2 rounded-full bg-brand animate-pulse"></div>
           </div>
         </div>
 
-        {/* Heading */}
+        
         <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight text-dark mb-4">
           Page not found
         </h2>
 
-        {/* Description */}
+        
         <p className="text-neutral text-base md:text-lg leading-relaxed mb-10 max-w-lg mx-auto">
           The page you're looking for doesn't exist or has been moved. Let's get you back to
           exploring our food safety solutions.
         </p>
 
-        {/* Actions */}
+        
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
           <Link
             href="/"
@@ -49,7 +49,7 @@ export default function NotFound() {
           </Link>
         </div>
 
-        {/* Helpful links */}
+        
         <div className="mt-16 pt-8 border-t border-neutral/10">
           <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-4">
             Popular pages

@@ -70,10 +70,10 @@ export default function ArticlePage() {
     <>
       <Navigation />
 
-      {/* Article Header */}
+      
       <article className="pt-32 md:pt-40 pb-16 md:pb-24">
         <div className="max-w-4xl mx-auto px-6 md:px-16">
-          {/* Back link */}
+          
           <Link
             href="/insights"
             className="inline-flex items-center gap-2 text-sm font-medium text-neutral hover:text-brand transition-colors mb-8"
@@ -82,26 +82,26 @@ export default function ArticlePage() {
             Back to all insights
           </Link>
 
-          {/* Header */}
+          
           <div className="article-header">
-            {/* Category badge */}
+            
             <div className="mb-6">
               <span className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-light text-brand border border-brand-subtle">
                 {article.category}
               </span>
             </div>
 
-            {/* Title */}
+            
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl tracking-tighter text-dark mb-6 leading-tight">
               {article.title}
             </h1>
 
-            {/* Excerpt */}
+            
             <p className="text-xl md:text-2xl text-neutral leading-relaxed mb-8">
               {article.excerpt}
             </p>
 
-            {/* Meta */}
+            
             <div className="flex flex-wrap items-center gap-6 text-sm text-neutral pb-8 border-b border-neutral/10">
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 rounded-full bg-light flex items-center justify-center">
@@ -135,7 +135,7 @@ export default function ArticlePage() {
             </div>
           </div>
 
-          {/* Featured Image */}
+          
           <div className="my-12 relative h-96 rounded-3xl overflow-hidden bg-slate-100">
             <Image
               src={article.image}
@@ -146,7 +146,7 @@ export default function ArticlePage() {
             />
           </div>
 
-          {/* Article Content */}
+          
           <div className="article-content prose prose-lg max-w-none">
             {article.content.map((block, index) => {
               switch (block.type) {
@@ -190,7 +190,7 @@ export default function ArticlePage() {
               }
             })}
 
-            {/* References */}
+            
             {article.references && article.references.length > 0 && (
               <div className="mt-16 pt-8 border-t border-neutral/10">
                 <h3 className="font-display font-semibold text-xl text-dark mb-4">
@@ -208,7 +208,7 @@ export default function ArticlePage() {
           </div>
         </div>
 
-        {/* Related Articles */}
+        
         {relatedArticles.length > 0 && (
           <div className="max-w-6xl mx-auto px-6 md:px-16 mt-24">
             <div className="border-t border-neutral/10 pt-16">
@@ -252,7 +252,7 @@ export default function ArticlePage() {
           </div>
         )}
 
-        {/* CTA */}
+        
         <div className="max-w-4xl mx-auto px-6 md:px-16 mt-24">
           <div className="card p-8 md:p-12 bg-gradient-to-br from-emerald-50 via-white to-emerald-50 text-center">
             <h3 className="font-display font-bold text-2xl md:text-3xl text-dark mb-4">

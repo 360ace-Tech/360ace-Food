@@ -14,10 +14,8 @@ export default function MobileFloatNav() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   useEffect(() => {
-    // Auto-hint once for ~3s
     const t = setTimeout(() => setHintAll(false), 3000);
 
-    // Single observer that picks the most-visible section
     type SectionKey = "home" | "services" | "process" | "experts" | "contact";
     const map: Record<SectionKey, SectionKey> = {
       home: "home",
@@ -47,7 +45,6 @@ export default function MobileFloatNav() {
       );
       els.forEach(({ el }) => obs!.observe(el));
 
-      // fallback: compute closest section to viewport center on scroll
       let ticking = false;
       const compute = () => {
         ticking = false;
@@ -74,9 +71,7 @@ export default function MobileFloatNav() {
       };
       window.addEventListener("scroll", onScroll, { passive: true });
       window.addEventListener("resize", onScroll);
-      // immediate compute
       compute();
-      // cleanup additions
       const prevDisconnect = obs.disconnect.bind(obs);
       obs.disconnect = () => {
         window.removeEventListener("scroll", onScroll);

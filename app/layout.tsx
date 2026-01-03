@@ -1,24 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import MobileFloatNav from "@/components/MobileFloatNav";
 import CustomCursor from "@/components/CustomCursor";
 import site from "@/data/site";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-manrope",
-  display: "swap",
-});
+const bodyFont = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -70,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 // Control HTML caching of prerendered pages (helps avoid month-long caches)
-export const revalidate = 300; // 5 minutes
+export const revalidate = 300;
 
 export const viewport = {
   width: "device-width",
@@ -85,12 +72,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`antialiased ${inter.variable} ${manrope.variable}`}>
+    <html lang="en" className={`antialiased`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
       </head>
-      <body style={{ fontFamily: 'var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
+      <body style={{ fontFamily: bodyFont }}>
         <SmoothScroll>
           <CustomCursor />
           <MobileFloatNav />

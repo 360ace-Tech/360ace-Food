@@ -46,20 +46,20 @@ export default function Navigation() {
 
   return (
     <nav className="fixed top-6 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
-      <div className="pointer-events-auto glass-panel rounded-full px-3 py-2 flex items-center shadow-lg shadow-black/5 transition-transform hover:scale-[1.02] duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]">
+      <div className="pointer-events-auto glass-panel rounded-full px-3 py-2 flex items-center shadow-lg shadow-black/5 transition-transform hover:scale-[1.02] duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] nav-shell">
         <Link
           href="/"
-          className="pl-5 pr-7 font-display font-bold text-lg md:text-xl tracking-tight text-dark hover:text-brand transition-colors flex items-center gap-2"
+          className="pl-5 pr-7 font-display font-bold text-lg md:text-xl tracking-tight text-dark hover:text-brand transition-colors flex items-center gap-2 brand-link"
         >
           <Image
             src="/images/logo-dark.png"
             alt="360ace.FOOD logo"
             width={40}
             height={40}
-            className="w-8 h-8 md:w-10 md:h-10"
+            className="w-8 h-8 md:w-10 md:h-10 nav-logo"
           />
-          <span>
-            360ACE. <span className="text-brand">FOOD</span>
+          <span className="site-title">
+            360ACE.<span className="text-brand">FOOD</span>
           </span>
         </Link>
 
@@ -80,10 +80,11 @@ export default function Navigation() {
 
         <Link
           href="/contact"
-          className="ml-2 md:ml-4 bg-brand hover:bg-brand/90 text-white px-7 md:px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.19em] transition-colors duration-300 flex items-center gap-2 group"
+          className="ml-2 md:ml-4 bg-brand hover:bg-brand/90 text-white px-7 md:px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.19em] transition-colors duration-300 flex items-center gap-2 group book-cta"
         >
-          <span>Book consultation</span>
-          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          <span className="cta-text-full">Book consultation</span>
+          <span className="cta-text-short">Consult</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform cta-icon" />
         </Link>
       </div>
     </nav>

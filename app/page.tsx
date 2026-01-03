@@ -117,10 +117,10 @@ export default function Home() {
       <Loader />
       <Navigation />
 
-      {/* Hero Section */}
+      
       <section id="home" className="relative w-full overflow-hidden pt-16 lg:pt-0 min-h-[65vh] lg:min-h-screen">
         <div className="grid lg:grid-cols-2 h-full min-h-screen w-full">
-          {/* Left: Typography */}
+          
           <div className="flex flex-col justify-center px-6 md:px-16 lg:px-24 py-16 md:py-20 order-2 lg:order-1 z-10 bg-white">
             <div className="overflow-hidden mb-6">
               <div className="hero-tag opacity-0 translate-y-4 inline-flex items-center gap-2 border border-brand-subtle rounded-full px-3 py-1 mb-2 bg-light/80">
@@ -173,17 +173,17 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right: Abstract Visual */}
+          
           <div className="hidden lg:flex relative h-full w-full bg-light order-1 lg:order-2 overflow-hidden items-center justify-center">
-            {/* CSS Grid Pattern */}
+            
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
 
-            {/* Molecule network + leaf nodes (desktop only) */}
+            
             <div className="hidden lg:flex w-full h-full select-none pointer-events-none relative">
               <HeroMolecule />
             </div>
 
-            {/* Floating Info Card */}
+            
             <div className="absolute bottom-8 md:bottom-10 left-6 md:left-auto md:right-10 bg-white/85 backdrop-blur-md p-5 md:p-6 rounded-3xl border border-white shadow-xl z-20 max-w-xs hero-card opacity-0 translate-y-10 hidden lg:block">
               <div className="flex justify-between items-start mb-4">
                 <span className="text-3xl md:text-4xl font-display font-bold text-dark leading-none">
@@ -200,7 +200,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Marquee: Standards & Compliance */}
+      
       <div className="py-10 md:py-12 border-y border-neutral/5 overflow-hidden bg-white">
         <p className="text-center font-mono text-[10px] uppercase tracking-[0.3em] text-neutral/40 mb-6 md:mb-8">
           Standards &amp; Compliance Focus
@@ -244,11 +244,11 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Impact Stats Section */}
+      
       <section id="impact" className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1800px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-16 items-start">
-            {/* Overview */}
+            
             <div className="lg:col-span-4 sticky top-28">
               <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tighter mb-5 text-dark">
                 Impact at a glance.
@@ -274,9 +274,9 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Metrics & Capabilities */}
+            
             <div className="lg:col-span-8 grid gap-10">
-              {/* Metrics */}
+              
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 reveal-trigger">
                 <div className="card p-5 sm:p-6 flex flex-col justify-between">
                   <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">
@@ -313,7 +313,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Capabilities */}
+              
               <div className="grid md:grid-cols-2 gap-6 reveal-trigger">
                 <div className="card p-6 sm:p-8">
                   <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-brand mb-4">
@@ -368,7 +368,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
+      
       <section id="services" className="py-24 md:py-32 px-6 bg-light border-t border-neutral/5">
         <div className="max-w-[1800px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-8">
@@ -398,7 +398,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-7">
-            {/* Service 1 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -437,7 +437,7 @@ export default function Home() {
               </ul>
             </article>
 
-            {/* Service 2 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -463,7 +463,7 @@ export default function Home() {
               </ul>
             </article>
 
-            {/* Service 3 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -485,7 +485,7 @@ export default function Home() {
               </ul>
             </article>
 
-            {/* Service 4 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -509,7 +509,7 @@ export default function Home() {
               </ul>
             </article>
 
-            {/* Service 5 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -534,7 +534,7 @@ export default function Home() {
               </ul>
             </article>
 
-            {/* Service 6 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -557,7 +557,7 @@ export default function Home() {
               </ul>
             </article>
 
-            {/* Service 7 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -588,7 +588,7 @@ export default function Home() {
               </a>
             </article>
 
-            {/* Service 8 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -612,7 +612,7 @@ export default function Home() {
               </ul>
             </article>
 
-            {/* Service 9 */}
+            
             <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -638,7 +638,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Process Section */}
+      
       <section id="process" className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1400px] mx-auto">
           <div className="max-w-2xl mb-12 md:mb-16">
@@ -655,7 +655,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:[grid-template-columns:0.7fr_1.3fr] gap-12 items-start">
-            {/* Vertical line / labels */}
+            
             <div className="hidden md:flex flex-col items-start">
               <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/50 mb-4">
                 From first call to continuous improvement
@@ -697,7 +697,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Cards */}
+            
             <div className="space-y-5">
               <div className="card p-6 md:p-7 reveal-trigger">
                 <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-neutral/60 mb-2">
@@ -761,7 +761,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experts Section */}
+      
       <section id="experts" className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-light border-t border-neutral/5">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12 md:mb-16">
@@ -780,7 +780,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-10">
-            {/* Expert 1 */}
+            
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger">
               <div className="flex items-start gap-5">
                 <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
@@ -829,7 +829,7 @@ export default function Home() {
               </div>
             </article>
 
-            {/* Expert 2 */}
+            
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger">
               <div className="flex items-start gap-5">
                 <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
@@ -883,7 +883,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Insights Section */}
+      
       <section id="insights" className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-10 md:mb-14">
@@ -909,7 +909,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {/* Article 1 */}
+            
             <article className="card p-6 md:p-7 reveal-trigger hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-transform duration-300">
               <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/60 mb-3">
                 July 18, 2024
@@ -930,7 +930,7 @@ export default function Home() {
               </a>
             </article>
 
-            {/* Article 2 */}
+            
             <article className="card p-6 md:p-7 reveal-trigger hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-transform duration-300">
               <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/60 mb-3">
                 June 2, 2024
@@ -954,7 +954,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA Section */}
+      
       <section id="contact" className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-light relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.14),transparent_55%),radial-gradient(circle_at_bottom,_rgba(248,113,113,0.16),transparent_55%)] opacity-70 pointer-events-none"></div>
 

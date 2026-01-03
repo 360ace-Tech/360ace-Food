@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: [
-          // CSP is set dynamically with a per-request nonce in middleware.ts
           {
             key: "X-DNS-Prefetch-Control",
             value: "on",

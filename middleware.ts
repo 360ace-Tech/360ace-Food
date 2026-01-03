@@ -34,11 +34,9 @@ function buildCSP(nonce: string) {
 }
 
 export function middleware(req: NextRequest) {
-  // No-op in static export mode
   if (process.env.NEXT_STATIC_EXPORT === "1") {
     return NextResponse.next();
   }
-  // Localhost CSP bypass: ensure production builds render locally without CSP blocking
   try {
     const host = req.nextUrl.hostname || "";
     const isLocalHostname =
@@ -56,7 +54,6 @@ export function middleware(req: NextRequest) {
       return NextResponse.next();
     }
   } catch {}
-  // Fix accidental attempts to load Next's internal output as a route
   if (req.nextUrl.pathname.startsWith("/server/app")) {
     const url = req.nextUrl.clone();
     url.pathname = "/";
@@ -66,13 +63,11 @@ export function middleware(req: NextRequest) {
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const nonce = btoa(String.fromCharCode(...bytes));
-  // Allow disabling CSP with an env override if needed
   if (process.env.DISABLE_CSP === "1") {
     return NextResponse.next();
   }
   const csp = buildCSP(nonce);
 
-  // Forward CSP as a request header so Next can pick nonce and stamp it on inline scripts
   const fwdHeaders = new Headers(req.headers);
   fwdHeaders.set("content-security-policy", csp);
 
@@ -80,7 +75,6 @@ export function middleware(req: NextRequest) {
     request: { headers: fwdHeaders },
   });
 
-  // And also set CSP on the actual response to the browser
   res.headers.set("Content-Security-Policy", csp);
   return res;
 }

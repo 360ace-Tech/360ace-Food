@@ -19,7 +19,7 @@ class Node {
     this.speed = 0.0008 + Math.random() * 0.0018;
     this.wobble = (Math.random() - 0.5) * (h * 0.6);
     this.alpha = 0.32 + Math.random() * 0.38;
-    this.cluster = Math.random() < 0.4; // increase clustered nodes for richer pockets
+    this.cluster = Math.random() < 0.4;
   }
 
   update(w: number, h: number) {
@@ -38,7 +38,6 @@ export default function HeroMolecule() {
   const nodesRef = useRef<Node[]>([]);
   const leafRefs = useRef<HTMLDivElement[]>([]);
 
-  // choose a subset of indices to host leaves
   const leafIndices = useMemo(() => {
     const set = new Set<number>();
     const totalLeaves = 34;
@@ -47,7 +46,6 @@ export default function HeroMolecule() {
   }, []);
 
   const leafSizes = useMemo(() => {
-    // blend of small and large leaves
     return [...new Array(34)].map(() => {
       const large = Math.random() < 0.4;
       return large ? 30 + Math.floor(Math.random() * 12) : 12 + Math.floor(Math.random() * 8);
@@ -76,12 +74,10 @@ export default function HeroMolecule() {
     resize();
     window.addEventListener("resize", resize);
 
-    // init nodes
     nodesRef.current = [];
-    const COUNT = 62; // tuned overall density
+    const COUNT = 62;
     for (let i = 0; i < COUNT; i++) nodesRef.current.push(new Node(h));
 
-    // map leaf indices to dom elements
     leafRefs.current = leafRefs.current.slice(0, leafIndices.length);
 
     let raf = 0;
@@ -91,7 +87,6 @@ export default function HeroMolecule() {
 
       for (let i = 0; i < nodes.length; i++) nodes[i].update(w, h);
 
-      // connections (variable density)
       for (let i = 0; i < nodes.length; i++) {
         const ni = nodes[i];
         for (let j = i + 1; j < nodes.length; j++) {
@@ -100,13 +95,13 @@ export default function HeroMolecule() {
           const dy = ni.y - nj.y;
           const d = Math.hypot(dx, dy);
           const isClusterPair = ni.cluster || nj.cluster;
-          const maxD = isClusterPair ? 125 : 66; // richer clusters, less global clutter
+          const maxD = isClusterPair ? 125 : 66;
           if (d < maxD) {
-            const t = 1 - d / maxD; // proximity factor
+            const t = 1 - d / maxD;
             ctx.strokeStyle = isClusterPair
               ? `rgba(100,116,139,${0.24 * t})`
               : `rgba(148,163,184,${0.12 * t})`;
-            const lw = isClusterPair ? 0.6 + 0.6 * t : 0.4 + 0.3 * t; // thicker as nodes are closer
+            const lw = isClusterPair ? 0.6 + 0.6 * t : 0.4 + 0.3 * t;
             ctx.lineWidth = lw;
             ctx.beginPath();
             ctx.moveTo(ni.x, ni.y);
@@ -116,7 +111,6 @@ export default function HeroMolecule() {
         }
       }
 
-      // position leaves at selected node positions
       for (let k = 0; k < leafIndices.length; k++) {
         const idx = leafIndices[k];
         const n = nodes[idx % nodes.length];
@@ -141,7 +135,7 @@ export default function HeroMolecule() {
   return (
     <div ref={wrapperRef} className="absolute inset-0">
       <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-70" aria-hidden />
-      {/* Leaves positioned by RAF (no React re-render) */}
+      
       {leafIndices.map((_, i) => (
         <div
           key={i}
