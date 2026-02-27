@@ -22,6 +22,7 @@
 
 # misc
 .DS_Store
+*.docx
 *.pem
 
 # debug
@@ -42,3 +43,4 @@ archive/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.docx

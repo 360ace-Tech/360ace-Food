@@ -9,6 +9,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
 import articles from "@/data/articles.json";
+import JsonLd from "@/components/JsonLd";
+import site from "@/data/site";
 
 export default function InsightsPage() {
   useEffect(() => {
@@ -53,6 +55,29 @@ export default function InsightsPage() {
     <>
       <Navigation />
 
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Insights", item: `${site.url}/insights` },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Insights & Articles",
+          url: `${site.url}/insights`,
+          hasPart: articles.map((a) => ({
+            "@type": "Article",
+            headline: a.title,
+            url: `${site.url}/insights/${a.slug}`,
+            datePublished: a.date,
+          })),
+        }}
+      />
       
       <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1400px] mx-auto">
@@ -95,7 +120,7 @@ export default function InsightsPage() {
       <section className="py-16 md:py-24 px-6 md:px-16 lg:px-24 bg-light">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article, index) => (
+            {articles.map((article) => (
               <Link
                 href={`/insights/${article.slug}`}
                 key={article.id}

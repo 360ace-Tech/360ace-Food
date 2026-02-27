@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import site from "@/data/site";
-import articles from "@/data/articles.json" assert { type: "json" };
+import articlesData from "@/data/articles.json" assert { type: "json" };
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const article = (articles as any[]).find((a) => a.slug === params.slug);
+type Article = {
+  slug: string;
+  title: string;
+  excerpt?: string;
+  image?: string;
+  date?: string;
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const article = (articlesData as Article[]).find((a) => a.slug === slug);
   if (!article) return { title: site.title, description: site.description };
   return {
     title: `${article.title} — ${site.shortName}`,
@@ -34,7 +43,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 // For static export, generate the list of article paths at build time
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return (articles as any[]).map((a) => ({ slug: a.slug }));
+  return (articlesData as Article[]).map((a) => ({ slug: a.slug }));
 }
 
 export default function ArticleLayout({ children }: { children: React.ReactNode }) {

@@ -8,7 +8,9 @@ import { usePathname } from "next/navigation";
 
 export default function Navigation() {
   const pathname = usePathname();
-  const [active, setActive] = useState<"home" | "services" | "process" | "insights" | null>(null);
+  const [active, setActive] = useState<
+    "home" | "services" | "process" | "selfcheck" | "insights" | null
+  >(null);
 
   useEffect(() => {
     const sections: { id: string; key: typeof active }[] = [
@@ -39,7 +41,9 @@ export default function Navigation() {
 
   const itemClasses = (key: typeof active) =>
     `px-5 py-2 rounded-full text-[10px] font-semibold uppercase tracking-[0.19em] transition-all duration-300 ${
-      active === key || (key === "insights" && pathname.startsWith("/insights"))
+      active === key ||
+      (key === "insights" && pathname.startsWith("/insights")) ||
+      (key === "selfcheck" && pathname.startsWith("/self-check"))
         ? "bg-brand text-white"
         : "text-neutral hover:text-dark hover:bg-white"
     }`;
@@ -72,6 +76,9 @@ export default function Navigation() {
           </Link>
           <Link href="/#process" scroll={false} className={itemClasses("process")}>
             Process
+          </Link>
+          <Link href="/self-check" className={itemClasses("selfcheck")}>
+            Self-check
           </Link>
           <Link href="/insights" className={itemClasses("insights")}>
             Insights

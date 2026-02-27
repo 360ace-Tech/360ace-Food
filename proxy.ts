@@ -33,7 +33,7 @@ function buildCSP(nonce: string) {
     .join("; ");
 }
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   if (process.env.NEXT_STATIC_EXPORT === "1") {
     return NextResponse.next();
   }

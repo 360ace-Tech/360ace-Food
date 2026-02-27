@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     ...(isStaticExport ? { unoptimized: true } : {}),
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "unsplash.com" },
+      { protocol: "https", hostname: "images.pexels.com" },
+    ],
   },
 };
 

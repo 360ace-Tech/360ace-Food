@@ -32,6 +32,12 @@ class Node {
   }
 }
 
+function prng(seed: number) {
+  // deterministic pseudo-random [0,1) without Math.random()
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+}
+
 export default function HeroMolecule() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -41,15 +47,24 @@ export default function HeroMolecule() {
   const leafIndices = useMemo(() => {
     const set = new Set<number>();
     const totalLeaves = 34;
-    while (set.size < totalLeaves) set.add(Math.floor(Math.random() * 90));
+    let i = 0;
+    while (set.size < totalLeaves && i < 300) {
+      const r = prng(i++);
+      set.add(Math.floor(r * 90));
+    }
     return Array.from(set.values());
   }, []);
 
   const leafSizes = useMemo(() => {
-    return [...new Array(34)].map(() => {
-      const large = Math.random() < 0.4;
-      return large ? 30 + Math.floor(Math.random() * 12) : 12 + Math.floor(Math.random() * 8);
-    });
+    const arr: number[] = [];
+    for (let i = 0; i < 34; i++) {
+      const r1 = prng(100 + i);
+      const large = r1 < 0.4;
+      const r2 = prng(200 + i);
+      const r3 = prng(300 + i);
+      arr.push(large ? 30 + Math.floor(r2 * 12) : 12 + Math.floor(r3 * 8));
+    }
+    return arr;
   }, []);
 
   useEffect(() => {
@@ -130,7 +145,7 @@ export default function HeroMolecule() {
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(raf);
     };
-  }, [leafIndices]);
+  }, [leafIndices, leafSizes]);
 
   return (
     <div ref={wrapperRef} className="absolute inset-0">

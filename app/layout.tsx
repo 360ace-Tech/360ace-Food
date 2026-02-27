@@ -4,6 +4,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import MobileFloatNav from "@/components/MobileFloatNav";
 import CustomCursor from "@/components/CustomCursor";
 import site from "@/data/site";
+import JsonLd from "@/components/JsonLd";
 
 const bodyFont = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
@@ -74,7 +75,29 @@ export default function RootLayout({
   return (
     <html lang="en" className={`antialiased`}>
       <head>
-        
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: site.name,
+            url: site.url,
+            sameAs: [],
+            logo: site.ogImage,
+          }}
+        />
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: site.title,
+            url: site.url,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: `${site.url}/?q={search_term_string}`,
+              "query-input": "required name=search_term_string",
+            },
+          }}
+        />
       </head>
       <body style={{ fontFamily: bodyFont }}>
         <SmoothScroll>

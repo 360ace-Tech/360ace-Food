@@ -31,22 +31,22 @@ export default function Footer() {
             <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-neutral/60 mb-1">
               Navigation
             </span>
-            <a href="/#home" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+            <Link href="/#home" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
               <span className="link-underline">Home</span>
               <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </a>
-            <a href="/#services" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+            </Link>
+            <Link href="/#services" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
               <span className="link-underline">Services</span>
               <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </a>
-            <a href="/#process" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+            </Link>
+            <Link href="/#process" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
               <span className="link-underline">Process</span>
               <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </a>
-            <a href="/#insights" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+            </Link>
+            <Link href="/#insights" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
               <span className="link-underline">Insights</span>
               <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </a>
+            </Link>
             <Link href="/contact" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
               <span className="link-underline">Contact</span>
               <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />

@@ -9,6 +9,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, ArrowLeft, ArrowRight, Share2 } from "lucide-react";
 import articles from "@/data/articles.json";
+import site from "@/data/site";
+import JsonLd from "@/components/JsonLd";
 
 export default function ArticlePage() {
   const params = useParams();
@@ -66,21 +68,47 @@ export default function ArticlePage() {
     .filter((a) => a.category === article.category && a.id !== article.id)
     .slice(0, 2);
 
+  const index = articles.findIndex((a) => a.id === article.id);
+  const prev = index > 0 ? articles[index - 1] : null;
+  const next = index < articles.length - 1 ? articles[index + 1] : null;
+
   return (
     <>
       <Navigation />
 
       
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: article.title,
+          description: article.excerpt,
+          datePublished: article.date,
+          author: { "@type": "Person", name: article.author },
+          image: article.image,
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Insights", item: `${site.url}/insights` },
+            { "@type": "ListItem", position: 2, name: article.title, item: `${site.url}/insights/${article.slug}` },
+          ],
+        }}
+      />
+      
       <article className="pt-32 md:pt-40 pb-16 md:pb-24">
         <div className="max-w-4xl mx-auto px-6 md:px-16">
           
-          <Link
-            href="/insights"
-            className="inline-flex items-center gap-2 text-sm font-medium text-neutral hover:text-brand transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to all insights
-          </Link>
+            <Link
+              href="/insights"
+              className="inline-flex items-center gap-2 text-sm font-medium text-neutral hover:text-brand transition-colors mb-8"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to all insights
+            </Link>
 
           
           <div className="article-header">
@@ -128,7 +156,7 @@ export default function ArticlePage() {
                 <Clock className="w-4 h-4" />
                 <span>{article.readTime}</span>
               </div>
-              <button className="flex items-center gap-2 hover:text-brand transition-colors ml-auto">
+              <button className="flex items-center gap-2 hover:text-brand transition-colors ml-auto" onClick={() => navigator.share?.({ title: article.title, url: typeof window!=="undefined"?window.location.href:undefined }).catch(()=>{})}>
                 <Share2 className="w-4 h-4" />
                 <span>Share</span>
               </button>
@@ -191,13 +219,13 @@ export default function ArticlePage() {
             })}
 
             
-            {article.references && article.references.length > 0 && (
+            {Array.isArray((article as unknown as { references?: string[] }).references) && (article as unknown as { references?: string[] }).references!.length > 0 && (
               <div className="mt-16 pt-8 border-t border-neutral/10">
                 <h3 className="font-display font-semibold text-xl text-dark mb-4">
                   References
                 </h3>
                 <ul className="space-y-2">
-                  {article.references.map((ref, index) => (
+                  {(article as unknown as { references?: string[] }).references!.map((ref, index) => (
                     <li key={index} className="text-sm text-neutral leading-relaxed">
                       {index + 1}. {ref}
                     </li>
@@ -259,7 +287,7 @@ export default function ArticlePage() {
               Ready to strengthen your food safety program?
             </h3>
             <p className="text-neutral mb-8 max-w-2xl mx-auto">
-              Let's discuss how our evidence-based consulting services can support your
+              Let&apos;s discuss how our evidence-based consulting services can support your
               compliance and quality goals.
             </p>
             <Link
@@ -271,6 +299,30 @@ export default function ArticlePage() {
             </Link>
           </div>
         </div>
+
+        { (prev || next) && (
+          <div className="max-w-4xl mx-auto px-6 md:px-16 mt-10 mb-24">
+            <div className="flex items-center justify-between gap-4">
+              {prev ? (
+                <Link href={`/insights/${prev.slug}`} className="group inline-flex items-center gap-2 text-sm text-neutral hover:text-brand">
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition" />
+                  <span>{prev.title}</span>
+                </Link>
+              ) : <span />}
+              {next ? (
+                <Link href={`/insights/${next.slug}`} className="group inline-flex items-center gap-2 text-sm text-neutral hover:text-brand">
+                  <span>{next.title}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" />
+                </Link>
+              ) : <span />}
+            </div>
+            <div className="mt-6 text-center">
+              <Link href="/insights" className="inline-flex items-center gap-2 text-sm text-neutral hover:text-brand">
+                <ArrowLeft className="w-4 h-4" /> Back to all insights
+              </Link>
+            </div>
+          </div>
+        )}
       </article>
 
       <Footer />

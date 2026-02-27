@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
+import JsonLd from "@/components/JsonLd";
+import site from "@/data/site";
 
 export default function ContactPage() {
   useEffect(() => {
@@ -23,6 +25,16 @@ export default function ContactPage() {
   return (
     <>
       <Navigation />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+            { "@type": "ListItem", position: 2, name: "Contact", item: `${site.url}/contact` },
+          ],
+        }}
+      />
       <section className="pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1100px] mx-auto grid lg:grid-cols-[0.9fr,1.1fr] gap-10 items-start">
           <div className="contact-hero">
@@ -41,7 +53,7 @@ export default function ContactPage() {
             </p>
 
             <div className="mt-8 grid gap-2 text-sm text-neutral">
-              <p className="flex items-center gap-2"><Mail className="w-4 h-4 text-brand"/> hello@360ace.food</p>
+              <p className="flex items-center gap-2"><Mail className="w-4 h-4 text-brand" /> food@360ace.food</p>
             </div>
           </div>
 

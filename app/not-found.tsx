@@ -26,7 +26,7 @@ export default function NotFound() {
 
         
         <p className="text-neutral text-base md:text-lg leading-relaxed mb-10 max-w-lg mx-auto">
-          The page you're looking for doesn't exist or has been moved. Let's get you back to
+          The page you&apos;re looking for doesn&apos;t exist or has been moved. Let&apos;s get you back to
           exploring our food safety solutions.
         </p>
 

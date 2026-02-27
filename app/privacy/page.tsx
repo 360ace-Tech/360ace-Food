@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <p className="text-neutral mb-8">Last updated: January 1, 2026</p>
 
           <p className="text-neutral mb-6">
-            360ACE Food Consulting ("we", "us") respects your privacy. This policy describes how we
+            360ACE Food Consulting (&quot;we&quot;, &quot;us&quot;) respects your privacy. This policy describes how we
             collect, use, and protect personal information when you visit our website or engage our services.
           </p>
 
@@ -55,11 +55,10 @@ export default function PrivacyPage() {
           </ul>
 
           <h2 className="font-display font-semibold text-2xl text-dark mb-3">Contact</h2>
-          <p className="text-neutral">Questions? Email hello@360ace.food.</p>
+          <p className="text-neutral">Questions? Email food@360ace.food.</p>
         </div>
       </section>
       <Footer />
     </>
   );
 }
-

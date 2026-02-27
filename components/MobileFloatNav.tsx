@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Home, Briefcase, GitBranch, Mail, Newspaper, Users } from "lucide-react";
+import { Home, Briefcase, GitBranch, Mail, Newspaper, Users, ClipboardList } from "lucide-react";
 
 export default function MobileFloatNav() {
   const pathname = usePathname();
   const [active, setActive] = useState<
-    "home" | "services" | "process" | "experts" | "insights" | "contact" | null
+    "home" | "services" | "process" | "experts" | "insights" | "selfcheck" | "contact" | null
   >(null);
   const [hintAll, setHintAll] = useState<boolean>(true);
   const [hovered, setHovered] = useState<number | null>(null);
@@ -187,6 +187,22 @@ export default function MobileFloatNav() {
         >
           <Newspaper className="h-4 w-4" />
           <span className={tip("Insights", 4)}><span className={dot} />Insights</span>
+        </Link>
+
+        <Link
+          href="/self-check"
+          aria-label="Self-check"
+          className={btn(pathname.startsWith("/self-check"))}
+          onMouseEnter={() => enter(6)}
+          onMouseLeave={leave}
+          onFocus={() => enter(6)}
+          onBlur={leave}
+          onTouchStart={() => enter(6)}
+          onTouchEnd={leave}
+          onClick={() => { setHovered(null); setHintAll(false); }}
+        >
+          <ClipboardList className="h-4 w-4" />
+          <span className={tip("Self-check", 6)}><span className={dot} />Self-check</span>
         </Link>
 
         <Link

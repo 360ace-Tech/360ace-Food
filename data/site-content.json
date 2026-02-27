@@ -48,7 +48,8 @@
     "description": "Let's co-design a roadmap that aligns compliance, capability, and innovation across your value chain. Share your current challenges and we will respond with a clear, science-backed path forward.",
     "cta": {
       "primary": "Book a consultation",
-      "secondary": "Explore services"
+      "secondary": "Explore services",
+      "tertiary": "Self-check assessment"
     }
   }
 }

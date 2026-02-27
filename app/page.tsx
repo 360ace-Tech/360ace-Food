@@ -7,26 +7,18 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 import HeroMolecule from "@/components/HeroMolecule";
-import {
-  ArrowRight,
-  Compass,
-  LineChart,
-  Users,
-  Beaker,
-  FileText,
-  TestTube2,
-  BookOpenCheck,
-  FileBadge2,
-  Mic,
-  Ship,
-  ClipboardList,
-  CheckCircle2,
-  Building2,
-  Globe2,
-  GraduationCap,
-  ArrowUpRight,
-} from "lucide-react";
+import { ArrowRight, Compass, LineChart, Users, CheckCircle2, Building2, ArrowUpRight, Beaker, FileText, TestTube2, BookOpenCheck, FileBadge2, Mic, Ship, ClipboardList, Globe2, GraduationCap } from "lucide-react";
 import Image from "next/image";
+import siteContentRaw from "@/data/site-content.json" assert { type: "json" };
+type SiteContent = {
+  hero: { tag: string; title: string[]; description: string; stats: { value: string; description: string } };
+  impact: { title: string; description: string; highlights: string[]; metrics: { value: string; description: string }[] };
+  contact: { title: string; description: string; cta: { primary: string; secondary: string; tertiary: string } };
+};
+const siteContent = siteContentRaw as SiteContent;
+import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import site from "@/data/site";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,6 +110,15 @@ export default function Home() {
       <Navigation />
 
       
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+          ],
+        }}
+      />
       <section id="home" className="relative w-full overflow-hidden pt-16 lg:pt-0 min-h-[65vh] lg:min-h-screen">
         <div className="grid lg:grid-cols-2 h-full min-h-screen w-full">
           
@@ -126,27 +127,21 @@ export default function Home() {
               <div className="hero-tag opacity-0 translate-y-4 inline-flex items-center gap-2 border border-brand-subtle rounded-full px-3 py-1 mb-2 bg-light/80">
                 <span className="w-1.5 h-1.5 bg-brand rounded-full animate-pulse"></span>
                 <span className="text-[10px] uppercase tracking-[0.26em] font-semibold text-neutral">
-                  PhD-led expertise
+                  {siteContent.hero.tag}
                 </span>
               </div>
             </div>
 
             <h1 className="font-display font-bold text-[10.5vw] sm:text-[8.5vw] lg:text-[4.6vw] leading-[0.9] tracking-tighter text-dark mb-8 md:mb-10 text-balance">
-              <div className="overflow-hidden">
-                <span className="block hero-line">Science-led protection</span>
-              </div>
-              <div className="overflow-hidden">
-                <span className="block hero-line">for resilient, trusted</span>
-              </div>
-              <div className="overflow-hidden">
-                <span className="block hero-line text-brand">food systems.</span>
-              </div>
+              {siteContent.hero.title.map((line, i) => (
+                <div className="overflow-hidden" key={i}>
+                  <span className={`block hero-line ${i === 2 ? "text-brand" : ""}`}>{line}</span>
+                </div>
+              ))}
             </h1>
 
             <p className="hero-text opacity-0 text-base md:text-lg lg:text-xl text-neutral font-normal max-w-xl leading-relaxed mb-10">
-              Dr. Ifeoluwa Adekoya helps quality leaders anticipate risk, engineer compliant
-              operations, and build consumer confidence through evidence-based strategy, training,
-              and research partnerships.
+              {siteContent.hero.description}
             </p>
 
             <div className="hero-text opacity-0 flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center">
@@ -251,26 +246,19 @@ export default function Home() {
             
             <div className="lg:col-span-4 sticky top-28">
               <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tighter mb-5 text-dark">
-                Impact at a glance.
+                {siteContent.impact.title}
               </h2>
               <div className="w-12 h-1 bg-brand mb-7"></div>
               <p className="text-neutral text-base md:text-lg leading-relaxed mb-7">
-                We deliver science-led food safety, regulatory, and quality assurance consulting
-                for organizations ready to elevate compliance and consumer trust.
+                {siteContent.impact.description}
               </p>
               <ul className="space-y-3 text-sm text-neutral">
-                <li className="flex gap-2">
-                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand"></span>
-                  <span>ISO 9001:2015 Lead Auditor &amp; Lean Six Sigma Green Belt.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand"></span>
-                  <span>30+ peer-reviewed publications guiding food safety innovation.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-400"></span>
-                  <span>Trusted advisor to SMEs, laboratories, and multinational brands.</span>
-                </li>
+                {siteContent.impact.highlights.map((h, i) => (
+                  <li className="flex gap-2" key={i}>
+                    <span className={`mt-1 w-1.5 h-1.5 rounded-full ${i < 2 ? "bg-brand" : "bg-slate-400"}`}></span>
+                    <span>{h}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -279,37 +267,20 @@ export default function Home() {
               
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 reveal-trigger">
                 <div className="card p-5 sm:p-6 flex flex-col justify-between">
-                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">
-                    10<span className="text-brand text-xl align-top">+</span>
-                  </span>
-                  <p className="text-xs md:text-sm text-neutral leading-snug">
-                    Years delivering quality systems across food, pharma, and research.
-                  </p>
+                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">{siteContent.impact.metrics[0].value}</span>
+                  <p className="text-xs md:text-sm text-neutral leading-snug">{siteContent.impact.metrics[0].description}</p>
                 </div>
                 <div className="card p-5 sm:p-6 flex flex-col justify-between">
-                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">
-                    30<span className="text-brand text-xl align-top">+</span>
-                  </span>
-                  <p className="text-xs md:text-sm text-neutral leading-snug">
-                    Peer-reviewed publications and technical papers driving innovation.
-                  </p>
+                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">{siteContent.impact.metrics[1].value}</span>
+                  <p className="text-xs md:text-sm text-neutral leading-snug">{siteContent.impact.metrics[1].description}</p>
                 </div>
                 <div className="card p-5 sm:p-6 flex flex-col justify-between">
-                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">
-                    10
-                  </span>
-                  <p className="text-xs md:text-sm text-neutral leading-snug">
-                    African countries supported with training and compliance programs.
-                  </p>
+                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">{siteContent.impact.metrics[2].value}</span>
+                  <p className="text-xs md:text-sm text-neutral leading-snug">{siteContent.impact.metrics[2].description}</p>
                 </div>
                 <div className="card p-5 sm:p-6 flex flex-col justify-between">
-                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">
-                    5<span className="text-brand text-xl align-top">+</span>
-                  </span>
-                  <p className="text-xs md:text-sm text-neutral leading-snug">
-                    Certifications including ISO 9001:2015 Lead Auditor &amp; Lean Six Sigma Green
-                    Belt.
-                  </p>
+                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">{siteContent.impact.metrics[3].value}</span>
+                  <p className="text-xs md:text-sm text-neutral leading-snug">{siteContent.impact.metrics[3].description}</p>
                 </div>
               </div>
 
@@ -781,11 +752,11 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-10">
             
-            <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger">
+            <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ifeoluwa-adekoya">
               <div className="flex items-start gap-5">
                 <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
-                    src="/images/ifeoluwa-placeholder.png"
+                    src="/images/ife.jpg"
                     alt="Dr. Ifeoluwa Adekoya"
                     width={144}
                     height={144}
@@ -793,9 +764,9 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-lg md:text-xl text-dark">
+                  <Link href="/bio/ifeoluwa-adekoya" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
                     Dr. Ifeoluwa Adekoya
-                  </h3>
+                  </Link>
                   <p className="text-[13px] text-brand font-semibold mb-2">
                     PhD Food Technologist
                   </p>
@@ -804,33 +775,19 @@ export default function Home() {
                     with a decade of impact across the food, research, and pharmaceutical
                     industries.
                   </p>
-                </div>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-neutral/60 mb-2">
-                    Credentials
-                  </p>
-                  <ul className="space-y-2 text-[13px] text-neutral">
-                    <li>ISO 9001:2015 Lead Auditor &amp; Lean Six Sigma Green Belt.</li>
-                    <li>30+ peer-reviewed publications guiding food safety innovation.</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-neutral/60 mb-2">
-                    Collaborations
-                  </p>
-                  <ul className="space-y-2 text-[13px] text-neutral">
-                    <li>Council for Scientific and Industrial Research (CSIR).</li>
-                    <li>International Association for Food Protection (IAFP).</li>
-                    <li>Agri-food SMEs and leading laboratories across Africa.</li>
-                  </ul>
+                  <Link
+                    href="/bio/ifeoluwa-adekoya"
+                    className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand mt-3"
+                  >
+                    Learn more
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </div>
             </article>
 
             
-            <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger">
+            <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ajibola-oyedeji">
               <div className="flex items-start gap-5">
                 <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
@@ -842,9 +799,9 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-lg md:text-xl text-dark">
+                  <Link href="/bio/ajibola-oyedeji" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
                     Dr. Ajibola Oyedeji
-                  </h3>
+                  </Link>
                   <p className="text-[13px] text-brand font-semibold mb-2">
                     Food Scientist (PhD Food Science and Technology)
                   </p>
@@ -852,30 +809,13 @@ export default function Home() {
                     Over ten years of experience in research, quality assurance, methods and product
                     development, and laboratory analysis across food systems.
                   </p>
-                </div>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-neutral/60 mb-2">
-                    Credentials
-                  </p>
-                  <ul className="space-y-2 text-[13px] text-neutral">
-                    <li>10+ years in research, QA, and laboratory analysis.</li>
-                    <li>PhD in Food Science and Technology.</li>
-                    <li>ISO 17025-compliant methods and QA framework development.</li>
-                    <li>Leadership in product development and process optimization.</li>
-                    <li>40+ Web of Science-indexed publications and contributions.</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-neutral/60 mb-2">
-                    Collaborations
-                  </p>
-                  <ul className="space-y-2 text-[13px] text-neutral">
-                    <li>Food manufacturers and processors.</li>
-                    <li>Accredited testing laboratories.</li>
-                    <li>Academic and policy bodies.</li>
-                  </ul>
+                  <Link
+                    href="/bio/ajibola-oyedeji"
+                    className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand mt-3"
+                  >
+                    Learn more
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </div>
             </article>
@@ -899,56 +839,54 @@ export default function Home() {
                 change.
               </p>
             </div>
-            <a
+            <Link
               href="/insights"
               className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand hover:text-brand/70"
             >
               View all insights
               <ArrowRight className="w-3 h-3" />
-            </a>
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             
             <article className="card p-6 md:p-7 reveal-trigger hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-transform duration-300">
               <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/60 mb-3">
-                July 18, 2024
+                February 27, 2026
               </p>
               <h3 className="font-display font-semibold text-xl mb-3 text-dark">
-                Engineering safer food systems through proactive compliance
+                Food Quality and Safety Are Inevitable
               </h3>
               <p className="text-sm text-neutral mb-4">
-                How forward-looking quality teams can blend science, technology, and culture to stay
-                ahead of regulatory demands.
+                Why quality and safety are foundational responsibilities across the value chain.
               </p>
-              <a
-                href="/insights/engineering-safe-systems"
+              <Link
+                href="/insights/food-quality-and-safety-are-inevitable"
                 className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand hover:text-brand/70"
               >
                 Read article
                 <ArrowUpRight className="w-3 h-3" />
-              </a>
+              </Link>
             </article>
 
             
             <article className="card p-6 md:p-7 reveal-trigger hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-transform duration-300">
               <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/60 mb-3">
-                June 2, 2024
+                February 27, 2026
               </p>
               <h3 className="font-display font-semibold text-xl mb-3 text-dark">
-                Designing food safety training that sticks
+                Food Safety Systems That Work in Real Facilities
               </h3>
               <p className="text-sm text-neutral mb-4">
-                Move beyond slide decks with immersive learning experiences that shift frontline
-                behaviour.
+                How to design systems that hold up under pressure — not just on audit day.
               </p>
-              <a
-                href="/insights/designing-training-that-sticks"
+              <Link
+                href="/insights/food-safety-systems-that-work-in-real-facilities"
                 className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand hover:text-brand/70"
               >
                 Read article
                 <ArrowUpRight className="w-3 h-3" />
-              </a>
+              </Link>
             </article>
           </div>
         </div>
@@ -967,12 +905,10 @@ export default function Home() {
           </div>
 
           <h2 className="font-display font-bold text-[9vw] md:text-[4.5vw] leading-[0.95] tracking-tight text-dark mb-5">
-            Ready to elevate your food safety posture?
+            {siteContent.contact.title}
           </h2>
           <p className="text-neutral text-sm md:text-base max-w-2xl mx-auto mb-10">
-            Let's co-design a roadmap that aligns compliance, capability, and innovation across your
-            value chain. Share your current challenges and we will respond with a clear,
-            science-backed path forward.
+            {siteContent.contact.description}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
@@ -980,14 +916,20 @@ export default function Home() {
               href="/contact"
               className="px-9 py-4 bg-brand text-white rounded-full font-bold text-[11px] uppercase tracking-[0.24em] hover:bg-brand/90 hover:shadow-xl hover:shadow-brand/40 transition-all duration-300 w-full sm:w-auto"
             >
-              Book a consultation
+              {siteContent.contact.cta.primary}
             </a>
             <a
               href="#services"
               className="px-9 py-4 bg-white border border-brand-subtle text-dark rounded-full font-bold text-[11px] uppercase tracking-[0.24em] hover:bg-slate-50 transition-all duration-300 w-full sm:w-auto"
             >
-              Explore services
+              {siteContent.contact.cta.secondary}
             </a>
+            <Link
+              href="/self-check"
+              className="px-9 py-4 bg-white border border-brand-subtle text-dark rounded-full font-bold text-[11px] uppercase tracking-[0.24em] hover:bg-slate-50 transition-all duration-300 w-full sm:w-auto"
+            >
+              {siteContent.contact.cta.tertiary}
+            </Link>
           </div>
         </div>
       </section>

@@ -46,7 +46,7 @@ export default function TermsPage() {
           </p>
 
           <h2 className="font-display font-semibold text-2xl text-dark mb-3">Contact</h2>
-          <p className="text-neutral">For questions about these terms, email hello@360ace.food.</p>
+          <p className="text-neutral">For questions about these terms, email food@360ace.food.</p>
         </div>
       </section>
       <Footer />
