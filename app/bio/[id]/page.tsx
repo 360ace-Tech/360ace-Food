@@ -29,6 +29,7 @@ export default function BioPage() {
   const consultant = (data as Consultant[]).find((c) => c.id === id);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     const ctx = gsap.context(() => {
       gsap.from(".bio-hero, .bio-content > *", { opacity: 0, y: 20, duration: 0.8, stagger: 0.08, ease: "power3.out" });
     });
@@ -90,7 +91,7 @@ export default function BioPage() {
             </ol>
           </nav>
           <div className="flex flex-col md:flex-row gap-8 items-start">
-            <div className="w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0">
+            <div className="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0">
               <Image src={consultant.avatar} alt={consultant.name} width={256} height={256} className="w-full h-full object-cover" />
             </div>
             <div>
