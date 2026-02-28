@@ -111,7 +111,7 @@ export default function SelfCheckPage() {
           <h1 className="font-display font-bold text-4xl md:text-5xl tracking-tight text-dark mb-4">
             Is your food safety system working — or just on paper?
           </h1>
-          <p className="text-neutral text-base md:text-lg leading-relaxed max-w-[70ch] md:max-w-[75ch]">
+          <p className="text-neutral text-base md:text-lg leading-relaxed max-w-[80ch] md:max-w-[85ch]">
             This short self-check is not an audit and not a compliance test. It helps you reflect on
             how well your system supports daily operations in a real facility. There are no scores and
             no pass or fail — just insights to guide action.

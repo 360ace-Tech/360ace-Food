@@ -99,12 +99,9 @@ export default function BioPage() {
               {consultant.role && <p className="text-brand font-semibold">{consultant.role}</p>}
               <div className="mt-3"><button className="inline-flex items-center gap-2 text-sm text-neutral hover:text-brand" onClick={() => navigator.share?.({ title: consultant.name, url: typeof window!=="undefined"?window.location.href:undefined }).catch(()=>{})}><Share2 className="w-4 h-4" /> Share</button></div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 md:px-16 lg:px-24 pb-24 bg-white">
-        <div className="max-w-[1100px] mx-auto grid md:grid-cols-[1.1fr,0.9fr] gap-10 bio-content">
+          
+            <div className="mt-6 grid md:grid
+cols-[1.1fr,0.9fr] gap-10 bio-content">
           <article className="card p-6 md:p-8">
             {consultant.bio.map((p, i) => (
               <p className="text-neutral mb-4" key={i}>{p}</p>
