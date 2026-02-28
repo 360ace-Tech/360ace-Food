@@ -7,7 +7,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Calendar, Clock, ArrowLeft, ArrowRight, Share2 } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ArrowRight, Share2, Twitter, Linkedin, Facebook, Copy } from "lucide-react";
 import articles from "@/data/articles.json";
 import site from "@/data/site";
 import JsonLd from "@/components/JsonLd";
@@ -99,8 +99,8 @@ export default function ArticlePage() {
         }}
       />
       
-      <article className="pt-32 md:pt-40 pb-16 md:pb-24">
-        <div className="max-w-4xl mx-auto px-6 md:px-16">
+      <article className="pt-32 md:pt-40 pb-10 px-6 md:px-16 lg:px-24">
+        <div className="max-w-[1100px] mx-auto">
           
             <Link
               href="/insights"

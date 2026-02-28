@@ -192,17 +192,17 @@ export default function InsightsPage() {
       <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1000px] mx-auto text-center">
           <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tight text-dark mb-4">
-            Want insights delivered to your inbox?
+            
           </h2>
           <p className="text-neutral text-base md:text-lg max-w-2xl mx-auto mb-8">
-            Subscribe to receive our latest articles, industry updates, and food safety best
-            practices directly to your email.
+            
+            
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-9 py-4 bg-brand text-white rounded-full font-bold text-[11px] uppercase tracking-[0.24em] hover:bg-brand/90 hover:shadow-xl hover:shadow-brand/40 transition-all duration-300"
           >
-            <span>Get in touch</span>
+            <span>Book a consultation</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

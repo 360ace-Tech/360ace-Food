@@ -764,7 +764,7 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <Link href="/bio/ifeoluwa-adekoya" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
+                  <Link scroll={true} href="/bio/ifeoluwa-adekoya" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
                     Dr. Ifeoluwa Adekoya
                   </Link>
                   <p className="text-sm text-neutral">
@@ -796,7 +796,7 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <Link href="/bio/ajibola-oyedeji" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
+                  <Link scroll={true} href="/bio/ajibola-oyedeji" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
                     Dr. Ajibola Oyedeji
                   </Link>
                   <p className="text-sm text-neutral">
