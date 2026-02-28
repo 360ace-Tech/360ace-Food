@@ -74,6 +74,25 @@ export default function Home() {
           "-=1"
         );
 
+      // Animate the hero stats number (10+ years) more slowly
+      const heroYearsEl = document.querySelector(
+        ".hero-card .hero-years"
+      ) as HTMLElement | null;
+      if (heroYearsEl) {
+        const obj = { val: 0 } as { val: number };
+        const target = 10;
+        tlHero.add(() => {
+          gsap.to(obj, {
+            val: target,
+            duration: 3.0,
+            ease: "power3.out",
+            onUpdate: () => {
+              heroYearsEl.textContent = `${Math.floor(obj.val)}`;
+            },
+          });
+        });
+      }
+
       // Scroll Reveals
       document.querySelectorAll(".reveal-trigger").forEach((el) => {
         gsap.from(el, {
@@ -102,7 +121,7 @@ export default function Home() {
           onEnter: () => {
             gsap.to(obj, {
               val: target,
-              duration: 1.6,
+              duration: 3.0,
               ease: "power3.out",
               onUpdate: () => {
                 (el as HTMLElement).textContent = `${Math.floor(obj.val)}${hasPlus ? "+" : ""}`;
@@ -205,7 +224,7 @@ export default function Home() {
             <div className="absolute bottom-8 md:bottom-10 left-6 md:left-auto md:right-10 bg-white/85 backdrop-blur-md p-5 md:p-6 rounded-3xl border border-white shadow-xl z-20 max-w-xs hero-card opacity-0 translate-y-10 hidden lg:block">
               <div className="flex justify-between items-start mb-4">
                 <span className="text-3xl md:text-4xl font-display font-bold text-dark leading-none">
-                  10<span className="text-brand text-2xl align-top">+</span>
+                  <span className="hero-years">10</span><span className="text-brand text-2xl align-top">+</span>
                 </span>
                 <LineChart className="text-brand w-5 h-5" />
               </div>
