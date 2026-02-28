@@ -56,6 +56,16 @@ export default function BioPage() {
           <JsonLd
             data={{
               "@context": "https://schema.org",
+              "@type": "Person",
+              name: consultant.name,
+              image: consultant.avatar,
+              url: `${site.url}/bio/${consultant.id}`,
+              jobTitle: consultant.role || null,
+            }}
+          />
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Home", item: site.url },
@@ -80,12 +90,12 @@ export default function BioPage() {
             </ol>
           </nav>
           <div className="flex flex-col md:flex-row gap-8 items-start">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0">
-              <Image src={consultant.avatar} alt={consultant.name} width={160} height={160} className="w-full h-full object-cover" />
+            <div className="w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0">
+              <Image src={consultant.avatar} alt={consultant.name} width={256} height={256} className="w-full h-full object-cover" />
             </div>
             <div>
               <h1 className="font-display font-bold text-3xl md:text-4xl text-dark mb-1">{consultant.name}</h1>
-              <p className="text-brand font-semibold">{consultant.role}</p>
+              {consultant.role && <p className="text-brand font-semibold">{consultant.role}</p>}
               <div className="mt-3"><button className="inline-flex items-center gap-2 text-sm text-neutral hover:text-brand" onClick={() => navigator.share?.({ title: consultant.name, url: typeof window!=="undefined"?window.location.href:undefined }).catch(()=>{})}><Share2 className="w-4 h-4" /> Share</button></div>
             </div>
           </div>
