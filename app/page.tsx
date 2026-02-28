@@ -84,7 +84,7 @@ export default function Home() {
         tlHero.add(() => {
           gsap.to(obj, {
             val: target,
-            duration: 3.0,
+            duration: 3.8,
             ease: "power3.out",
             onUpdate: () => {
               heroYearsEl.textContent = `${Math.floor(obj.val)}`;
@@ -121,7 +121,7 @@ export default function Home() {
           onEnter: () => {
             gsap.to(obj, {
               val: target,
-              duration: 3.0,
+              duration: 3.8,
               ease: "power3.out",
               onUpdate: () => {
                 (el as HTMLElement).textContent = `${Math.floor(obj.val)}${hasPlus ? "+" : ""}`;
