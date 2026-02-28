@@ -98,23 +98,23 @@ export default function BioPage() {
               <h1 className="font-display font-bold text-3xl md:text-4xl text-dark mb-1">{consultant.name}</h1>
               {consultant.role && <p className="text-brand font-semibold">{consultant.role}</p>}
               <div className="mt-3"><button className="inline-flex items-center gap-2 text-sm text-neutral hover:text-brand" onClick={() => navigator.share?.({ title: consultant.name, url: typeof window!=="undefined"?window.location.href:undefined }).catch(()=>{})}><Share2 className="w-4 h-4" /> Share</button></div>
+              <div className="mt-6 grid md:grid-cols-2 gap-6 bio-content">
+                <article className="card p-6 md:p-8">
+                  {consultant.bio.map((p, i) => (
+                    <p className="text-neutral mb-4" key={i}>{p}</p>
+                  ))}
+                </article>
+                <aside className="card p-6 md:p-8">
+                  <h2 className="font-display font-semibold text-xl text-dark mb-3 flex items-center gap-2"><Award className="w-5 h-5 text-brand" /> Credentials</h2>
+                  <ul className="space-y-2 text-sm text-neutral">
+                    {consultant.credentials.map((c, i) => (
+                      <li key={i} className="flex items-start gap-2"><span className="mt-2 w-1.5 h-1.5 rounded-full bg-brand" /> <span>{c}</span></li>
+                    ))}
+                  </ul>
+                </aside>
+              </div>
             </div>
-          
-            <div className="mt-6 grid md:grid
-cols-[1.1fr,0.9fr] gap-10 bio-content">
-          <article className="card p-6 md:p-8">
-            {consultant.bio.map((p, i) => (
-              <p className="text-neutral mb-4" key={i}>{p}</p>
-            ))}
-          </article>
-          <aside className="card p-6 md:p-8">
-            <h2 className="font-display font-semibold text-xl text-dark mb-3 flex items-center gap-2"><Award className="w-5 h-5 text-brand" /> Credentials</h2>
-            <ul className="space-y-2 text-sm text-neutral">
-              {consultant.credentials.map((c, i) => (
-                <li key={i} className="flex items-start gap-2"><span className="mt-2 w-1.5 h-1.5 rounded-full bg-brand" /> <span>{c}</span></li>
-              ))}
-            </ul>
-          </aside>
+          </div>
         </div>
       </section>
 
