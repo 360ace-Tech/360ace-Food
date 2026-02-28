@@ -82,8 +82,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useEffect(() => {
     const lenis = lenisRef.current;
     if (!lenis) return;
-    if (!window.location.hash) return;
-    const raf = () => {
+    // If navigating to a hash, keep the existing behavior handled above.
+    if (window.location.hash) {
       const hash = window.location.hash;
       const start = performance.now();
       const maxMs = 3000;
@@ -93,8 +93,14 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         if (performance.now() - start < maxMs) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
-    };
-    raf();
+      return;
+    }
+    // Otherwise, ensure we land at the top on route change (e.g., bio pages from Home)
+    requestAnimationFrame(() => {
+      try {
+        lenis.scrollTo(0, { offset: 0, immediate: true });
+      } catch {}
+    });
   }, [pathname]);
 
   return <>{children}</>;
