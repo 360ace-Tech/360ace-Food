@@ -88,6 +88,29 @@ export default function Home() {
           ease: "power3.out",
         });
       });
+      // Impact counters (count up on enter)
+      document.querySelectorAll("#impact .card .font-display").forEach((el) => {
+        const t = (el as HTMLElement).textContent || "";
+        const m = t.match(/(\d+)/);
+        const target = m ? parseInt(m[1], 10) : 0;
+        const hasPlus = /\+$/.test(t.trim());
+        const obj = { val: 0 } as { val: number };
+        ScrollTrigger.create({
+          trigger: "#impact",
+          start: "top 85%",
+          once: true,
+          onEnter: () => {
+            gsap.to(obj, {
+              val: target,
+              duration: 1.6,
+              ease: "power3.out",
+              onUpdate: () => {
+                (el as HTMLElement).textContent = `${Math.floor(obj.val)}${hasPlus ? "+" : ""}`;
+              },
+            });
+          },
+        });
+      });
 
       // Marquee Animation
       gsap.to(".marquee-content", {
@@ -370,7 +393,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-7">
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -409,7 +432,7 @@ export default function Home() {
             </article>
 
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -435,7 +458,7 @@ export default function Home() {
             </article>
 
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -457,7 +480,7 @@ export default function Home() {
             </article>
 
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -481,7 +504,7 @@ export default function Home() {
             </article>
 
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -506,7 +529,7 @@ export default function Home() {
             </article>
 
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -529,7 +552,7 @@ export default function Home() {
             </article>
 
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -560,7 +583,7 @@ export default function Home() {
             </article>
 
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -584,7 +607,7 @@ export default function Home() {
             </article>
 
             
-            <article className="card p-7 sm:p-8 flex flex-col justify-between gap-5 reveal-trigger">
+            <article className="card p-7 sm:p-8 flex flex-col gap-5 reveal-trigger">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
