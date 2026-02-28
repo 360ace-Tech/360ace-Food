@@ -796,7 +796,7 @@ export default function Home() {
             
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ifeoluwa-adekoya">
               <div className="flex items-start gap-5">
-                <div className="w-32 h-32 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
+                <div className="w-36 h-36 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/images/ife.jpg"
                     alt="Dr. Ifeoluwa Adekoya"
@@ -828,7 +828,7 @@ export default function Home() {
             
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ajibola-oyedeji">
               <div className="flex items-start gap-5">
-                <div className="w-32 h-32 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
+                <div className="w-36 h-36 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/images/jb.jpeg"
                     alt="Dr. Ajibola Oyedeji"
