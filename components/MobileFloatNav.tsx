@@ -102,7 +102,7 @@ export default function MobileFloatNav() {
   const showTop = pathname === "/" && active && active !== "home";
 
   return (
-    <div className="fixed right-3 top-20 z-50 md:hidden pointer-events-auto">
+    <div className="fixed right-3 top-20 z-50 lg:hidden pointer-events-auto">
       <div className="flex flex-col gap-2 bg-white/60 border border-white/40 rounded-full p-2 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6)] backdrop-blur-xl items-center">
         
         <Link

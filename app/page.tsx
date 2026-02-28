@@ -224,7 +224,7 @@ export default function Home() {
             <div className="absolute bottom-8 md:bottom-10 left-6 md:left-auto md:right-10 bg-white/85 backdrop-blur-md p-5 md:p-6 rounded-3xl border border-white shadow-xl z-20 max-w-xs hero-card opacity-0 translate-y-10 hidden lg:block">
               <div className="flex justify-between items-start mb-4">
                 <span className="text-3xl md:text-4xl font-display font-bold text-dark leading-none">
-                  <span className="hero-years">10</span><span className="text-brand text-2xl align-top">+</span>
+                  <span className="hero-years">0</span><span className="text-brand text-2xl align-top">+</span>
                 </span>
                 <LineChart className="text-brand w-5 h-5" />
               </div>
@@ -238,7 +238,7 @@ export default function Home() {
       </section>
 
       
-      <div className="py-10 md:py-12 border-y border-neutral/5 overflow-hidden bg-white">
+          <div className="py-8 md:py-12 border-y border-neutral/5 overflow-hidden bg-white">
         <p className="text-center font-mono text-[10px] uppercase tracking-[0.3em] text-neutral/40 mb-6 md:mb-8">
           Standards &amp; Compliance Focus
         </p>
@@ -795,8 +795,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-10">
             
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ifeoluwa-adekoya">
-              <div className="flex items-start gap-5">
-                <div className="w-36 h-36 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
+              <div className="flex flex-col lg:flex-row items-start gap-4 md:gap-5">
+                <div className="w-28 h-28 sm:w-28 sm:h-28 md:w-40 md:h-40 lg:w-52 lg:h-52 xl:w-60 xl:h-60 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/images/ife.jpg"
                     alt="Dr. Ifeoluwa Adekoya"
@@ -805,7 +805,7 @@ export default function Home() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div>
+                <div className="min-w-0 mt-4 lg:mt-0">
                   <Link scroll={true} href="/bio/ifeoluwa-adekoya" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
                     Dr. Ifeoluwa Adekoya
                   </Link>
@@ -827,8 +827,8 @@ export default function Home() {
 
             
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ajibola-oyedeji">
-              <div className="flex items-start gap-5">
-                <div className="w-36 h-36 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
+              <div className="flex flex-col lg:flex-row items-start gap-4 md:gap-5">
+                <div className="w-28 h-28 sm:w-28 sm:h-28 md:w-40 md:h-40 lg:w-52 lg:h-52 xl:w-60 xl:h-60 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/images/jb.jpeg"
                     alt="Dr. Ajibola Oyedeji"
@@ -837,7 +837,7 @@ export default function Home() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div>
+                <div className="min-w-0 mt-4 lg:mt-0">
                   <Link scroll={true} href="/bio/ajibola-oyedeji" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
                     Dr. Ajibola Oyedeji
                   </Link>

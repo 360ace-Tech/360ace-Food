@@ -99,7 +99,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body style={{ fontFamily: bodyFont }}>
+      <body>
         <SmoothScroll>
           <CustomCursor />
           <MobileFloatNav />

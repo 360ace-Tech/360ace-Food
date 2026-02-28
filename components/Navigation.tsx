@@ -68,7 +68,7 @@ export default function Navigation() {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-1 bg-light rounded-full p-1">
+        <div className="hidden xl:flex items-center gap-1 bg-light rounded-full p-1">
           <Link href="/#home" scroll={false} className={itemClasses("home")}>
             Home
           </Link>
