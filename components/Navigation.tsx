@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 export default function Navigation() {
   const pathname = usePathname();
   const [active, setActive] = useState<
-    "home" | "services" | "process" | "selfcheck" | "insights" | null
+    "home" | "services" | "process" | "experts" | "selfcheck" | "insights" | null
   >(null);
 
   useEffect(() => {
@@ -17,6 +17,7 @@ export default function Navigation() {
       { id: "home", key: "home" },
       { id: "services", key: "services" },
       { id: "process", key: "process" },
+      { id: "experts", key: "experts" },
       { id: "insights", key: "insights" },
     ];
 
@@ -76,6 +77,9 @@ export default function Navigation() {
           </Link>
           <Link href="/#process" scroll={false} className={itemClasses("process")}>
             Process
+          </Link>
+          <Link href="/#experts" scroll={false} className={itemClasses("experts")} >
+            Experts
           </Link>
           <Link href="/self-check" className={itemClasses("selfcheck")}>
             Self-check

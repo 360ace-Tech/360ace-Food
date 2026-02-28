@@ -79,7 +79,7 @@ export default function InsightsPage() {
         }}
       />
       
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-6 md:px-16 lg:px-24 bg-white">
+      <section className="pt-32 pb-20 md:pt-44 md:pb-28 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1400px] mx-auto">
           <div className="insights-hero max-w-3xl">
             <div className="inline-flex items-center gap-2 border border-brand-subtle rounded-full px-3 py-1 mb-6 bg-light/80">
@@ -117,7 +117,7 @@ export default function InsightsPage() {
       </section>
 
       
-      <section className="py-16 md:py-24 px-6 md:px-16 lg:px-24 bg-light">
+      <section className="py-20 md:py-28 px-6 md:px-16 lg:px-24 bg-light">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article) => (

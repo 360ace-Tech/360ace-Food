@@ -754,7 +754,7 @@ export default function Home() {
             
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ifeoluwa-adekoya">
               <div className="flex items-start gap-5">
-                <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
+                <div className="w-32 h-32 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/images/ife.jpg"
                     alt="Dr. Ifeoluwa Adekoya"
@@ -767,11 +767,8 @@ export default function Home() {
                   <Link href="/bio/ifeoluwa-adekoya" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
                     Dr. Ifeoluwa Adekoya
                   </Link>
-                  <p className="text-[13px] text-brand font-semibold mb-2">
-                    PhD Food Technologist
-                  </p>
                   <p className="text-sm text-neutral">
-                    PhD Food Technologist, ISO 9001:2015 Lead Auditor, and Lean Six Sigma Green Belt
+                    ISO 9001:2015 Lead Auditor, and Lean Six Sigma Green Belt
                     with a decade of impact across the food, research, and pharmaceutical
                     industries.
                   </p>
@@ -789,7 +786,7 @@ export default function Home() {
             
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ajibola-oyedeji">
               <div className="flex items-start gap-5">
-                <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
+                <div className="w-32 h-32 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/images/jb.jpeg"
                     alt="Dr. Ajibola Oyedeji"
@@ -802,9 +799,6 @@ export default function Home() {
                   <Link href="/bio/ajibola-oyedeji" className="font-display font-semibold text-lg md:text-xl text-dark hover:text-brand transition-colors">
                     Dr. Ajibola Oyedeji
                   </Link>
-                  <p className="text-[13px] text-brand font-semibold mb-2">
-                    Food Scientist (PhD Food Science and Technology)
-                  </p>
                   <p className="text-sm text-neutral">
                     Over ten years of experience in research, quality assurance, methods and product
                     development, and laboratory analysis across food systems.
@@ -826,7 +820,7 @@ export default function Home() {
       
       <section id="insights" className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1400px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-10 md:mb-14">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12 md:mb-16">
             <div>
               <span className="font-mono text-[11px] text-brand uppercase tracking-[0.32em] mb-3 block">
                 Insights
@@ -848,7 +842,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-10">
             
             <article className="card p-6 md:p-7 reveal-trigger hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-transform duration-300">
               <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/60 mb-3">
