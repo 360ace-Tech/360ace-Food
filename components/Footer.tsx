@@ -23,7 +23,7 @@ export default function Footer() {
             </div>
             <p className="text-sm text-neutral max-w-md">
               Safeguarding food systems with evidence-based strategy, agile implementation, and
-              enduring partnerships across Africa and beyond.
+              enduring partnerships across the world.
             </p>
           </div>
 

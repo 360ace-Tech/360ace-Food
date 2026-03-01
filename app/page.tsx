@@ -320,10 +320,6 @@ export default function Home() {
                   <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">{siteContent.impact.metrics[2].value}</span>
                   <p className="text-xs md:text-sm text-neutral leading-snug">{siteContent.impact.metrics[2].description}</p>
                 </div>
-                <div className="card p-5 sm:p-6 flex flex-col justify-between">
-                  <span className="text-2xl md:text-3xl font-display font-bold text-dark mb-1">{siteContent.impact.metrics[3].value}</span>
-                  <p className="text-xs md:text-sm text-neutral leading-snug">{siteContent.impact.metrics[3].description}</p>
-                </div>
               </div>
 
               
@@ -787,8 +783,8 @@ export default function Home() {
               </h2>
             </div>
             <p className="text-neutral text-sm md:text-base max-w-md">
-              PhD-trained specialists with experience across food manufacturing, laboratories,
-              academia, and regulatory-focused research programs in Africa and beyond.
+              Trained specialists with experience across food manufacturing, laboratories,
+              academia, and regulatory-focused research programs.
             </p>
           </div>
 
@@ -834,7 +830,7 @@ export default function Home() {
                     alt="Dr. Ajibola Oyedeji"
                     width={144}
                     height={144}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-top lg:object-cover"
                   />
                 </div>
                 <div className="min-w-0 mt-4 lg:mt-0">
