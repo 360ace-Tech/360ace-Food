@@ -830,7 +830,7 @@ export default function Home() {
                     alt="Dr. Ajibola Oyedeji"
                     width={144}
                     height={144}
-                    className="w-full h-full object-cover object-[50%_12%] md:object-[50%_10%] lg:object-center"
+                    className="w-full h-full object-cover object-[50%_0%] lg:object-center"
                   />
                 </div>
                 <div className="min-w-0 mt-4 lg:mt-0">

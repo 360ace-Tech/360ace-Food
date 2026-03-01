@@ -92,7 +92,7 @@ export default function BioPage() {
           </nav>
           <div className="grid grid-cols-[auto,1fr] gap-4 md:gap-8 items-start">
             <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0">
-              <Image src={consultant.avatar} alt={consultant.name} width={256} height={256} className="w-full h-full object-cover object-[50%_12%] md:object-[50%_10%] lg:object-center" />
+              <Image src={consultant.avatar} alt={consultant.name} width={256} height={256} className="w-full h-full object-cover object-[50%_0%] lg:object-center" />
             </div>
             <div>
               <h1 className="font-display font-bold text-3xl md:text-4xl text-dark mb-1">{consultant.name}</h1>
