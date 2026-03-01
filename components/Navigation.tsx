@@ -13,7 +13,7 @@ export default function Navigation() {
   >(null);
 
   useEffect(() => {
-    const sections: { id: string; key: typeof active }[] = [
+    const map: { id: string; key: typeof active }[] = [
       { id: "home", key: "home" },
       { id: "services", key: "services" },
       { id: "process", key: "process" },
@@ -21,23 +21,34 @@ export default function Navigation() {
       { id: "insights", key: "insights" },
     ];
 
-    const observers: IntersectionObserver[] = [];
-    sections.forEach(({ id, key }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const ob = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) setActive(key);
-          });
-        },
-        { root: null, threshold: 0.3 }
-      );
-      ob.observe(el);
-      observers.push(ob);
-    });
+    const els = map
+      .map(({ id, key }) => ({ el: document.getElementById(id), key }))
+      .filter((x): x is { el: HTMLElement; key: typeof active } => !!x.el);
 
-    return () => observers.forEach((o) => o.disconnect());
+    if (!els.length || pathname !== "/") return;
+
+    let raf = 0;
+    const compute = () => {
+      const center = window.innerHeight * 0.45;
+      let bestKey: typeof active = null;
+      let bestDist = Infinity;
+      els.forEach(({ el, key }) => {
+        const r = el.getBoundingClientRect();
+        const mid = r.top + r.height / 2;
+        const d = Math.abs(mid - center);
+        if (d < bestDist) { bestDist = d; bestKey = key; }
+      });
+      setActive(bestKey);
+    };
+    const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(compute); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    compute();
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, [pathname]);
 
   const itemClasses = (key: typeof active) =>
