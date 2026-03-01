@@ -792,7 +792,7 @@ export default function Home() {
             
             <article className="card p-6 sm:p-8 flex flex-col gap-5 md:gap-6 reveal-trigger" id="ifeoluwa-adekoya">
               <div className="flex flex-col lg:flex-row items-start gap-4 md:gap-5">
-                <div className="w-28 h-28 sm:w-28 sm:h-28 md:w-40 md:h-40 lg:w-52 lg:h-52 xl:w-60 xl:h-60 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
+                <div className="w-28 h-36 sm:w-28 sm:h-36 md:w-40 md:h-52 lg:w-52 lg:h-64 xl:w-60 xl:h-72 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/images/ife.jpg"
                     alt="Dr. Ifeoluwa Adekoya"
