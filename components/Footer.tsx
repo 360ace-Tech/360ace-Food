@@ -32,22 +32,24 @@ export default function Footer() {
             <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-neutral/60 mb-1">
               Explore
             </span>
-            <Link href="/#home" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
-              <span className="link-underline">Home</span>
-              <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </Link>
-            <Link href="/#services" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
-              <span className="link-underline">Services</span>
-              <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </Link>
-            <Link href="/#process" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
-              <span className="link-underline">Process</span>
-              <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </Link>
-            <Link href="/#experts" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
-              <span className="link-underline">Experts</span>
-              <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </Link>
+            <nav aria-label="Footer explore" className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <Link href="/#home" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+                <span className="link-underline">Home</span>
+                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+              <Link href="/#services" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+                <span className="link-underline">Services</span>
+                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+              <Link href="/#process" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+                <span className="link-underline">Process</span>
+                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+              <Link href="/#experts" scroll={false} className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+                <span className="link-underline">Experts</span>
+                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+            </nav>
           </div>
 
           {/* Resources */}
@@ -55,18 +57,20 @@ export default function Footer() {
             <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-neutral/60 mb-1">
               Resources
             </span>
-            <Link href="/self-check" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
-              <span className="link-underline">Self-check</span>
-              <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </Link>
-            <Link href="/insights" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
-              <span className="link-underline">Insights</span>
-              <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </Link>
-            <Link href="/contact" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
-              <span className="link-underline">Contact</span>
-              <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </Link>
+            <nav aria-label="Footer resources" className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <Link href="/self-check" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+                <span className="link-underline">Self-check</span>
+                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+              <Link href="/insights" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+                <span className="link-underline">Insights</span>
+                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+              <Link href="/contact" className="group inline-flex items-center gap-1 text-sm text-dark transition-colors hover:text-brand">
+                <span className="link-underline">Contact</span>
+                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+            </nav>
           </div>
         </div>
 
