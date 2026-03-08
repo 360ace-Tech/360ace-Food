@@ -7,7 +7,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Calendar, Clock, ArrowLeft, ArrowRight, Share2, Twitter, Linkedin, Facebook, Copy } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import articles from "@/data/articles.json";
 import site from "@/data/site";
 import JsonLd from "@/components/JsonLd";
