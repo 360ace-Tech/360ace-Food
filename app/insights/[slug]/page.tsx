@@ -12,6 +12,7 @@ import articles from "@/data/articles.json";
 import site from "@/data/site";
 import JsonLd from "@/components/JsonLd";
 import ArticleShare from "@/components/ArticleShare";
+import ViewCount from "@/components/ViewCount";
 
 export default function ArticlePage() {
   const params = useParams();
@@ -157,6 +158,7 @@ export default function ArticlePage() {
                 <Clock className="w-4 h-4" />
                 <span>{article.readTime}</span>
               </div>
+              <ViewCount slug={article.slug} incrementOnMount />
               <ArticleShare title={article.title} slug={article.slug} />
             </div>
           </div>

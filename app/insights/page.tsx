@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
 import articles from "@/data/articles.json";
 import JsonLd from "@/components/JsonLd";
+import ViewCount from "@/components/ViewCount";
 import site from "@/data/site";
 
 export default function InsightsPage() {
@@ -160,6 +161,7 @@ export default function InsightsPage() {
                         <Clock className="w-3.5 h-3.5" />
                         <span>{article.readTime}</span>
                       </div>
+                      <ViewCount slug={article.slug} />
                     </div>
 
                     
