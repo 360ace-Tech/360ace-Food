@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Script from "next/script";
 import gsap from "gsap";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -12,6 +13,17 @@ export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [error, setError] = useState<string>("");
   const formRef = useRef<HTMLFormElement | null>(null);
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || "";
+
+  function validateEmail(email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
+  }
+
+  function validatePhone(phone: string) {
+    if (!phone) return true; // optional
+    const digits = (phone.match(/\d/g) || []).length;
+    return digits >= 7 && digits <= 20;
+  }
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".contact-hero, .contact-form", {
@@ -77,7 +89,31 @@ export default function ContactPage() {
                 email: String(fields.get("email") || "").trim(),
                 phone: String(fields.get("phone") || "").trim(),
                 message: String(fields.get("message") || "").trim(),
+                // Turnstile adds this hidden input automatically when the widget sits inside the form
+                "cf-turnstile-response": String(fields.get("cf-turnstile-response") || ""),
               };
+
+              // Client-side validations for UX
+              if (!payload.name || !payload.email) {
+                setStatus("error");
+                setError("Name and email are required.");
+                return;
+              }
+              if (!validateEmail(payload.email)) {
+                setStatus("error");
+                setError("Enter a valid email address.");
+                return;
+              }
+              if (!validatePhone(payload.phone)) {
+                setStatus("error");
+                setError("Enter a valid phone number (optional).");
+                return;
+              }
+              if (siteKey && !payload["cf-turnstile-response"]) {
+                setStatus("error");
+                setError("Please complete the Turnstile check.");
+                return;
+              }
 
               try {
                 const res = await fetch("/api/contact", {
@@ -135,7 +171,20 @@ export default function ContactPage() {
               )}
               {status === "error" && <p className="text-red-600">{error}</p>}
             </div>
+            {/* Turnstile widget goes inside the form so it attaches hidden input */}
+            {siteKey ? (
+              <div
+                className="cf-turnstile mt-2"
+                data-sitekey={siteKey}
+                data-theme="light"
+                data-size="flexible"
+              />
+            ) : null}
           </form>
+          {/* Cloudflare Turnstile (only if site key present) */}
+          {siteKey ? (
+            <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" defer />
+          ) : null}
         </div>
       </section>
       <Footer />

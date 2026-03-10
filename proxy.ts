@@ -15,15 +15,16 @@ function buildCSP(nonce: string) {
 
   const directives: Record<string, string> = {
     "default-src": "'self'",
-    "script-src": scriptSrc,
-    "script-src-elem": scriptSrc,
+    // Allow Cloudflare Turnstile script/iframe
+    "script-src": `${scriptSrc} https://challenges.cloudflare.com`,
+    "script-src-elem": `${scriptSrc} https://challenges.cloudflare.com`,
     "script-src-attr": "'none'",
     "style-src": "'self' 'unsafe-inline'",
     "img-src": "'self' data: blob:",
     "font-src": "'self' data:",
     "connect-src": "'self' https:",
     "worker-src": "'self' blob:",
-    "frame-src": "'self'",
+    "frame-src": "'self' https://challenges.cloudflare.com",
     "object-src": "'none'",
     "base-uri": "'self'",
     "form-action": "'self' mailto:",
@@ -63,4 +64,3 @@ export function proxy(req: NextRequest) {
 export const config = {
   matcher: "/:path*",
 };
-
