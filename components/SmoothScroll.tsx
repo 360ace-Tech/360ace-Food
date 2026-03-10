@@ -1,0 +1,107 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import Lenis from "lenis";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const lenisRef = useRef<Lenis | null>(null);
+  const rafRef = useRef<((time: number) => void) | null>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      syncTouch: true,
+    });
+
+    lenisRef.current = lenis;
+
+    lenis.on("scroll", ScrollTrigger.update);
+    const raf = (time: number) => lenis.raf(time * 1000);
+    rafRef.current = raf;
+    gsap.ticker.add(raf);
+
+    gsap.ticker.lagSmoothing(0);
+
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target?.closest("a") as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const href = anchor.getAttribute("href") || "";
+      if (!href) return;
+      const isHashOnly = href.startsWith("#");
+      const isRootHash = href.startsWith("/#") && window.location.pathname === "/";
+      if (!(isHashOnly || isRootHash)) return;
+      const hash = isHashOnly ? href : href.slice(1);
+      const el = document.querySelector(hash);
+      if (!el) return;
+      e.preventDefault();
+      lenis.scrollTo(el as HTMLElement, { offset: -10 });
+      history.pushState(null, "", hash);
+    };
+    document.addEventListener("click", onClick);
+    const smoothToHash = () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+      const start = performance.now();
+      const maxMs = 3000;
+      const step = () => {
+        const el = document.querySelector(hash) as HTMLElement | null;
+        if (el) {
+          lenis.scrollTo(el, { offset: -88 });
+        }
+        if (performance.now() - start < maxMs) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const onHashChange = () => smoothToHash();
+    window.addEventListener("hashchange", onHashChange);
+
+    if (window.location.hash) smoothToHash();
+
+    return () => {
+      document.removeEventListener("click", onClick);
+      window.removeEventListener("hashchange", onHashChange);
+      if (rafRef.current) gsap.ticker.remove(rafRef.current);
+      lenis.destroy();
+    };
+  }, []);
+
+  useEffect(() => {
+    const lenis = lenisRef.current;
+    if (!lenis) return;
+    // If navigating to a hash, keep the existing behavior handled above.
+    if (window.location.hash) {
+      const hash = window.location.hash;
+      const start = performance.now();
+      const maxMs = 3000;
+      const tick = () => {
+        const el = document.querySelector(hash) as HTMLElement | null;
+        if (el) lenis.scrollTo(el, { offset: -88 });
+        if (performance.now() - start < maxMs) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      return;
+    }
+    // Otherwise, ensure we land at the top on route change (e.g., bio pages from Home)
+    requestAnimationFrame(() => {
+      try {
+        lenis.scrollTo(0, { offset: 0, immediate: true });
+      } catch {}
+    });
+  }, [pathname]);
+
+  return <>{children}</>;
+}

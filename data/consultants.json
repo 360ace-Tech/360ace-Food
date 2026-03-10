@@ -1,0 +1,40 @@
+[
+  {
+    "id": "ifeoluwa-adekoya",
+    "name": "Dr. Ifeoluwa Adekoya",
+    "role": "",
+    "avatar": "/images/ife.jpg",
+    "bio": [
+      "Ife Adekoya is a Food Safety and Regulatory Systems Consultant dedicated to helping food and agri-food organizations move from compliance to excellence.",
+      "With extensive experience in federally regulated food and cannabis processing environments and advanced training in food technology and quality systems, she delivers practical, science-driven solutions that strengthen operations from farm to fork.",
+      "She partners with manufacturers and processors to develop clear, audit-ready, and sustainable quality and compliance systems, and collaborates with academic institutions on proposals, research design, and student supervision."
+    ],
+    "credentials": [
+      "HACCP & SQF Certified",
+      "ISO 9001:2015 Certified Lead Auditor",
+      "Professional Agrologist (P.Ag.), Alberta Institute of Agrologists",
+      "Lean Six Sigma Green Belt",
+      "Published Author (30+ Scholarly Articles & Book Chapters)",
+      "Academic Peer Reviewer & Scientific Editor"
+    ]
+  },
+  {
+    "id": "ajibola-oyedeji",
+    "name": "Dr. Ajibola Oyedeji",
+    "role": "",
+    "avatar": "/images/jb.jpeg",
+    "bio": [
+      "Ajibola Oyedeji is a Food Scientist with over ten years of experience in research, quality assurance, product development, and laboratory systems management.",
+      "He has led multidisciplinary teams in product development, ISO 17025-compliant laboratory methods design, and quality management system implementation.",
+      "With 40+ Web of Science-indexed publications and conference presentations, Ajibola bridges scientific research and practical application across industry, laboratories, and academia."
+    ],
+    "credentials": [
+      "PhD, Food Science & Technology",
+      "ISO 17025 Laboratory Systems & Methods Development Expertise",
+      "Author of 40+ Web of Science-Indexed Publications",
+      "International Conference Presenter & Policy Contributor",
+      "Advisor in Food Safety, QA & Regulatory Systems"
+    ]
+  }
+]
+

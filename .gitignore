@@ -1,23 +1,46 @@
-# Node / Next.js
-node_modules
-.next
-out
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.docx
+*.pem
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-.DS_Store
-.env.local
-.env
-.env.*.local
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# legacy/reference HTML not part of v2 branch
+archive/
+
+# vercel
 .vercel
-# MacOS metadata
-.DS_Store
-# Log files
-*.log
-# Editor directories
-.vscode
-.idea
-*.docx
-docs
-tsconfig.tsbuildinfo
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+.docx

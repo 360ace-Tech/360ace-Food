@@ -1,15 +1,15 @@
-import type { MetadataRoute } from 'next';
+import type { MetadataRoute } from "next";
+export const dynamic = "force-static";
+import site from "@/data/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/api/']
-      }
-    ],
-    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://360acefood.example'}/sitemap.xml`
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/api/", "/_next/"],
+    },
+    sitemap: `${site.url}/sitemap.xml`,
+    host: site.url,
   };
 }
-

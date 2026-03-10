@@ -1,22 +1,28 @@
-import type { MetadataRoute } from 'next';
-import { getBlogSlugs } from '@/lib/blog';
+import type { MetadataRoute } from "next";
+export const dynamic = "force-static";
+import site from "@/data/site";
+import articlesData from "@/data/articles.json" assert { type: "json" };
+import consultantsData from "@/data/consultants.json" assert { type: "json" };
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://360acefood.example';
-
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${base}/`, changeFrequency: 'weekly', priority: 1 },
-    { url: `${base}/contact`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${base}/insights`, changeFrequency: 'weekly', priority: 0.8 }
+    { url: `${site.url}/`, lastModified: new Date() },
+    { url: `${site.url}/self-check`, lastModified: new Date() },
+    { url: `${site.url}/insights`, lastModified: new Date() },
+    { url: `${site.url}/contact`, lastModified: new Date() },
+    { url: `${site.url}/privacy`, lastModified: new Date() },
+    { url: `${site.url}/terms`, lastModified: new Date() },
   ];
 
-  const slugs = await getBlogSlugs().catch(() => [] as string[]);
-  const posts: MetadataRoute.Sitemap = slugs.map((slug) => ({
-    url: `${base}/insights/${slug}`,
-    changeFrequency: 'monthly',
-    priority: 0.7
+  const articleRoutes: MetadataRoute.Sitemap = (articlesData as { slug: string; date?: string }[]).map((a) => ({
+    url: `${site.url}/insights/${a.slug}`,
+    lastModified: a.date ? new Date(a.date) : new Date(),
   }));
 
-  return [...staticRoutes, ...posts];
-}
+  const bioRoutes: MetadataRoute.Sitemap = (consultantsData as { id: string }[]).map((c) => ({
+    url: `${site.url}/bio/${c.id}`,
+    lastModified: new Date(),
+  }));
 
+  return [...staticRoutes, ...articleRoutes, ...bioRoutes];
+}

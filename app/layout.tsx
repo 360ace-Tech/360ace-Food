@@ -1,64 +1,110 @@
-import type { Metadata } from 'next';
-import clsx from 'clsx';
-import './globals.css';
-import { Footer } from '@/components/layout/footer';
-import { Header } from '@/components/layout/header';
-import { SkipToContent } from '@/components/ui/skip-to-content';
-import { PageTransition } from '@/components/layout/page-transition';
+import type { Metadata } from "next";
+import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import MobileFloatNav from "@/components/MobileFloatNav";
+import CustomCursor from "@/components/CustomCursor";
+import site from "@/data/site";
+import JsonLd from "@/components/JsonLd";
 
-// Use system fonts by default to avoid external fetches in restricted environments
-const useLocalFonts = true;
-const maintenanceEnabled = process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://360acefood.example';
+const bodyFont = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
 export const metadata: Metadata = {
-  title: '360ace Food Consulting',
-  description:
-    'We deliver science-led food safety, regulatory, and quality assurance consulting for organizations ready to elevate compliance and consumer trust.',
-  metadataBase: new URL(siteUrl),
-  icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png'
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
+  keywords: site.keywords,
+  authors: [{ name: site.name }],
+  creator: site.name,
+  publisher: site.name,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   openGraph: {
-    title: '360ace.Food Consulting',
-    description:
-      'Science-led partner for resilient food systems: regulatory readiness, training, quality systems, and research support.',
-    type: 'website'
+    type: "website",
+    locale: "en_US",
+    url: site.url,
+    title: site.title,
+    description: site.description,
+    siteName: site.name,
+    images: [
+      {
+        url: site.ogImage,
+        width: 1200,
+        height: 630,
+        alt: site.title,
+      },
+    ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: '360ace.Food Consulting',
-    description: 'Science-led partner for resilient food systems.'
-  }
+    card: site.twitter.card,
+    title: site.title,
+    description: site.description,
+  },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
+
+// Control HTML caching of prerendered pages (helps avoid month-long caches)
+export const revalidate = 300;
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
-  children
-}: {
+  children,
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`antialiased`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap"
-          rel="stylesheet"
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: site.name,
+            url: site.url,
+            sameAs: [],
+            logo: site.ogImage,
+          }}
+        />
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: site.title,
+            url: site.url,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: `${site.url}/?q={search_term_string}`,
+              "query-input": "required name=search_term_string",
+            },
+          }}
         />
       </head>
-      <body className={clsx('bg-[var(--background)] text-[var(--foreground)]')}>
-        {!maintenanceEnabled && <SkipToContent />}
-        {!maintenanceEnabled && <Header />}
-        <PageTransition>
-          <main id="main-content" className="relative">
-            {children}
-          </main>
-        </PageTransition>
-        {!maintenanceEnabled && <Footer />}
+      <body>
+        <SmoothScroll>
+          <CustomCursor />
+          <MobileFloatNav />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
