@@ -147,8 +147,12 @@ export default function ContactPage() {
                 <input name="email" type="email" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
               </div>
               <div>
-                <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Phone</label>
-                <input name="phone" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
+                <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Phone (optional)</label>
+                <input
+                  name="phone"
+                  placeholder="Optional"
+                  className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30"
+                />
               </div>
             </div>
             <div>
@@ -173,12 +177,14 @@ export default function ContactPage() {
             </div>
             {/* Turnstile widget goes inside the form so it attaches hidden input */}
             {siteKey ? (
-              <div
-                className="cf-turnstile mt-2"
-                data-sitekey={siteKey}
-                data-theme="light"
-                data-size="flexible"
-              />
+              <div className="mt-2 w-full sm:w-1/2 min-w-[240px] max-w-[360px]">
+                <div
+                  className="cf-turnstile"
+                  data-sitekey={siteKey}
+                  data-theme="light"
+                  data-size="flexible"
+                />
+              </div>
             ) : null}
           </form>
           {/* Cloudflare Turnstile (only if site key present) */}
