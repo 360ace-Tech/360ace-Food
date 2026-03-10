@@ -3,11 +3,20 @@ import { sendContactEmail } from "@/lib/mail";
 
 async function verifyTurnstile(req: NextRequest) {
   const secret = process.env.TURNSTILE_SECRET_KEY || process.env.CLOUDFLARE_TURNSTILE_SECRET || "";
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || "";
   const enabled = Boolean(secret);
   if (!enabled) return { ok: true } as const;
 
+  // Bypass verification for trusted preview/dev hosts where the widget may not render
+  const host = req.headers.get("host") || req.nextUrl.hostname || "";
+  const isPreview = /\.netlify\.app$/i.test(host) || /localhost(:\d+)?$/i.test(host);
+
   const body = await req.clone().json().catch(() => ({} as any));
   const token = String(body["cf-turnstile-response"] || body.turnstile || "");
+
+  if ((!token || !siteKey) && isPreview) {
+    return { ok: true } as const;
+  }
   if (!token) return { ok: false, error: "Turnstile token missing" } as const;
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
@@ -15,7 +24,6 @@ async function verifyTurnstile(req: NextRequest) {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({ secret, response: token, remoteip: ip || "" }),
-    // Avoid caching
     cache: "no-store",
   });
   const json = (await r.json()) as { success?: boolean; "error-codes"?: string[] };
