@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -9,6 +9,9 @@ import JsonLd from "@/components/JsonLd";
 import site from "@/data/site";
 
 export default function ContactPage() {
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [error, setError] = useState<string>("");
+  const formRef = useRef<HTMLFormElement | null>(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".contact-hero, .contact-form", {
@@ -57,37 +60,80 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <form className="contact-form card p-6 md:p-8 grid gap-4" onSubmit={(e) => e.preventDefault()}>
+          <form
+            ref={formRef}
+            className="contact-form card p-6 md:p-8 grid gap-4"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              if (status === "sending") return;
+              setStatus("sending");
+              setError("");
+
+              const form = e.currentTarget as HTMLFormElement;
+              const fields = new FormData(form);
+              const payload = {
+                name: String(fields.get("name") || "").trim(),
+                company: String(fields.get("company") || "").trim(),
+                email: String(fields.get("email") || "").trim(),
+                phone: String(fields.get("phone") || "").trim(),
+                message: String(fields.get("message") || "").trim(),
+              };
+
+              try {
+                const res = await fetch("/api/contact", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload),
+                });
+                const json = await res.json().catch(() => ({} as any));
+                if (!res.ok || !json.ok) throw new Error(json.error || "Failed to send");
+                setStatus("success");
+                form.reset();
+              } catch (err: any) {
+                setStatus("error");
+                setError(err?.message || "Failed to send. Please email food@360ace.food.");
+              }
+            }}
+          >
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Full name</label>
-                <input className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
+                <input name="name" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
               </div>
               <div>
                 <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Company</label>
-                <input className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
+                <input name="company" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
               </div>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Email</label>
-                <input type="email" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
+                <input name="email" type="email" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
               </div>
               <div>
                 <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Phone</label>
-                <input className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
+                <input name="phone" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
               </div>
             </div>
             <div>
               <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">What would you like to achieve?</label>
-              <textarea rows={5} className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
+              <textarea name="message" rows={5} className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
             </div>
             <div className="flex items-center justify-between gap-4">
               <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60">We reply in 1 business day</p>
-              <button className="inline-flex items-center gap-2 px-9 py-4 bg-brand text-white rounded-full font-bold text-[11px] uppercase tracking-[0.24em] hover:bg-brand/90 hover:shadow-xl hover:shadow-brand/40 transition-all duration-300">
+              <button disabled={status === "sending"} className="inline-flex items-center gap-2 px-9 py-4 bg-brand text-white rounded-full font-bold text-[11px] uppercase tracking-[0.24em] hover:bg-brand/90 hover:shadow-xl hover:shadow-brand/40 transition-all duration-300 disabled:opacity-60">
                 Submit request
                 <ArrowRight className="w-4 h-4" />
               </button>
+            </div>
+
+            {/* Status message */}
+            <div aria-live="polite" className="mt-2 text-sm">
+              {status === "sending" && <p className="text-neutral">Sending…</p>}
+              {status === "success" && (
+                <p className="text-emerald-600 font-medium">Thank you — your request was sent successfully.</p>
+              )}
+              {status === "error" && <p className="text-red-600">{error}</p>}
             </div>
           </form>
         </div>
