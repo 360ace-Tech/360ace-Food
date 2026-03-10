@@ -150,7 +150,6 @@ export default function ContactPage() {
                 <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Phone (optional)</label>
                 <input
                   name="phone"
-                  placeholder="Optional"
                   className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30"
                 />
               </div>
