@@ -49,10 +49,27 @@ function isAllowedOrigin(req: NextRequest) {
   return allowed.some((o) => origin.startsWith(o));
 }
 
+function withCors(res: NextResponse, req: NextRequest, allowed: boolean) {
+  const origin = req.headers.get("origin") || "*";
+  if (allowed) {
+    res.headers.set("Access-Control-Allow-Origin", origin);
+  }
+  res.headers.set("Vary", "Origin");
+  res.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.headers.set("Access-Control-Allow-Headers", "content-type");
+  return res;
+}
+
+export async function OPTIONS(req: NextRequest) {
+  const allowed = isAllowedOrigin(req);
+  return withCors(new NextResponse(null, { status: 204 }), req, allowed);
+}
+
 export async function POST(req: NextRequest) {
   try {
-    if (!isAllowedOrigin(req)) {
-      return NextResponse.json({ ok: false, error: "Forbidden origin" }, { status: 403 });
+    const allowed = isAllowedOrigin(req);
+    if (!allowed) {
+      return withCors(NextResponse.json({ ok: false, error: "Forbidden origin" }, { status: 403 }), req, false);
     }
 
     const data = await req.json().catch(() => ({}));
@@ -62,21 +79,21 @@ export async function POST(req: NextRequest) {
     const phone = String(data.phone || "").trim() || undefined;
     const message = String(data.message || "").trim() || undefined;
 
-    if (!name || !email) return NextResponse.json({ ok: false, error: "Name and email are required." }, { status: 400 });
-    if (!isValidEmail(email)) return NextResponse.json({ ok: false, error: "Enter a valid email address." }, { status: 400 });
-    if (!isValidPhone(phone || "")) return NextResponse.json({ ok: false, error: "Enter a valid phone number (optional)." }, { status: 400 });
+    if (!name || !email) return withCors(NextResponse.json({ ok: false, error: "Name and email are required." }, { status: 400 }), req, allowed);
+    if (!isValidEmail(email)) return withCors(NextResponse.json({ ok: false, error: "Enter a valid email address." }, { status: 400 }), req, allowed);
+    if (!isValidPhone(phone || "")) return withCors(NextResponse.json({ ok: false, error: "Enter a valid phone number (optional)." }, { status: 400 }), req, allowed);
 
     const v = await verifyTurnstile(req);
-    if (!v.ok) return NextResponse.json({ ok: false, error: v.error }, { status: 400 });
+    if (!v.ok) return withCors(NextResponse.json({ ok: false, error: v.error }, { status: 400 }), req, allowed);
 
     await sendContactEmail({ name, email, company, phone, message });
 
-    return NextResponse.json({
+    return withCors(NextResponse.json({
       ok: true,
       message: "Thanks — we’ll reply within 1 business day.",
-    });
+    }), req, allowed);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Unable to send message";
-    return NextResponse.json({ ok: false, error: msg }, { status: 500 });
+    return withCors(NextResponse.json({ ok: false, error: msg }, { status: 500 }), req, true);
   }
 }

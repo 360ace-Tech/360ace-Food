@@ -72,7 +72,12 @@ export async function sendContactEmail(opts: {
       <pre style="white-space:pre-wrap; margin:0;">${escapeHtml(opts.message || "(none)")}</pre>
     </div>`;
 
-  const from = cfg.allowArbitraryFrom ? `${opts.name} <${opts.email}>` : cfg.from;
+  // Choose a safe From: many providers (Gmail, O365) require the authenticated user
+  // address as From. Use SMTP_USER when host matches common providers; otherwise
+  // fall back to CONTACT_FROM_EMAIL or SMTP_USER.
+  const isGmail = /gmail\./i.test(cfg.host);
+  const isO365 = /office365|outlook\./i.test(cfg.host);
+  const from = isGmail || isO365 ? cfg.user : (cfg.from || cfg.user);
 
   return transporter.sendMail({
     from,
@@ -92,4 +97,3 @@ function escapeHtml(s: string) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-
