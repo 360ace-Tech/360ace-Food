@@ -55,14 +55,7 @@ export default function Home() {
           },
           "-=1"
         )
-        .to(
-          "#hero-canvas",
-          {
-            opacity: 1,
-            duration: 2,
-          },
-          "-=1"
-        )
+        // Canvas rendering starts inside HeroMolecule; no need to target a specific id.
         .to(
           ".hero-card",
           {

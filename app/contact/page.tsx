@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
+import Script from "next/script";
 import gsap from "gsap";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -9,6 +10,20 @@ import JsonLd from "@/components/JsonLd";
 import site from "@/data/site";
 
 export default function ContactPage() {
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [error, setError] = useState<string>("");
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || "";
+
+  function validateEmail(email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
+  }
+
+  function validatePhone(phone: string) {
+    if (!phone) return true; // optional
+    const digits = (phone.match(/\d/g) || []).length;
+    return digits >= 7 && digits <= 20;
+  }
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".contact-hero, .contact-form", {
@@ -57,39 +72,147 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <form className="contact-form card p-6 md:p-8 grid gap-4" onSubmit={(e) => e.preventDefault()}>
+          <form
+            ref={formRef}
+            className="contact-form card p-6 md:p-8 grid gap-4"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              if (status === "sending") return;
+              setStatus("sending");
+              setError("");
+
+              const form = e.currentTarget as HTMLFormElement;
+              const fields = new FormData(form);
+              const payload = {
+                name: String(fields.get("name") || "").trim(),
+                company: String(fields.get("company") || "").trim(),
+                email: String(fields.get("email") || "").trim(),
+                phone: String(fields.get("phone") || "").trim(),
+                message: String(fields.get("message") || "").trim(),
+                // Turnstile adds this hidden input automatically when the widget sits inside the form
+                "cf-turnstile-response": String(fields.get("cf-turnstile-response") || ""),
+              };
+
+              // Client-side validations for UX
+              if (!payload.name || !payload.email) {
+                setStatus("error");
+                setError("Name and email are required.");
+                return;
+              }
+              if (!validateEmail(payload.email)) {
+                setStatus("error");
+                setError("Enter a valid email address.");
+                return;
+              }
+              if (!validatePhone(payload.phone)) {
+                setStatus("error");
+                setError("Enter a valid phone number (optional).");
+                return;
+              }
+              // Do not force client-side Turnstile; server will verify when enabled.
+
+              try {
+                const res = await fetch("/api/contact", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload),
+                });
+                const json = await res.json().catch(() => ({} as any));
+                if (!res.ok || !json.ok) throw new Error(json.error || "Failed to send");
+                setStatus("success");
+                form.reset();
+              } catch (err: any) {
+                setStatus("error");
+                setError(err?.message || "Failed to send. Please email food@360ace.food.");
+              }
+            }}
+          >
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Full name</label>
-                <input className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
+                <input name="name" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
               </div>
               <div>
                 <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Company</label>
-                <input className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
+                <input name="company" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
               </div>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Email</label>
-                <input type="email" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
+                <input name="email" type="email" className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" required />
               </div>
               <div>
-                <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Phone</label>
-                <input className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
+                <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">Phone (optional)</label>
+                <input
+                  name="phone"
+                  className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30"
+                />
               </div>
             </div>
             <div>
               <label className="block text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60 mb-2">What would you like to achieve?</label>
-              <textarea rows={5} className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
+              <textarea name="message" rows={5} className="w-full rounded-xl border border-brand-subtle px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand/30" />
             </div>
             <div className="flex items-center justify-between gap-4">
               <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-neutral/60">We reply in 1 business day</p>
-              <button className="inline-flex items-center gap-2 px-9 py-4 bg-brand text-white rounded-full font-bold text-[11px] uppercase tracking-[0.24em] hover:bg-brand/90 hover:shadow-xl hover:shadow-brand/40 transition-all duration-300">
+              <button disabled={status === "sending"} className="inline-flex items-center gap-2 px-9 py-4 bg-brand text-white rounded-full font-bold text-[11px] uppercase tracking-[0.24em] hover:bg-brand/90 hover:shadow-xl hover:shadow-brand/40 transition-all duration-300 disabled:opacity-60">
                 Submit request
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
+
+            {/* Status message */}
+            <div aria-live="polite" className="mt-1">
+              {status === "sending" && (
+                <div className="flex items-center gap-3 rounded-2xl border border-brand-subtle bg-brand/[0.04] px-4 py-3">
+                  <span className="w-4 h-4 rounded-full border-2 border-brand border-t-transparent animate-spin flex-shrink-0" />
+                  <p className="font-display text-sm font-medium text-dark/60 tracking-tight">Sending your request…</p>
+                </div>
+              )}
+              {status === "success" && (
+                <div className="animate-status-in flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/70 px-4 py-3">
+                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand flex items-center justify-center shadow-sm">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                      <path d="M1 4l3 3 5-6" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p className="font-display font-semibold text-sm text-emerald-900 tracking-tight">Request sent</p>
+                    <p className="font-display text-xs text-emerald-700 mt-0.5 leading-relaxed">Thank you — we'll reply within 1 business day.</p>
+                  </div>
+                </div>
+              )}
+              {status === "error" && (
+                <div className="animate-status-in flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50/70 px-4 py-3">
+                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center shadow-sm">
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
+                      <path d="M1 1l6 6M7 1L1 7" stroke="white" strokeWidth="1.7" strokeLinecap="round"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p className="font-display font-semibold text-sm text-red-900 tracking-tight">Couldn't send</p>
+                    <p className="font-display text-xs text-red-700 mt-0.5 leading-relaxed">{error}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Turnstile widget goes inside the form so it attaches hidden input */}
+            {siteKey ? (
+              <div className="mt-2 w-full sm:w-1/2 min-w-[240px] max-w-[360px]">
+                <div
+                  className="cf-turnstile"
+                  data-sitekey={siteKey}
+                  data-theme="light"
+                  data-size="flexible"
+                />
+              </div>
+            ) : null}
           </form>
+          {/* Cloudflare Turnstile (only if site key present) */}
+          {siteKey ? (
+            <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" defer />
+          ) : null}
         </div>
       </section>
       <Footer />

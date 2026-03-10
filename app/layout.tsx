@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import MobileFloatNav from "@/components/MobileFloatNav";
@@ -6,7 +7,12 @@ import CustomCursor from "@/components/CustomCursor";
 import site from "@/data/site";
 import JsonLd from "@/components/JsonLd";
 
-const bodyFont = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-manrope",
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -45,12 +51,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: site.twitter.card,
+    site: site.twitter.handle,
+    creator: site.twitter.handle,
     title: site.title,
     description: site.description,
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   alternates: {
     canonical: "/",
@@ -73,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`antialiased`}>
+    <html lang="en" className={`antialiased ${manrope.variable}`} suppressHydrationWarning>
       <head>
         <JsonLd
           data={{
@@ -82,7 +90,7 @@ export default function RootLayout({
             name: site.name,
             url: site.url,
             sameAs: [],
-            logo: site.ogImage,
+            logo: `${site.url}${site.ogImage}`,
           }}
         />
         <JsonLd
