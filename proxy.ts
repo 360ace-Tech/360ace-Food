@@ -7,11 +7,13 @@ function buildCSP(nonce: string) {
     `'nonce-${nonce}'`,
     "'unsafe-inline'",
     dev ? "'unsafe-eval' 'wasm-unsafe-eval'" : "",
+    "blob:",
+    "data:",
   ]
     .filter(Boolean)
     .join(" ");
 
-  const directives = {
+  const directives: Record<string, string> = {
     "default-src": "'self'",
     "script-src": scriptSrc,
     "script-src-elem": scriptSrc,
@@ -20,13 +22,13 @@ function buildCSP(nonce: string) {
     "img-src": "'self' data: blob:",
     "font-src": "'self' data:",
     "connect-src": "'self' https:",
+    "worker-src": "'self' blob:",
     "frame-src": "'self'",
     "object-src": "'none'",
     "base-uri": "'self'",
     "form-action": "'self' mailto:",
     "frame-ancestors": "'self'",
-    "upgrade-insecure-requests": "",
-  } as const;
+  };
 
   return Object.entries(directives)
     .map(([k, v]) => (v ? `${k} ${v}` : k))
@@ -37,44 +39,23 @@ export function proxy(req: NextRequest) {
   if (process.env.NEXT_STATIC_EXPORT === "1") {
     return NextResponse.next();
   }
-  try {
-    const host = req.nextUrl.hostname || "";
-    const isLocalHostname =
-      host === "localhost" ||
-      host === "127.0.0.1" ||
-      host === "::1" ||
-      host.endsWith(".local") ||
-      host.endsWith(".lan");
-    const isRFC1918 =
-      /^10\./.test(host) ||
-      /^192\.168\./.test(host) ||
-      /^172\.(1[6-9]|2[0-9]|3[01])\./.test(host) ||
-      /^169\.254\./.test(host);
-    if (isLocalHostname || isRFC1918) {
-      return NextResponse.next();
-    }
-  } catch {}
-  if (req.nextUrl.pathname.startsWith("/server/app")) {
-    const url = req.nextUrl.clone();
-    url.pathname = "/";
-    return NextResponse.redirect(url);
+
+  // Disable/relax CSP on Netlify previews to avoid blocking scripts
+  const host = req.nextUrl.hostname || "";
+  const isNetlify = process.env.NETLIFY === "true" || /netlify\.app$/.test(host);
+  if (process.env.DISABLE_CSP === "1" || isNetlify) {
+    return NextResponse.next();
   }
 
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
-  const nonce = btoa(String.fromCharCode(...bytes));
-  if (process.env.DISABLE_CSP === "1") {
-    return NextResponse.next();
-  }
-  const csp = buildCSP(nonce);
+  const nonce = Buffer.from(bytes).toString("base64");
 
+  const csp = buildCSP(nonce);
   const fwdHeaders = new Headers(req.headers);
   fwdHeaders.set("content-security-policy", csp);
 
-  const res = NextResponse.next({
-    request: { headers: fwdHeaders },
-  });
-
+  const res = NextResponse.next({ request: { headers: fwdHeaders } });
   res.headers.set("Content-Security-Policy", csp);
   return res;
 }
@@ -82,3 +63,4 @@ export function proxy(req: NextRequest) {
 export const config = {
   matcher: "/:path*",
 };
+
