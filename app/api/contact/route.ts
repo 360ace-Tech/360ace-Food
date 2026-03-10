@@ -80,6 +80,11 @@ export async function POST(req: NextRequest) {
       return withCors(NextResponse.json({ ok: false, error: "Forbidden origin" }, { status: 403 }), req, false);
     }
 
+    // Verify Turnstile BEFORE consuming the body — req.clone() throws if the
+    // body stream has already been read, causing the cryptic "unusable" 500.
+    const v = await verifyTurnstile(req);
+    if (!v.ok) return withCors(NextResponse.json({ ok: false, error: v.error }, { status: 400 }), req, allowed);
+
     const data = await req.json().catch(() => ({}));
     const name = String(data.name || "").trim();
     const email = String(data.email || "").trim();
@@ -90,9 +95,6 @@ export async function POST(req: NextRequest) {
     if (!name || !email) return withCors(NextResponse.json({ ok: false, error: "Name and email are required." }, { status: 400 }), req, allowed);
     if (!isValidEmail(email)) return withCors(NextResponse.json({ ok: false, error: "Enter a valid email address." }, { status: 400 }), req, allowed);
     if (!isValidPhone(phone || "")) return withCors(NextResponse.json({ ok: false, error: "Enter a valid phone number (optional)." }, { status: 400 }), req, allowed);
-
-    const v = await verifyTurnstile(req);
-    if (!v.ok) return withCors(NextResponse.json({ ok: false, error: v.error }, { status: 400 }), req, allowed);
 
     await sendContactEmail({ name, email, company, phone, message });
 

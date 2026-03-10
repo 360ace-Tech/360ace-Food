@@ -7,12 +7,37 @@ export default function manifest(): MetadataRoute.Manifest {
     name: site.name,
     short_name: site.shortName,
     description: site.description,
+    lang: "en",
     start_url: "/",
+    scope: "/",
     display: "standalone",
+    orientation: "portrait-primary",
     background_color: "#ffffff",
     theme_color: "#059669",
-    // Use a single favicon with flexible sizing to avoid console warnings
-    // when the actual pixel dimensions do not match declared sizes.
-    icons: [{ src: "/favicon.png", sizes: "any", type: "image/png" }],
+    categories: ["business", "food"],
+    icons: [
+      {
+        src: "/favicon.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        src: "/icon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        src: "/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+      {
+        src: "/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        purpose: "maskable" as any,
+      },
+    ],
   };
 }

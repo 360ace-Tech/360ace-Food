@@ -163,12 +163,39 @@ export default function ContactPage() {
             </div>
 
             {/* Status message */}
-            <div aria-live="polite" className="mt-2 text-sm">
-              {status === "sending" && <p className="text-neutral">Sending…</p>}
-              {status === "success" && (
-                <p className="text-emerald-600 font-medium">Thank you — your request was sent successfully.</p>
+            <div aria-live="polite" className="mt-1">
+              {status === "sending" && (
+                <div className="flex items-center gap-3 rounded-2xl border border-brand-subtle bg-brand/[0.04] px-4 py-3">
+                  <span className="w-4 h-4 rounded-full border-2 border-brand border-t-transparent animate-spin flex-shrink-0" />
+                  <p className="font-display text-sm font-medium text-dark/60 tracking-tight">Sending your request…</p>
+                </div>
               )}
-              {status === "error" && <p className="text-red-600">{error}</p>}
+              {status === "success" && (
+                <div className="animate-status-in flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/70 px-4 py-3">
+                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand flex items-center justify-center shadow-sm">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                      <path d="M1 4l3 3 5-6" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p className="font-display font-semibold text-sm text-emerald-900 tracking-tight">Request sent</p>
+                    <p className="font-display text-xs text-emerald-700 mt-0.5 leading-relaxed">Thank you — we'll reply within 1 business day.</p>
+                  </div>
+                </div>
+              )}
+              {status === "error" && (
+                <div className="animate-status-in flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50/70 px-4 py-3">
+                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center shadow-sm">
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
+                      <path d="M1 1l6 6M7 1L1 7" stroke="white" strokeWidth="1.7" strokeLinecap="round"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p className="font-display font-semibold text-sm text-red-900 tracking-tight">Couldn't send</p>
+                    <p className="font-display text-xs text-red-700 mt-0.5 leading-relaxed">{error}</p>
+                  </div>
+                </div>
+              )}
             </div>
             {/* Turnstile widget goes inside the form so it attaches hidden input */}
             {siteKey ? (
