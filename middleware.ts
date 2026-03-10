@@ -6,6 +6,7 @@ function buildCSP(nonce: string) {
     "'self'",
     `'nonce-${nonce}'`,
     "'unsafe-inline'",
+    // Allow eval in dev only; allow blob for Next workers in preview/production
     dev ? "'unsafe-eval' 'wasm-unsafe-eval'" : "",
     "blob:",
     "data:",
@@ -35,18 +36,20 @@ function buildCSP(nonce: string) {
     .join("; ");
 }
 
-export function proxy(req: NextRequest) {
+export function middleware(req: NextRequest) {
+  // Skip on static export builds
   if (process.env.NEXT_STATIC_EXPORT === "1") {
     return NextResponse.next();
   }
 
-  // Disable/relax CSP on Netlify previews to avoid blocking scripts
+  // Skip CSP on Netlify previews or when explicitly disabled
   const host = req.nextUrl.hostname || "";
   const isNetlify = process.env.NETLIFY === "true" || /netlify\.app$/.test(host);
   if (process.env.DISABLE_CSP === "1" || isNetlify) {
     return NextResponse.next();
   }
 
+  // Generate nonce and attach CSP
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const nonce = Buffer.from(bytes).toString("base64");
