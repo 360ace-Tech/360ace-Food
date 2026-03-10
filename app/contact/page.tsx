@@ -109,11 +109,7 @@ export default function ContactPage() {
                 setError("Enter a valid phone number (optional).");
                 return;
               }
-              if (siteKey && !payload["cf-turnstile-response"]) {
-                setStatus("error");
-                setError("Please complete the Turnstile check.");
-                return;
-              }
+              // Do not force client-side Turnstile; server will verify when enabled.
 
               try {
                 const res = await fetch("/api/contact", {

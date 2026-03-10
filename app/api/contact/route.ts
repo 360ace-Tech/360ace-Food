@@ -38,8 +38,14 @@ export const runtime = "nodejs"; // ensure Node APIs for SMTP
 
 function isAllowedOrigin(req: NextRequest) {
   const allowed = (process.env.CONTACT_ALLOWED_ORIGINS || "").split(/[,\s]+/).filter(Boolean);
-  if (allowed.length === 0) return true; // local/dev default
   const origin = req.headers.get("origin") || req.headers.get("referer") || "";
+  if (!origin) return true;
+  try {
+    const host = new URL(origin).hostname;
+    const isNetlify = /\.netlify\.app$/i.test(host);
+    if (isNetlify || process.env.NETLIFY === "true") return true;
+  } catch {}
+  if (allowed.length === 0) return true; // default allow if none specified
   return allowed.some((o) => origin.startsWith(o));
 }
 
