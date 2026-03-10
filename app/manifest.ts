@@ -11,9 +11,8 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     background_color: "#ffffff",
     theme_color: "#059669",
-    icons: [
-      { src: "/favicon.png", sizes: "192x192", type: "image/png" },
-      { src: "/favicon.png", sizes: "512x512", type: "image/png" },
-    ],
+    // Use a single favicon with flexible sizing to avoid console warnings
+    // when the actual pixel dimensions do not match declared sizes.
+    icons: [{ src: "/favicon.png", sizes: "any", type: "image/png" }],
   };
 }

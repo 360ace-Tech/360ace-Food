@@ -49,8 +49,8 @@ export const metadata: Metadata = {
     description: site.description,
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   alternates: {
     canonical: "/",
@@ -73,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`antialiased`}>
+    <html lang="en" className={`antialiased`} suppressHydrationWarning>
       <head>
         <JsonLd
           data={{
