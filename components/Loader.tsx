@@ -26,6 +26,16 @@ export default function Loader() {
         ease: "power4.inOut",
         delay: 0.2,
       });
+
+    // Fallback: ensure the loader never blocks rendering if animations fail or are delayed in production
+    const kill = window.setTimeout(() => {
+      try {
+        loader.style.transition = loader.style.transition || "transform 0.8s cubic-bezier(0.77,0,0.175,1)";
+        loader.style.transform = "translateY(-100%)";
+      } catch {}
+    }, 3200);
+
+    return () => window.clearTimeout(kill);
   }, []);
 
   return (
@@ -45,6 +55,10 @@ export default function Loader() {
       <div className="w-64 h-[2px] bg-gray-100 rounded-full overflow-hidden">
         <div ref={loaderBarRef} className="loader-bar" id="loader-bar"></div>
       </div>
+      <noscript>
+        {/* If JS is blocked/disabled, hide the overlay so SSR content is visible */}
+        <style>{`#loader{display:none !important}`}</style>
+      </noscript>
     </div>
   );
 }
