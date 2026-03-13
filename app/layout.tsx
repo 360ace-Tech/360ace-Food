@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     images: [
       {
-        url: site.ogImage,
+        url: `${site.url}${site.ogImage}`,
         width: 1200,
         height: 630,
         alt: site.title,
@@ -57,11 +57,15 @@ export const metadata: Metadata = {
     description: site.description,
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: "/favicon.png", sizes: "16x16", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   alternates: {
-    canonical: "/",
+    canonical: site.url,
   },
 };
 
@@ -73,6 +77,7 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  themeColor: "#059669",
 };
 
 export default function RootLayout({
