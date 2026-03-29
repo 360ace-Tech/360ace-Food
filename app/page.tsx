@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Navigation from "@/components/Navigation";
@@ -19,10 +19,17 @@ const siteContent = siteContentRaw as SiteContent;
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import site from "@/data/site";
+import ServiceModal, { ServiceDetail } from "@/components/ServiceModal";
+import servicesDetailRaw from "@/data/services-detail.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const servicesDetail = servicesDetailRaw as ServiceDetail[];
+const serviceById = Object.fromEntries(servicesDetail.map((s) => [s.id, s]));
+
 export default function Home() {
+  const [activeService, setActiveService] = useState<ServiceDetail | null>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animations
@@ -152,6 +159,32 @@ export default function Home() {
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: site.url },
           ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Food Safety Consulting Services by 360ace",
+          description: "Modular food safety, regulatory, training, and research consulting services for food manufacturers, importers, and laboratories.",
+          numberOfItems: servicesDetail.length,
+          itemListElement: servicesDetail.map((s, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Service",
+              "@id": `${site.url}/#${s.id}`,
+              name: s.title,
+              description: s.description,
+              provider: {
+                "@type": "Organization",
+                name: site.name,
+                url: site.url,
+              },
+              areaServed: "CA",
+              serviceType: "Food Safety Consulting",
+            },
+          })),
         }}
       />
       <section id="home" className="relative w-full overflow-hidden pt-16 lg:pt-0 min-h-[65vh] lg:min-h-screen">
@@ -401,7 +434,14 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-7">
             
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["food-safety-gmp-training"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["food-safety-gmp-training"])}
+              aria-label="Explore Food Safety & GMP Training details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -437,10 +477,21 @@ export default function Home() {
                   <span>Real-world examples and guidance tailored to each facility.</span>
                 </li>
               </ul>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
             </article>
 
             
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["technical-training"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["technical-training"])}
+              aria-label="Explore Technical Training details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -463,10 +514,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Allergen Management and Label Control.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Root Cause Analysis and Internal Auditing.</span></li>
               </ul>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
             </article>
 
             
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["quality-system-documentation"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["quality-system-documentation"])}
+              aria-label="Explore Quality System Documentation details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -485,10 +547,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Tailored, workflow-based procedures for every department.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Records designed for easy audit presentation.</span></li>
               </ul>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
             </article>
 
             
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["laboratory-methods-advisory"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["laboratory-methods-advisory"])}
+              aria-label="Explore Laboratory Methods Advisory & Training details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -509,10 +582,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Coordination with accredited third-party laboratories.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Ongoing technical troubleshooting and method optimization.</span></li>
               </ul>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
             </article>
 
             
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["research-support"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["research-support"])}
+              aria-label="Explore Research Support details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -534,10 +618,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Manuscript formatting and journal submission support.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Academic and technical manuscript review and plagiarism check.</span></li>
               </ul>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
             </article>
 
-            
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["proposal-grant-development"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["proposal-grant-development"])}
+              aria-label="Explore Proposal & Grant Development details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -557,10 +652,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Grant-writing support for research, community, or industry projects.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Advisory assistance for reporting, resubmission, and funder feedback.</span></li>
               </ul>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
             </article>
 
-            
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["conference-insight-support"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["conference-insight-support"])}
+              aria-label="Explore Conference & Insight Support details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -581,17 +687,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Training &amp; workshop facilitation for diverse audiences.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Impact reporting and capacity-building documentation.</span></li>
               </ul>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.24em] text-brand hover:text-brand/70 mt-2"
-              >
-                View conferences we have supported
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
-              </a>
+              </div>
             </article>
 
-            
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["food-import-readiness"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["food-import-readiness"])}
+              aria-label="Explore Food Import Readiness & Compliance details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -612,10 +722,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Advisory on food product analysis to ensure safety and quality.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Packaging, labeling, and market-entry advisory.</span></li>
               </ul>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
             </article>
 
-            
-            <article className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger">
+
+            <article
+              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              onClick={() => setActiveService(serviceById["regulatory-audit-readiness"])}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActiveService(serviceById["regulatory-audit-readiness"])}
+              aria-label="Explore Regulatory & Audit Readiness details"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display font-semibold text-xl mb-2 text-dark">
@@ -635,6 +756,10 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Local and international regulatory compliance interpretation and implementation.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Nutritional value calculation &amp; compliant labeling for retail markets.</span></li>
               </ul>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+                <span>Explore details</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
             </article>
           </div>
         </div>
@@ -960,6 +1085,11 @@ export default function Home() {
       </section>
 
       <Footer />
+
+      <ServiceModal
+        service={activeService}
+        onClose={() => setActiveService(null)}
+      />
     </>
   );
 }

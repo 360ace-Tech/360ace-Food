@@ -111,6 +111,32 @@ export default function RootLayout({
             },
           }}
         />
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: site.name,
+            url: site.url,
+            logo: `${site.url}/favicon.png`,
+            image: `${site.url}${site.ogImage}`,
+            description: site.description,
+            areaServed: [
+              { "@type": "Country", name: "Canada" },
+            ],
+            knowsAbout: [
+              "Food Safety Consulting",
+              "HACCP Programs",
+              "GMP Training",
+              "CFIA Compliance",
+              "BRCGS Readiness",
+              "Food Import Compliance",
+              "ISO 9001:2015",
+              "Laboratory Quality Assurance",
+              "Regulatory Audit Readiness",
+            ],
+            sameAs: [],
+          }}
+        />
       </head>
       <body>
         <SmoothScroll>
