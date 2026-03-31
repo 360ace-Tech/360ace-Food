@@ -435,7 +435,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-7">
             
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["food-safety-gmp-training"])}
               role="button"
               tabIndex={0}
@@ -444,7 +444,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Food Safety &amp; GMP Training
                   </h3>
                   <p className="text-sm text-neutral">
@@ -477,15 +477,21 @@ export default function Home() {
                   <span>Real-world examples and guidance tailored to each facility.</span>
                 </li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
 
             
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["technical-training"])}
               role="button"
               tabIndex={0}
@@ -494,7 +500,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Technical Training
                   </h3>
                   <p className="text-sm text-neutral">
@@ -514,15 +520,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Allergen Management and Label Control.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Root Cause Analysis and Internal Auditing.</span></li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
 
             
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["quality-system-documentation"])}
               role="button"
               tabIndex={0}
@@ -531,7 +543,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Quality System Documentation
                   </h3>
                   <p className="text-sm text-neutral">
@@ -547,15 +559,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Tailored, workflow-based procedures for every department.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Records designed for easy audit presentation.</span></li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
 
             
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["laboratory-methods-advisory"])}
               role="button"
               tabIndex={0}
@@ -564,7 +582,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Laboratory Methods Advisory &amp; Training
                   </h3>
                   <p className="text-sm text-neutral">
@@ -582,15 +600,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Coordination with accredited third-party laboratories.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Ongoing technical troubleshooting and method optimization.</span></li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
 
             
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["research-support"])}
               role="button"
               tabIndex={0}
@@ -599,7 +623,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Research Support
                   </h3>
                   <p className="text-sm text-neutral">
@@ -618,15 +642,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Manuscript formatting and journal submission support.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Academic and technical manuscript review and plagiarism check.</span></li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
 
 
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["proposal-grant-development"])}
               role="button"
               tabIndex={0}
@@ -635,7 +665,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Proposal &amp; Grant Development
                   </h3>
                   <p className="text-sm text-neutral">
@@ -652,15 +682,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Grant-writing support for research, community, or industry projects.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Advisory assistance for reporting, resubmission, and funder feedback.</span></li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
 
 
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["conference-insight-support"])}
               role="button"
               tabIndex={0}
@@ -669,7 +705,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Conference &amp; Insight Support
                   </h3>
                   <p className="text-sm text-neutral">
@@ -687,15 +723,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Training &amp; workshop facilitation for diverse audiences.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Impact reporting and capacity-building documentation.</span></li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
 
 
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["food-import-readiness"])}
               role="button"
               tabIndex={0}
@@ -704,7 +746,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Food Import Readiness &amp; Compliance
                   </h3>
                   <p className="text-sm text-neutral">
@@ -722,15 +764,21 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Advisory on food product analysis to ensure safety and quality.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Packaging, labeling, and market-entry advisory.</span></li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
 
 
             <article
-              className="card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              className="card service-card p-6 sm:p-7 flex flex-col gap-4 reveal-trigger cursor-pointer group/card"
               onClick={() => setActiveService(serviceById["regulatory-audit-readiness"])}
               role="button"
               tabIndex={0}
@@ -739,7 +787,7 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-display font-semibold text-xl mb-2 text-dark">
+                  <h3 className="font-display font-semibold text-xl mb-2 text-dark service-card-title">
                     Regulatory &amp; Audit Readiness
                   </h3>
                   <p className="text-sm text-neutral">
@@ -756,9 +804,15 @@ export default function Home() {
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Local and international regulatory compliance interpretation and implementation.</span></li>
                 <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span><span>Nutritional value calculation &amp; compliant labeling for retail markets.</span></li>
               </ul>
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
+              {/* Desktop: reveals on hover */}
+              <div className="hidden md:flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mt-auto pt-1">
                 <span>Explore details</span>
                 <ArrowUpRight className="w-3 h-3" />
+              </div>
+              {/* Mobile: always-visible tap cue */}
+              <div className="flex md:hidden items-center gap-1 text-[10px] font-medium tracking-[0.18em] text-brand/55 mt-auto pt-1">
+                <span>Tap to explore</span>
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </div>
             </article>
           </div>

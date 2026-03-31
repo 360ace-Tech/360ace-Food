@@ -55,7 +55,9 @@ export const metadata: Metadata = {
     creator: site.twitter.handle,
     title: site.title,
     description: site.description,
+    images: [`${site.url}${site.ogImage}`],
   },
+  applicationName: site.shortName,
   icons: {
     icon: [
       { url: "/favicon.png", sizes: "16x16", type: "image/png" },
@@ -92,47 +94,59 @@ export default function RootLayout({
           data={{
             "@context": "https://schema.org",
             "@type": "Organization",
+            "@id": `${site.url}/#organization`,
             name: site.name,
             url: site.url,
             sameAs: [],
-            logo: `${site.url}${site.ogImage}`,
+            logo: {
+              "@type": "ImageObject",
+              url: `${site.url}${site.ogImage}`,
+              width: 1200,
+              height: 630,
+            },
+            description: site.description,
           }}
         />
         <JsonLd
           data={{
             "@context": "https://schema.org",
             "@type": "WebSite",
+            "@id": `${site.url}/#website`,
             name: site.title,
             url: site.url,
-            potentialAction: {
-              "@type": "SearchAction",
-              target: `${site.url}/?q={search_term_string}`,
-              "query-input": "required name=search_term_string",
-            },
+            publisher: { "@id": `${site.url}/#organization` },
           }}
         />
         <JsonLd
           data={{
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
+            "@id": `${site.url}/#service`,
             name: site.name,
             url: site.url,
             logo: `${site.url}/favicon.png`,
             image: `${site.url}${site.ogImage}`,
             description: site.description,
+            parentOrganization: { "@id": `${site.url}/#organization` },
             areaServed: [
               { "@type": "Country", name: "Canada" },
+              { "@type": "AdministrativeArea", name: "Ontario" },
+              { "@type": "AdministrativeArea", name: "British Columbia" },
+              { "@type": "AdministrativeArea", name: "Alberta" },
             ],
             knowsAbout: [
               "Food Safety Consulting",
               "HACCP Programs",
               "GMP Training",
+              "GHP Training",
               "CFIA Compliance",
+              "SFCR Compliance",
               "BRCGS Readiness",
-              "Food Import Compliance",
+              "Food Import Compliance Canada",
               "ISO 9001:2015",
               "Laboratory Quality Assurance",
               "Regulatory Audit Readiness",
+              "Lean Six Sigma Food Industry",
             ],
             sameAs: [],
           }}
