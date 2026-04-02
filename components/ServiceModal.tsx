@@ -336,7 +336,12 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
       <div
         ref={panelRef}
         className="relative z-10 w-full max-w-xl max-h-[92vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-brand-subtle"
-        style={{ opacity: 0 }}
+        style={{
+          opacity: 0,
+          overscrollBehavior: "contain",
+          WebkitOverflowScrolling: "touch",
+          touchAction: "pan-y",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* ── Header ── */}
@@ -491,8 +496,13 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
           {/* Preview panel — same overflow pattern as ServiceModal panel */}
           <div
             ref={templatePopupRef}
-            className="relative z-10 w-full max-w-lg max-h-[72vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-brand-subtle"
-            style={{ opacity: 0, overscrollBehavior: "contain" }}
+            className="relative z-10 w-full max-w-lg max-h-[80dvh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-brand-subtle"
+            style={{
+              opacity: 0,
+              overscrollBehavior: "contain",
+              WebkitOverflowScrolling: "touch",
+              touchAction: "pan-y",
+            }}
             onClick={(e) => e.stopPropagation()}
             onMouseEnter={cancelCloseTemplate}
             onMouseLeave={scheduleCloseTemplate}
