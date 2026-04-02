@@ -7,7 +7,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import articles from "@/data/articles.json";
 import site from "@/data/site";
 import JsonLd from "@/components/JsonLd";
@@ -72,6 +72,7 @@ export default function ArticlePage() {
   const index = articles.findIndex((a) => a.id === article.id);
   const prev = index > 0 ? articles[index - 1] : null;
   const next = index < articles.length - 1 ? articles[index + 1] : null;
+  const articleImageUrl = article.image.startsWith("http") ? article.image : `${site.url}${article.image}`;
 
   return (
     <>
@@ -86,7 +87,8 @@ export default function ArticlePage() {
           description: article.excerpt,
           datePublished: article.date,
           author: { "@type": "Person", name: article.author },
-          image: article.image,
+          image: articleImageUrl,
+          mainEntityOfPage: `${site.url}/insights/${article.slug}`,
         }}
       />
       <JsonLd
@@ -165,9 +167,10 @@ export default function ArticlePage() {
           <div className="my-12 relative h-96 rounded-3xl overflow-hidden bg-slate-100">
             <Image
               src={article.image}
-              alt={article.title}
+              alt={"imageAlt" in article && typeof article.imageAlt === "string" ? article.imageAlt : article.title}
               fill
-              className="object-cover"
+              sizes="(min-width: 1280px) 1100px, (min-width: 768px) calc(100vw - 8rem), calc(100vw - 3rem)"
+              className={`${"imageFit" in article && article.imageFit === "contain" ? "object-contain p-4" : "object-cover"}`}
               priority
             />
           </div>
@@ -200,10 +203,11 @@ export default function ArticlePage() {
                       {block.text}
                     </h3>
                   );
-                case "list":
+                case "list": {
+                  const lb2 = block as { type: string; items?: string[] };
                   return (
                     <ul key={index} className="list-none pl-0 m-0 space-y-3 mb-6">
-                      {block.items?.map((item, i) => (
+                      {lb2.items?.map((item, i) => (
                         <li key={i} className="text-neutral leading-relaxed flex items-start gap-1.5">
                           <span className="mt-2 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span>
                           <span>{item}</span>
@@ -211,6 +215,33 @@ export default function ArticlePage() {
                       ))}
                     </ul>
                   );
+                }
+                case "authors": {
+                  const b = block as { type: string; text?: string };
+                  return b.text ? (
+                    <p key={index} className="text-sm text-neutral mb-6 leading-relaxed">
+                      <span className="font-semibold text-dark">Authors: </span>{b.text}
+                    </p>
+                  ) : null;
+                }
+                case "publication_link": {
+                  const lb = block as { type: string; text?: string; href?: string; label?: string };
+                  return lb.href ? (
+                    <div key={index} className="my-8 p-6 rounded-2xl border border-brand-subtle bg-emerald-50/60">
+                      <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-brand mb-2">Peer-Reviewed Journal Article</p>
+                      <p className="text-sm font-semibold text-dark mb-4 leading-snug">{lb.label}</p>
+                      <a
+                        href={lb.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand text-white text-[11px] font-bold uppercase tracking-[0.18em] rounded-full hover:bg-brand/90 hover:shadow-lg hover:shadow-brand/25 transition-all"
+                      >
+                        {lb.text || "Read full publication"}
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  ) : null;
+                }
                 default:
                   return null;
               }
@@ -252,9 +283,10 @@ export default function ArticlePage() {
                       <div className="relative h-48 bg-slate-100 overflow-hidden">
                         <Image
                           src={relatedArticle.image}
-                          alt={relatedArticle.title}
+                          alt={"imageAlt" in relatedArticle && typeof relatedArticle.imageAlt === "string" ? relatedArticle.imageAlt : relatedArticle.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          sizes="(min-width: 768px) 50vw, 100vw"
+                          className={`transition-transform duration-500 ${"imageFit" in relatedArticle && relatedArticle.imageFit === "contain" ? "object-contain p-2" : "object-cover group-hover:scale-105"}`}
                         />
                       </div>
                       <div className="p-6">

@@ -16,7 +16,10 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: site.title,
+  title: {
+    default: site.title,
+    template: `%s | ${site.shortName}`,
+  },
   description: site.description,
   keywords: site.keywords,
   authors: [{ name: site.name }],
@@ -77,8 +80,6 @@ export const revalidate = 300;
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
   themeColor: "#059669",
 };
 

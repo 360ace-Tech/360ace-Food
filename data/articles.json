@@ -1,5 +1,50 @@
 [
   {
+    "id": "extrusion-technology-mycotoxin-reduction-cereals",
+    "title": "Extrusion Technology for Mycotoxin Reduction in Cereals",
+    "slug": "extrusion-technology-mycotoxin-reduction-cereals",
+    "excerpt": "Examining extrusion processing as a scalable approach to reducing mycotoxins in cereal-based foods — and what the findings reveal about the limitations of current approaches and the need for predictive, science-led food safety systems.",
+    "date": "2026-04-02",
+    "readTime": "5 min read",
+    "author": "Dr. Ifeoluwa Adekoya et al.",
+    "category": "Featured Publication",
+    "image": "/images/articles/extrusion-technology-mycotoxin-reduction-cereals.jpg",
+    "imageAlt": "Raw grains moving through a high-temperature extrusion process and emerging as safe puffed cereal products",
+    "imageFit": "contain",
+    "content": [
+      {
+        "type": "authors",
+        "text": "Adelusi O.A., Ajala O., Owheruo J.O., Okechukwu V.O., Richard R.T., Obadina A.O., Adekoya I.O., Kondiah K., De Saeger S., and Njobeh P.B."
+      },
+      {
+        "type": "paragraph",
+        "text": "Mycotoxin contamination remains a critical challenge in food safety and global food systems. In this publication, we examine extrusion processing as a scalable approach to reducing mycotoxins in cereal-based foods, while highlighting key limitations in current approaches."
+      },
+      {
+        "type": "paragraph",
+        "text": "The findings emphasize that effective food safety extends beyond reducing detectable toxin levels — it requires a deeper understanding of processing conditions, toxicological risk, and system-level control."
+      },
+      {
+        "type": "paragraph",
+        "text": "For industry and research stakeholders, this work reinforces the need for predictive, science-led food safety systems that integrate processing technologies with real-world risk assessment and regulatory expectations."
+      },
+      {
+        "type": "publication_link",
+        "text": "Read the full publication",
+        "href": "https://www.sciencedirect.com/science/article/pii/S2772502226002787",
+        "label": "Extrusion Technology for Mycotoxin Reduction in Cereals: Process Parameters, Technological Advances, Advantages, Limitations, and Future Perspectives"
+      },
+      {
+        "type": "heading",
+        "text": "From Research to Practice"
+      },
+      {
+        "type": "paragraph",
+        "text": "At 360ACE.FOOD, we translate scientific insights into practical food safety systems — helping organizations implement controls that work under real conditions."
+      }
+    ]
+  },
+  {
     "id": "food-quality-and-safety-are-inevitable",
     "title": "Food Quality and Safety Are Inevitable",
     "slug": "food-quality-and-safety-are-inevitable",

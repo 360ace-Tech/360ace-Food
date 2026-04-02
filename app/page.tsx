@@ -10,10 +10,18 @@ import HeroMolecule from "@/components/HeroMolecule";
 import { ArrowRight, Compass, LineChart, Users, CheckCircle2, Building2, ArrowUpRight, Beaker, FileText, TestTube2, BookOpenCheck, FileBadge2, Mic, Ship, ClipboardList, Globe2, GraduationCap } from "lucide-react";
 import Image from "next/image";
 import siteContentRaw from "@/data/site-content.json" assert { type: "json" };
+import articlesRaw from "@/data/articles.json" assert { type: "json" };
 type SiteContent = {
   hero: { tag: string; title: string[]; description: string; stats: { value: string; description: string } };
   impact: { title: string; description: string; highlights: string[]; metrics: { value: string; description: string }[] };
   contact: { title: string; description: string; cta: { primary: string; secondary: string; tertiary: string } };
+};
+type Article = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  date: string;
 };
 const siteContent = siteContentRaw as SiteContent;
 import Link from "next/link";
@@ -26,6 +34,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const servicesDetail = servicesDetailRaw as ServiceDetail[];
 const serviceById = Object.fromEntries(servicesDetail.map((s) => [s.id, s]));
+const homepageInsights = [...(articlesRaw as Article[])]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 2);
 
 export default function Home() {
   const [activeService, setActiveService] = useState<ServiceDetail | null>(null);
@@ -978,9 +989,8 @@ export default function Home() {
                     Dr. Ifeoluwa Adekoya
                   </Link>
                   <p className="text-sm text-neutral">
-                    ISO 9001:2015 Lead Auditor, and Lean Six Sigma Green Belt
-                    with a decade of impact across the food, research, and pharmaceutical
-                    industries.
+                    Food Safety and Regulatory Systems Consultant dedicated to helping
+                    food and agri-food organizations move from compliance to excellence.
                   </p>
                   <Link
                     href="/bio/ifeoluwa-adekoya"
@@ -1053,45 +1063,33 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-10">
-            
-            <article className="card p-6 md:p-7 reveal-trigger hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-transform duration-300">
-              <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/60 mb-3">
-                February 27, 2026
-              </p>
-              <h3 className="font-display font-semibold text-xl mb-3 text-dark">
-                Food Quality and Safety Are Inevitable
-              </h3>
-              <p className="text-sm text-neutral mb-4">
-                Why quality and safety are foundational responsibilities across the value chain.
-              </p>
-              <Link
-                href="/insights/food-quality-and-safety-are-inevitable"
-                className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand hover:text-brand/70"
+            {homepageInsights.map((article) => (
+              <article
+                key={article.id}
+                className="card p-6 md:p-7 reveal-trigger hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-transform duration-300"
               >
-                Read article
-                <ArrowUpRight className="w-3 h-3" />
-              </Link>
-            </article>
-
-            
-            <article className="card p-6 md:p-7 reveal-trigger hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 transition-transform duration-300">
-              <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/60 mb-3">
-                February 27, 2026
-              </p>
-              <h3 className="font-display font-semibold text-xl mb-3 text-dark">
-                Food Safety Systems That Work in Real Facilities
-              </h3>
-              <p className="text-sm text-neutral mb-4">
-                How to design systems that hold up under pressure — not just on audit day.
-              </p>
-              <Link
-                href="/insights/food-safety-systems-that-work-in-real-facilities"
-                className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand hover:text-brand/70"
-              >
-                Read article
-                <ArrowUpRight className="w-3 h-3" />
-              </Link>
-            </article>
+                <p className="text-[11px] font-mono uppercase tracking-[0.32em] text-neutral/60 mb-3">
+                  {new Date(article.date).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
+                <h3 className="font-display font-semibold text-xl mb-3 text-dark">
+                  {article.title}
+                </h3>
+                <p className="text-sm text-neutral mb-4">
+                  {article.excerpt}
+                </p>
+                <Link
+                  href={`/insights/${article.slug}`}
+                  className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand hover:text-brand/70"
+                >
+                  Read article
+                  <ArrowUpRight className="w-3 h-3" />
+                </Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>

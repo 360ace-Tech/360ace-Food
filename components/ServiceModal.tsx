@@ -59,6 +59,7 @@ import {
   Shield,
   Globe,
   Calculator,
+  Eye,
 } from "lucide-react";
 
 // ── Icon registry — add new icons here + to the import above ──────────────────
@@ -98,7 +99,21 @@ const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   Shield,
   Globe,
   Calculator,
+  Eye,
 };
+
+// ── Template preview types ─────────────────────────────────────────────────────
+interface TemplateSection {
+  number: string;
+  title: string;
+  content: string;
+}
+
+interface TemplatePreviewData {
+  label: string;
+  title: string;
+  sections: TemplateSection[];
+}
 
 // ── Types (mirrors services-detail.json shape) ────────────────────────────────
 export interface ServiceSlide {
@@ -106,6 +121,7 @@ export interface ServiceSlide {
   feature: string;
   detail: string;
   stat?: { value: string; label: string };
+  templatePreviews?: TemplatePreviewData[];
 }
 
 export interface ServiceDetail {
@@ -128,8 +144,11 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
   const backdropRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);
+  const templatePopupRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [activeTemplate, setActiveTemplate] = useState<TemplatePreviewData | null>(null);
 
   // ── SYNC reset slide index when a different service opens ──────────────────
   // useLayoutEffect runs before the next paint, so `currentSlide` is 0 on
@@ -160,9 +179,21 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
       { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", delay: 0.32 }
     );
 
+    // Scroll lock — position:fixed is the only fully cross-browser/iOS Safari approach.
+    // Store the current scroll position so we can restore it on close.
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
     document.body.style.overflow = "hidden";
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
       document.body.style.overflow = "";
+      window.scrollTo(0, scrollY);
     };
   }, [service?.id]); // re-run only when the service identity changes
 
@@ -177,6 +208,52 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
       ease: "power2.in",
     }).to(backdropRef.current, { opacity: 0, duration: 0.2 }, "-=0.15");
   }, [onClose]);
+
+  // ── Template preview handlers ─────────────────────────────────────────────
+  const openTemplate = useCallback((tpl: TemplatePreviewData) => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setActiveTemplate(tpl);
+  }, []);
+
+  const scheduleCloseTemplate = useCallback(() => {
+    closeTimerRef.current = setTimeout(() => setActiveTemplate(null), 150);
+  }, []);
+
+  const cancelCloseTemplate = useCallback(() => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+  }, []);
+
+  const closeTemplate = useCallback(() => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    if (templatePopupRef.current) {
+      gsap.to(templatePopupRef.current, {
+        opacity: 0, scale: 0.96, y: 8,
+        duration: 0.2, ease: "power2.in",
+        onComplete: () => setActiveTemplate(null),
+      });
+    } else {
+      setActiveTemplate(null);
+    }
+  }, []);
+
+  // ── Animate template popup in ─────────────────────────────────────────────
+  useEffect(() => {
+    const el = templatePopupRef.current;
+    if (activeTemplate && el) {
+      gsap.fromTo(
+        el,
+        { opacity: 0, scale: 0.96, y: 10 },
+        {
+          opacity: 1, scale: 1, y: 0, duration: 0.28, ease: "back.out(1.4)",
+          onComplete: () => {
+            // Remove GSAP's residual transform — a lingering matrix() creates
+            // a new compositing layer that breaks mouse-wheel scroll routing.
+            gsap.set(el, { clearProps: "transform" });
+          },
+        }
+      );
+    }
+  }, [activeTemplate]);
 
   // ── Keyboard navigation ───────────────────────────────────────────────────
   useEffect(() => {
@@ -322,6 +399,24 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
             <p className="text-neutral text-sm sm:text-base leading-relaxed">
               {slide.detail}
             </p>
+
+            {/* Template preview buttons — rendered when slide has templatePreviews */}
+            {slide.templatePreviews && (
+              <div className="mt-5 flex flex-col sm:flex-row gap-3">
+                {slide.templatePreviews.map((tpl) => (
+                  <button
+                    key={tpl.label}
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-brand/30 bg-emerald-50 text-brand text-xs font-semibold hover:bg-emerald-100 hover:border-brand/60 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                    onMouseEnter={() => openTemplate(tpl)}
+                    onClick={() => openTemplate(tpl)}
+                    aria-label={`Open ${tpl.label}`}
+                  >
+                    <Eye className="w-3.5 h-3.5 flex-shrink-0" />
+                    {tpl.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -382,6 +477,94 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
           </a>
         </div>
       </div>
+
+      {/* ── Template preview popup ─────────────────────────────────────────── */}
+      {activeTemplate && (
+        <div
+          className="fixed inset-0 z-[9100] flex items-center justify-center p-4 sm:p-6 md:p-10"
+          onClick={closeTemplate}
+          aria-label="Template preview backdrop"
+        >
+          {/* Dim layer over service modal */}
+          <div className="absolute inset-0 bg-dark/20" aria-hidden="true" />
+
+          {/* Preview panel — same overflow pattern as ServiceModal panel */}
+          <div
+            ref={templatePopupRef}
+            className="relative z-10 w-full max-w-lg max-h-[72vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-brand-subtle"
+            style={{ opacity: 0, overscrollBehavior: "contain" }}
+            onClick={(e) => e.stopPropagation()}
+            onMouseEnter={cancelCloseTemplate}
+            onMouseLeave={scheduleCloseTemplate}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${activeTemplate.title} preview`}
+            onWheel={(e) => {
+              // Drive scroll explicitly — stops propagation to parents and
+              // works even if GSAP compositing layer causes native routing to miss this element.
+              e.stopPropagation();
+              const el = templatePopupRef.current;
+              if (el) el.scrollTop += e.deltaY;
+            }}
+          >
+            {/* Sticky header */}
+            <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-brand-subtle px-6 py-4 rounded-t-3xl">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-brand mb-1">
+                    Template Preview
+                  </p>
+                  <h3 className="font-display font-semibold text-base sm:text-lg leading-tight text-dark">
+                    {activeTemplate.title}
+                  </h3>
+                </div>
+                <button
+                  onClick={closeTemplate}
+                  className="flex-shrink-0 w-8 h-8 rounded-full border border-brand-subtle flex items-center justify-center text-neutral hover:border-brand/40 hover:text-dark transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                  aria-label="Close template preview"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Sections list */}
+            <div className="px-6 py-5 space-y-3">
+              {activeTemplate.sections.map((section) => (
+                <div key={section.number} className="flex gap-3 items-start">
+                  <span className="flex-shrink-0 w-8 h-6 rounded-md bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[10px] font-bold text-brand">
+                    {section.number}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-dark leading-snug">
+                      {section.title}
+                    </p>
+                    {section.content.includes("\n") ? (
+                      <ul className="mt-1.5 space-y-1">
+                        {section.content.split("\n").map((line, li) => (
+                          <li key={li} className="flex items-start gap-1.5 text-xs text-neutral leading-relaxed">
+                            <span className="mt-1.5 w-1 h-1 rounded-full bg-brand/50 flex-shrink-0" />
+                            <span>{line}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-xs text-neutral mt-0.5 leading-relaxed">{section.content}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Sticky footer */}
+            <div className="sticky bottom-0 bg-white border-t border-brand-subtle px-6 py-3 rounded-b-3xl">
+              <p className="text-[10px] text-neutral text-center">
+                Template structure — sections are customised to your specific operations
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

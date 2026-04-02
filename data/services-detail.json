@@ -104,6 +104,52 @@
         "feature": "Audit-Ready Records Design",
         "detail": "Records are formatted for easy retrieval, logical filing, and instant auditor-readiness — reducing the time your team spends scrambling during inspections and demonstrating a mature quality culture.",
         "stat": { "value": "Inspection", "label": "Ready at all times" }
+      },
+      {
+        "icon": "Eye",
+        "feature": "Document Templates",
+        "detail": "Explore the standardised formats used in real client engagements — hover or tap a button below to preview our SOP and SSOP document templates.",
+        "templatePreviews": [
+          {
+            "label": "Preview SOP Template",
+            "title": "Standard Operating Procedure (SOP)",
+            "sections": [
+              { "number": "HDR", "title": "Header Fields", "content": "SOP Title: [e.g., Personnel Hygiene]\nSOP Number: [Unique ID]\nVersion Date: [Date]\nEffective Date: [Date]\nReview Date: [Date]\nAuthored By: [Name / Position]\nApproved By: [Name / Position]" },
+              { "number": "1", "title": "Purpose", "content": "State the objective of the SOP and why it is required." },
+              { "number": "2", "title": "Scope", "content": "Define where and to whom this SOP applies." },
+              { "number": "4", "title": "Definitions", "content": "Define any key terms used in the SOP." },
+              { "number": "5", "title": "Responsibilities", "content": "Outline roles responsible for compliance." },
+              { "number": "6", "title": "Health & Safety, Training & Requirements", "content": "List specific safety considerations, required PPE, staff training needs, or any prerequisite requirements for implementing this SOP." },
+              { "number": "7", "title": "Procedure", "content": "Provide step-by-step instructions in clear order." },
+              { "number": "8", "title": "Monitoring & Records", "content": "Describe how compliance will be monitored and documented." },
+              { "number": "9", "title": "Verification", "content": "Explain how compliance with this SOP will be verified." },
+              { "number": "10", "title": "Corrective Actions / Deviations", "content": "State what to do if the SOP is not followed." },
+              { "number": "11", "title": "Documentation & Records", "content": "List forms or logs associated with this SOP." },
+              { "number": "12", "title": "References", "content": "List regulatory or certification references that guide this SOP." },
+              { "number": "13", "title": "History of Changes", "content": "Show how SOP updates are tracked." }
+            ]
+          },
+          {
+            "label": "Preview SSOP Template",
+            "title": "Sanitation Standard Operating Procedure (SSOP)",
+            "sections": [
+              { "number": "HDR", "title": "Header Fields", "content": "SSOP Title: [e.g., Cleaning and Sanitizing of Production Equipment]\nSSOp Number: [Unique ID]\nVersion Number: [Unique ID]\nEffective Date: [Date]\nReview Date: [Date]\nAuthored By: [Name / Position]\nApproved By: [Name / Position]" },
+              { "number": "1", "title": "Purpose", "content": "State the objective of the SSOP." },
+              { "number": "2", "title": "Scope", "content": "Define the area, equipment, and personnel this SSOP applies to." },
+              { "number": "3", "title": "References / Regulatory Basis", "content": "List regulatory references (CFIA, FDA, Codex, BRC, SQF, HACCP)." },
+              { "number": "4", "title": "Definitions", "content": "Define key terms such as cleaning, sanitizing, ATP testing." },
+              { "number": "5", "title": "Responsibilities", "content": "Outline who executes, supervises, and verifies sanitation." },
+              { "number": "6", "title": "Sanitation Procedure", "content": "Provide step-by-step cleaning and sanitizing instructions." },
+              { "number": "7", "title": "Frequency", "content": "Define how often cleaning/sanitizing must be performed." },
+              { "number": "8", "title": "Chemicals and Safety", "content": "List approved chemicals and safety/PPE requirements." },
+              { "number": "9", "title": "Monitoring & Records", "content": "Logs, checklists, and verification records required." },
+              { "number": "10", "title": "Corrective Actions / Deviations", "content": "Steps to take when sanitation does not meet requirements." },
+              { "number": "11", "title": "Verification", "content": "Audits, reviews, and tests to ensure compliance." },
+              { "number": "12", "title": "Documentation & Records", "content": "List forms, logs, and records tied to sanitation." },
+              { "number": "13", "title": "History of Changes", "content": "Show how SSOP updates are tracked." }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -198,7 +244,7 @@
       {
         "icon": "PenTool",
         "feature": "Grant-Writing Support",
-        "detail": "From NSERC and CIHR to provincial and industry-specific funds, grant-writing support covers narrative development, budget justification, and compliance with funder-specific eligibility and formatting requirements.",
+        "detail": "Strategic support for funding applications across academic, industry, and research sectors, including proposal development, budget justification, and compliance with sponsor-specific requirements and evaluation criteria.",
         "stat": { "value": "Multi-funder", "label": "Grant expertise" }
       },
       {

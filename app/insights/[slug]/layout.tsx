@@ -7,40 +7,47 @@ type Article = {
   title: string;
   excerpt?: string;
   image?: string;
+  imageAlt?: string;
   date?: string;
+  author?: string;
+  category?: string;
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const article = (articlesData as Article[]).find((a) => a.slug === slug);
   if (!article) return { title: site.title, description: site.description };
+
+  const title = article.title;
+  const description = article.excerpt || site.description;
+  const url = `${site.url}/insights/${article.slug}`;
+  const imageUrl = article.image
+    ? article.image.startsWith("http") ? article.image : `${site.url}${article.image}`
+    : `${site.url}${site.ogImage}`;
+
   return {
-    title: `${article.title} — ${site.shortName}`,
-    description: article.excerpt || site.description,
-    alternates: { canonical: `/insights/${article.slug}` },
+    title,
+    description,
+    alternates: { canonical: url },
     openGraph: {
       type: "article",
-      title: `${article.title} — ${site.shortName}`,
-      description: article.excerpt || site.description,
-      url: `${site.url}/insights/${article.slug}`,
-      images: [
-        {
-          url: article.image || site.ogImage,
-          width: 1200,
-          height: 630,
-          alt: article.title,
-        },
-      ],
+      title,
+      description,
+      url,
+      publishedTime: article.date,
+      authors: article.author ? [article.author] : undefined,
+      section: article.category,
+      images: [{ url: imageUrl, width: 1200, height: 800, alt: article.imageAlt || title }],
     },
     twitter: {
-      card: site.twitter.card,
-      title: `${article.title} — ${site.shortName}`,
-      description: article.excerpt || site.description,
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
     },
   };
 }
 
-// For static export, generate the list of article paths at build time
 export const dynamicParams = false;
 export function generateStaticParams() {
   return (articlesData as Article[]).map((a) => ({ slug: a.slug }));

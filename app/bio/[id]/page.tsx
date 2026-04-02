@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import data from "@/data/consultants.json" assert { type: "json" };
 import site from "@/data/site";
 import JsonLd from "@/components/JsonLd";
-import { Award, Share2, Home } from "lucide-react";
+import { Award, Share2, Home, User } from "lucide-react";
 // Note: generateMetadata cannot be exported from a client component; if needed,
 // we can move metadata logic into a server layout or route-level layout.
 
@@ -99,8 +99,11 @@ export default function BioPage() {
               {consultant.role && <p className="text-brand font-semibold">{consultant.role}</p>}
               <div className="mt-3"><button className="inline-flex items-center gap-2 text-sm text-neutral hover:text-brand" onClick={() => navigator.share?.({ title: consultant.name, url: typeof window!=="undefined"?window.location.href:undefined }).catch(()=>{})}><Share2 className="w-4 h-4" /> Share</button></div>
               <article className="mt-4 md:mt-6 card p-5 md:p-8 bio-content">
+                <h2 className="font-display font-semibold text-xl text-dark mb-3 flex items-center gap-2">
+                  <User className="w-5 h-5 text-brand" /> About
+                </h2>
                 {consultant.bio.map((p, i) => (
-                  <p className="text-neutral mb-4" key={i}>{p}</p>
+                  <p className="text-neutral mb-4 last:mb-0" key={i}>{p}</p>
                 ))}
               </article>
             </div>
