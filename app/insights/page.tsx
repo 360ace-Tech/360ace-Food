@@ -131,9 +131,10 @@ export default function InsightsPage() {
                   <div className="relative h-56 bg-slate-100 overflow-hidden">
                     <Image
                       src={article.image}
-                      alt={article.title}
+                      alt={"imageAlt" in article && typeof article.imageAlt === "string" ? article.imageAlt : article.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className={`transition-transform duration-500 ${"imageFit" in article && article.imageFit === "contain" ? "object-contain p-2" : "object-cover group-hover:scale-105"}`}
                     />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-brand">
@@ -192,11 +193,11 @@ export default function InsightsPage() {
       <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-white">
         <div className="max-w-[1000px] mx-auto text-center">
           <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tight text-dark mb-4">
-            
+            Have a food safety question?
           </h2>
           <p className="text-neutral text-base md:text-lg max-w-2xl mx-auto mb-8">
-            
-            
+            Our consultants are available to help you navigate regulatory requirements, build stronger
+            systems, and strengthen your food safety culture across the entire value chain.
           </p>
           <Link
             href="/contact"

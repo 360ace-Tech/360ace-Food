@@ -1,0 +1,354 @@
+[
+  {
+    "id": "food-safety-gmp-training",
+    "title": "Food Safety & GMP Training",
+    "tagline": "From compliance to excellence",
+    "description": "Onsite and virtual programs that embed Good Manufacturing and Hygienic Practices into daily operations and strengthen food-safety culture.",
+    "icon": "Users",
+    "accentColor": "emerald",
+    "slides": [
+      {
+        "icon": "GraduationCap",
+        "feature": "GMP/GHP & Food Safety Training",
+        "detail": "Tailored training programs for production staff, QA teams, and leadership that translate regulatory requirements into practical, day-to-day habits — building a facility-wide food safety culture rather than checkbox compliance.",
+        "stat": { "value": "100%", "label": "Audit-ready workforce" }
+      },
+      {
+        "icon": "FileCheck",
+        "feature": "Training Records & Certification",
+        "detail": "Structured documentation of attendance, competency assessments, and certificates ensures your records hold up under CFIA, BRCGS, or customer audits — turning training into traceable evidence of due diligence.",
+        "stat": { "value": "Zero", "label": "Documentation gaps" }
+      },
+      {
+        "icon": "ClipboardCheck",
+        "feature": "Competency Evaluation & Refreshers",
+        "detail": "Post-training evaluations identify knowledge gaps before they become operational risks. Scheduled refresher sessions keep food safety knowledge current as regulations evolve and staff roles change.",
+        "stat": { "value": "Ongoing", "label": "Competency assurance" }
+      },
+      {
+        "icon": "Factory",
+        "feature": "Facility-Tailored Guidance",
+        "detail": "Generic training rarely sticks. Every program is anchored in your facility's actual workflows, product lines, and risk profile — making content immediately applicable and memorable for each team member.",
+        "stat": { "value": "Custom", "label": "Per-facility design" }
+      }
+    ]
+  },
+  {
+    "id": "technical-training",
+    "title": "Technical Training",
+    "tagline": "Building technical confidence from farm to fork",
+    "description": "Specialized trainings that strengthen analytical, processing, and quality skills across the full food production chain.",
+    "icon": "Beaker",
+    "accentColor": "orange",
+    "slides": [
+      {
+        "icon": "Microscope",
+        "feature": "Food Safety & Microbiology",
+        "detail": "Understanding pathogen behavior, contamination routes, and microbiological testing methods is the foundation of a robust food safety program — this module bridges science and operational decision-making.",
+        "stat": { "value": "Science-led", "label": "Risk reduction" }
+      },
+      {
+        "icon": "Thermometer",
+        "feature": "Food Processing & Preservation",
+        "detail": "From thermal processing to modified atmosphere packaging, teams learn the critical control parameters that maintain product quality and safety — reducing spoilage, recalls, and consumer risk.",
+        "stat": { "value": "Critical", "label": "CCP mastery" }
+      },
+      {
+        "icon": "Scale",
+        "feature": "Food Laws & Legislation",
+        "detail": "Canadian and international food legislation is complex and evolving. This module ensures your team understands the Safe Food for Canadians Regulations (SFCR), CFIA requirements, and how to stay current.",
+        "stat": { "value": "SFCR", "label": "Compliance ready" }
+      },
+      {
+        "icon": "BadgeCheck",
+        "feature": "Quality & Regulatory Compliance",
+        "detail": "Learn how quality management systems — ISO 9001, BRCGS, SQF — integrate with regulatory requirements to create a cohesive framework that satisfies auditors and protects brand reputation.",
+        "stat": { "value": "Multi-standard", "label": "QMS alignment" }
+      },
+      {
+        "icon": "AlertTriangle",
+        "feature": "Allergen Management & Label Control",
+        "detail": "With 14 priority allergens regulated in Canada, allergen management training covers risk assessment, cross-contact prevention, label verification, and crisis-response protocols that protect both consumers and your brand.",
+        "stat": { "value": "14", "label": "Priority allergens" }
+      },
+      {
+        "icon": "Search",
+        "feature": "Root Cause Analysis & Internal Auditing",
+        "detail": "Equip your quality team to conduct thorough internal audits and use structured RCA methodologies (5-Whys, fishbone, FMEA) to resolve non-conformances before they escalate to regulatory action.",
+        "stat": { "value": "Proactive", "label": "Non-conformance control" }
+      }
+    ]
+  },
+  {
+    "id": "quality-system-documentation",
+    "title": "Quality System Documentation",
+    "tagline": "Clear, practical, and audit-ready",
+    "description": "Documentation that fits your operations — not a generic template dropped in your folder.",
+    "icon": "FileText",
+    "accentColor": "slate",
+    "slides": [
+      {
+        "icon": "FileEdit",
+        "feature": "SOP & SSOP Development",
+        "detail": "Standard Operating Procedures and Sanitation SOPs are developed in alignment with CFIA, Health Canada, and applicable global standards (BRCGS, SQF, FSSC 22000) — written in clear, actionable language your staff will actually use.",
+        "stat": { "value": "CFIA/BRCGS", "label": "Standard-aligned" }
+      },
+      {
+        "icon": "GitBranch",
+        "feature": "Workflow-Based Procedures",
+        "detail": "Procedures are mapped to your actual process flow — from receiving through dispatch — ensuring every step has an owner, a control, and a verification method that makes sense on the floor, not just on paper.",
+        "stat": { "value": "End-to-end", "label": "Process coverage" }
+      },
+      {
+        "icon": "Folder",
+        "feature": "Audit-Ready Records Design",
+        "detail": "Records are formatted for easy retrieval, logical filing, and instant auditor-readiness — reducing the time your team spends scrambling during inspections and demonstrating a mature quality culture.",
+        "stat": { "value": "Inspection", "label": "Ready at all times" }
+      },
+      {
+        "icon": "Eye",
+        "feature": "Document Templates",
+        "detail": "Explore the standardised formats used in real client engagements — hover or tap a button below to preview our SOP and SSOP document templates.",
+        "templatePreviews": [
+          {
+            "label": "Preview SOP Template",
+            "title": "Standard Operating Procedure (SOP)",
+            "sections": [
+              { "number": "HDR", "title": "Header Fields", "content": "SOP Title: [e.g., Personnel Hygiene]\nSOP Number: [Unique ID]\nVersion Date: [Date]\nEffective Date: [Date]\nReview Date: [Date]\nAuthored By: [Name / Position]\nApproved By: [Name / Position]" },
+              { "number": "1", "title": "Purpose", "content": "State the objective of the SOP and why it is required." },
+              { "number": "2", "title": "Scope", "content": "Define where and to whom this SOP applies." },
+              { "number": "4", "title": "Definitions", "content": "Define any key terms used in the SOP." },
+              { "number": "5", "title": "Responsibilities", "content": "Outline roles responsible for compliance." },
+              { "number": "6", "title": "Health & Safety, Training & Requirements", "content": "List specific safety considerations, required PPE, staff training needs, or any prerequisite requirements for implementing this SOP." },
+              { "number": "7", "title": "Procedure", "content": "Provide step-by-step instructions in clear order." },
+              { "number": "8", "title": "Monitoring & Records", "content": "Describe how compliance will be monitored and documented." },
+              { "number": "9", "title": "Verification", "content": "Explain how compliance with this SOP will be verified." },
+              { "number": "10", "title": "Corrective Actions / Deviations", "content": "State what to do if the SOP is not followed." },
+              { "number": "11", "title": "Documentation & Records", "content": "List forms or logs associated with this SOP." },
+              { "number": "12", "title": "References", "content": "List regulatory or certification references that guide this SOP." },
+              { "number": "13", "title": "History of Changes", "content": "Show how SOP updates are tracked." }
+            ]
+          },
+          {
+            "label": "Preview SSOP Template",
+            "title": "Sanitation Standard Operating Procedure (SSOP)",
+            "sections": [
+              { "number": "HDR", "title": "Header Fields", "content": "SSOP Title: [e.g., Cleaning and Sanitizing of Production Equipment]\nSSOp Number: [Unique ID]\nVersion Number: [Unique ID]\nEffective Date: [Date]\nReview Date: [Date]\nAuthored By: [Name / Position]\nApproved By: [Name / Position]" },
+              { "number": "1", "title": "Purpose", "content": "State the objective of the SSOP." },
+              { "number": "2", "title": "Scope", "content": "Define the area, equipment, and personnel this SSOP applies to." },
+              { "number": "3", "title": "References / Regulatory Basis", "content": "List regulatory references (CFIA, FDA, Codex, BRC, SQF, HACCP)." },
+              { "number": "4", "title": "Definitions", "content": "Define key terms such as cleaning, sanitizing, ATP testing." },
+              { "number": "5", "title": "Responsibilities", "content": "Outline who executes, supervises, and verifies sanitation." },
+              { "number": "6", "title": "Sanitation Procedure", "content": "Provide step-by-step cleaning and sanitizing instructions." },
+              { "number": "7", "title": "Frequency", "content": "Define how often cleaning/sanitizing must be performed." },
+              { "number": "8", "title": "Chemicals and Safety", "content": "List approved chemicals and safety/PPE requirements." },
+              { "number": "9", "title": "Monitoring & Records", "content": "Logs, checklists, and verification records required." },
+              { "number": "10", "title": "Corrective Actions / Deviations", "content": "Steps to take when sanitation does not meet requirements." },
+              { "number": "11", "title": "Verification", "content": "Audits, reviews, and tests to ensure compliance." },
+              { "number": "12", "title": "Documentation & Records", "content": "List forms, logs, and records tied to sanitation." },
+              { "number": "13", "title": "History of Changes", "content": "Show how SSOP updates are tracked." }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "laboratory-methods-advisory",
+    "title": "Laboratory Methods Advisory & Training",
+    "tagline": "From testing to trust",
+    "description": "Building reliable, compliant laboratory systems through practical, results-focused programs.",
+    "icon": "TestTube2",
+    "accentColor": "emerald",
+    "slides": [
+      {
+        "icon": "FlaskConical",
+        "feature": "Testing Method Selection",
+        "detail": "Selecting validated, fit-for-purpose analytical methods — ISO, AOAC, or in-house — is critical for defensible results. Advisory covers method validation principles, detection limits, and regulatory acceptability.",
+        "stat": { "value": "ISO/AOAC", "label": "Validated methods" }
+      },
+      {
+        "icon": "BarChart2",
+        "feature": "Sampling, Analysis & Data Interpretation",
+        "detail": "Statistically sound sampling plans and rigorous data interpretation training ensure your laboratory results are reliable, reproducible, and meaningful for product release and compliance decisions.",
+        "stat": { "value": "Defensible", "label": "Result integrity" }
+      },
+      {
+        "icon": "Link2",
+        "feature": "Third-Party Laboratory Coordination",
+        "detail": "Coordinating with accredited external labs — selecting the right lab, interpreting certificates of analysis, and managing turnaround times — reduces delays and ensures test results support your quality decisions.",
+        "stat": { "value": "Accredited", "label": "Lab network access" }
+      },
+      {
+        "icon": "Wrench",
+        "feature": "Technical Troubleshooting & Method Optimization",
+        "detail": "When results are inconsistent or methods underperform, systematic troubleshooting identifies root causes — whether equipment drift, reagent quality, or procedural gaps — and implements optimized protocols.",
+        "stat": { "value": "Optimized", "label": "Method performance" }
+      }
+    ]
+  },
+  {
+    "id": "research-support",
+    "title": "Research Support",
+    "tagline": "From concept to publication",
+    "description": "Structured guidance that enhances scientific rigor and publication credibility.",
+    "icon": "BookOpenCheck",
+    "accentColor": "orange",
+    "slides": [
+      {
+        "icon": "Workflow",
+        "feature": "Research Design & Protocol Development",
+        "detail": "Robust research begins with a well-structured design. Support covers hypothesis formulation, experimental design (randomized, factorial, longitudinal), variable control, and protocol documentation to meet institutional and funder standards.",
+        "stat": { "value": "Rigorous", "label": "Study design" }
+      },
+      {
+        "icon": "PieChart",
+        "feature": "Statistical Analysis & Data Interpretation",
+        "detail": "From descriptive statistics to multivariate analysis, guidance ensures the right tests are selected for your data type, assumptions are verified, and results are interpreted with appropriate confidence — strengthening peer-review outcomes.",
+        "stat": { "value": "p < 0.05", "label": "Statistical validity" }
+      },
+      {
+        "icon": "Atom",
+        "feature": "Experimental Method Development",
+        "detail": "Food and agri-food research often requires novel or adapted analytical methods. Support includes method development, preliminary validation, and documenting procedures to the level required for publication or regulatory submission.",
+        "stat": { "value": "Novel", "label": "Method validation" }
+      },
+      {
+        "icon": "BookOpen",
+        "feature": "Manuscript Formatting & Journal Submission",
+        "detail": "Navigating journal-specific formatting guidelines, author contribution statements, and submission portals can derail otherwise excellent research. End-to-end submission support accelerates acceptance timelines.",
+        "stat": { "value": "Higher", "label": "Acceptance rates" }
+      },
+      {
+        "icon": "CheckSquare",
+        "feature": "Manuscript Review & Plagiarism Check",
+        "detail": "Independent technical and language review catches errors, strengthens argument flow, and verifies originality — giving authors confidence their work will withstand peer scrutiny and editorial screening.",
+        "stat": { "value": "Zero", "label": "Plagiarism risk" }
+      }
+    ]
+  },
+  {
+    "id": "proposal-grant-development",
+    "title": "Proposal & Grant Development",
+    "tagline": "From ideas to impact",
+    "description": "Transforming research and industry concepts into funder-ready proposals.",
+    "icon": "FileBadge2",
+    "accentColor": "slate",
+    "slides": [
+      {
+        "icon": "FileSearch",
+        "feature": "Proposal Review for Clarity & Accuracy",
+        "detail": "Funders receive hundreds of submissions — clarity, logical flow, and technical accuracy are what make proposals stand out. Review services strengthen alignment between objectives, methodology, budget, and impact statements.",
+        "stat": { "value": "Funder-ready", "label": "Review standard" }
+      },
+      {
+        "icon": "PenTool",
+        "feature": "Grant-Writing Support",
+        "detail": "Strategic support for funding applications across academic, industry, and research sectors, including proposal development, budget justification, and compliance with sponsor-specific requirements and evaluation criteria.",
+        "stat": { "value": "Multi-funder", "label": "Grant expertise" }
+      },
+      {
+        "icon": "RefreshCw",
+        "feature": "Resubmission & Funder Feedback Advisory",
+        "detail": "Rejected proposals contain valuable reviewer feedback that, when properly addressed, significantly improves resubmission success rates. Advisory translates reviewer critiques into targeted revisions.",
+        "stat": { "value": "Improved", "label": "Resubmission success" }
+      }
+    ]
+  },
+  {
+    "id": "conference-insight-support",
+    "title": "Conference & Insight Support",
+    "tagline": "Elevating thought leadership",
+    "description": "Evidence-rich storytelling and impactful knowledge sharing for conferences and industry events.",
+    "icon": "Mic",
+    "accentColor": "emerald",
+    "slides": [
+      {
+        "icon": "CalendarDays",
+        "feature": "Conference Planning & Speaker Management",
+        "detail": "From initial program design to on-the-day logistics, comprehensive conference support covers session structuring, speaker coordination, abstract management, and timeline planning that keeps events running flawlessly.",
+        "stat": { "value": "End-to-end", "label": "Event management" }
+      },
+      {
+        "icon": "LayoutTemplate",
+        "feature": "Presentation & Poster Development",
+        "detail": "Data-driven visualizations, clean poster layouts, and compelling slide narratives ensure your research and industry insights reach audiences with clarity and impact — whether at academic conferences or industry summits.",
+        "stat": { "value": "Award-worthy", "label": "Visual communication" }
+      },
+      {
+        "icon": "Users2",
+        "feature": "Training & Workshop Facilitation",
+        "detail": "Interactive workshop design and skilled facilitation create participatory learning environments that move beyond passive attendance — improving knowledge retention and generating actionable outcomes for diverse audiences.",
+        "stat": { "value": "Interactive", "label": "Adult learning design" }
+      },
+      {
+        "icon": "TrendingUp",
+        "feature": "Impact Reporting & Capacity-Building Docs",
+        "detail": "Post-event impact documentation captures attendance, key learnings, and capacity outcomes — providing funders, stakeholders, and leadership with evidence of program value and return on investment.",
+        "stat": { "value": "Evidence-based", "label": "Impact reporting" }
+      }
+    ]
+  },
+  {
+    "id": "food-import-readiness",
+    "title": "Food Import Readiness & Compliance",
+    "tagline": "From source to shelf",
+    "description": "Ensuring imported food products meet Canadian safety and labeling standards before they reach market.",
+    "icon": "Ship",
+    "accentColor": "orange",
+    "slides": [
+      {
+        "icon": "MapPin",
+        "feature": "CFIA & Health Canada Product Guidance",
+        "detail": "Each food category — meat, dairy, produce, novel foods — has unique CFIA and Health Canada requirements. Advisory covers category-specific standards, permissible ingredients, and documentation requirements before product ships.",
+        "stat": { "value": "Category-specific", "label": "Regulatory guidance" }
+      },
+      {
+        "icon": "FileStack",
+        "feature": "Import Permits, Docs & Compliance Prep",
+        "detail": "Import permits, certificates of free sale, phytosanitary certificates, and commercial invoices must align precisely with CFIA requirements at the border — this service prepares importers to avoid costly holds and rejections.",
+        "stat": { "value": "Border-ready", "label": "Documentation prep" }
+      },
+      {
+        "icon": "FlaskConical",
+        "feature": "Food Product Analysis Advisory",
+        "detail": "Recommending the right analytical tests — microbiological, chemical, pesticide residue — for each product category ensures imported goods meet Canadian safety limits and are defensible against CFIA sampling programs.",
+        "stat": { "value": "Risk-based", "label": "Testing strategy" }
+      },
+      {
+        "icon": "Tag",
+        "feature": "Packaging, Labeling & Market-Entry Advisory",
+        "detail": "Canadian bilingual labeling requirements, nutrition facts tables, allergen declarations, and country-of-origin rules are complex and strictly enforced. Label review catches non-compliances before products hit retail shelves.",
+        "stat": { "value": "Bilingual", "label": "Label compliance" }
+      }
+    ]
+  },
+  {
+    "id": "regulatory-audit-readiness",
+    "title": "Regulatory & Audit Readiness",
+    "tagline": "From compliance to confidence",
+    "description": "Systems, documentation, and training that keep you inspection-ready — every day, not just audit day.",
+    "icon": "ClipboardList",
+    "accentColor": "slate",
+    "slides": [
+      {
+        "icon": "Shield",
+        "feature": "Advisory & On-Site Audit Support",
+        "detail": "Whether facing a CFIA routine inspection, BRCGS certification audit, or a major customer audit, on-site advisory provides real-time guidance on document presentation, corrective action responses, and auditor communication.",
+        "stat": { "value": "CFIA/BRCGS", "label": "Multi-scheme support" }
+      },
+      {
+        "icon": "Globe",
+        "feature": "Regulatory Compliance Interpretation",
+        "detail": "International regulatory divergences — between Codex Alimentarius, EU regulations, FDA requirements, and Canadian SFCR — are identified and interpreted to support market access strategies without duplicating compliance effort.",
+        "stat": { "value": "Global", "label": "Regulatory reach" }
+      },
+      {
+        "icon": "Calculator",
+        "feature": "Nutritional Labeling & Calculation",
+        "detail": "Accurate nutritional value calculations using validated databases and compliant formatting for Canadian Nutrition Facts tables and international equivalents ensures labels meet retail buyer and regulatory requirements at launch.",
+        "stat": { "value": "Retail-ready", "label": "Label accuracy" }
+      }
+    ]
+  }
+]

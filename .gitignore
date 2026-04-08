@@ -44,3 +44,6 @@ archive/
 *.tsbuildinfo
 next-env.d.ts
 .docx
+
+.claude
+SKILLS.md

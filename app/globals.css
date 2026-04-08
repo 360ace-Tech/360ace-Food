@@ -164,6 +164,38 @@ body {
   animation: leaf-float var(--dur, 10s) ease-in-out var(--delay, 0s) infinite;
 }
 
+/* ── Service Card Interactions ─────────────────────────────────────────────── */
+/* Spring/bounce scale + green glow on hover */
+.service-card {
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.3s ease;
+}
+
+.service-card:hover {
+  transform: scale(1.025) translateY(-6px);
+  box-shadow:
+    0 0 0 1px rgba(5, 150, 105, 0.14),
+    0 20px 48px rgba(5, 150, 105, 0.20),
+    0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: rgba(5, 150, 105, 0.2);
+}
+
+/* Title underline sweep on card hover */
+.service-card-title {
+  background-image: linear-gradient(var(--brand-primary), var(--brand-primary));
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size 0.28s ease;
+  padding-bottom: 1px;
+}
+
+.service-card:hover .service-card-title {
+  background-size: 100% 1.5px;
+}
+
 /* Defaults for responsive swaps */
 .cta-text-short { display: none; }
 
