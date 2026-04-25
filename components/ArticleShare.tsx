@@ -1,15 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
 import { Twitter, Linkedin, Facebook, Copy, Share2 } from "lucide-react";
 import site from "@/data/site";
 
 export default function ArticleShare({ title, slug }: { title: string; slug: string }) {
-  const canonicalUrl = `${site.url}/insights/${slug}`;
-  const [url, setUrl] = useState(canonicalUrl);
-
-  useEffect(() => {
-    setUrl(window.location.href);
-  }, []);
+  const url = `${site.url}/insights/${slug}`;
 
   return (
     <div className="flex items-center gap-3 ml-auto">

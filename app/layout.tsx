@@ -25,6 +25,16 @@ export const metadata: Metadata = {
   authors: [{ name: site.name }],
   creator: site.name,
   publisher: site.name,
+  applicationName: site.shortName,
+  category: "Food safety consulting",
+  classification: "Business",
+  referrer: "strict-origin-when-cross-origin",
+  manifest: "/manifest.webmanifest",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   robots: {
     index: true,
     follow: true,
@@ -60,7 +70,6 @@ export const metadata: Metadata = {
     description: site.description,
     images: [`${site.url}${site.ogImage}`],
   },
-  applicationName: site.shortName,
   icons: {
     icon: [
       { url: "/favicon.png", sizes: "16x16", type: "image/png" },
@@ -71,6 +80,15 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: site.url,
+    languages: {
+      "en-CA": site.url,
+      "x-default": site.url,
+    },
+  },
+  appleWebApp: {
+    capable: true,
+    title: site.shortName,
+    statusBarStyle: "default",
   },
 };
 
@@ -116,6 +134,21 @@ export default function RootLayout({
             name: site.title,
             url: site.url,
             publisher: { "@id": `${site.url}/#organization` },
+            inLanguage: "en-CA",
+            hasPart: [
+              {
+                "@type": "CollectionPage",
+                "@id": `${site.url}/insights#collection`,
+                name: "Food safety insights",
+                url: `${site.url}/insights`,
+              },
+              {
+                "@type": "ContactPage",
+                "@id": `${site.url}/contact#contact`,
+                name: "Book a Consultation",
+                url: `${site.url}/contact`,
+              },
+            ],
           }}
         />
         <JsonLd

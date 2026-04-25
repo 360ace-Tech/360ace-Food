@@ -3,7 +3,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const pub = path.join(root, 'public');
 let ok = true;
 
 function assertFile(p) {

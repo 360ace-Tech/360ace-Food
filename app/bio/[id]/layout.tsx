@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title,
     description,
+    keywords: [consultant.name, "food safety consultant", "food regulatory consultant", "quality assurance"].filter(Boolean),
     alternates: { canonical: url },
     openGraph: {
       type: "profile",

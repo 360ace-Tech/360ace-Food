@@ -23,6 +23,7 @@ const CSP = [
   .concat(";");
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   ...(isStaticExport ? { output: "export", trailingSlash: true } : {}),
   async headers() {
     return [

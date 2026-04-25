@@ -149,17 +149,18 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [activeTemplate, setActiveTemplate] = useState<TemplatePreviewData | null>(null);
+  const serviceId = service?.id;
 
   // ── SYNC reset slide index when a different service opens ──────────────────
   // useLayoutEffect runs before the next paint, so `currentSlide` is 0 on
   // the very first render with the new service — prevents slides[N] = undefined.
   useLayoutEffect(() => {
     setCurrentSlide(0);
-  }, [service?.id]);
+  }, [serviceId]);
 
   // ── Open animation ────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!service) return;
+    if (!serviceId) return;
 
     const tl = gsap.timeline();
     tl.fromTo(
@@ -195,7 +196,7 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
       document.body.style.overflow = "";
       window.scrollTo(0, scrollY);
     };
-  }, [service?.id]); // re-run only when the service identity changes
+  }, [serviceId]); // re-run only when the service identity changes
 
   // ── Close animation ───────────────────────────────────────────────────────
   const handleClose = useCallback(() => {

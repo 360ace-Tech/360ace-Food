@@ -28,6 +28,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title,
     description,
+    keywords: [article.category, article.author, "food safety", "regulatory compliance"].filter(
+      Boolean
+    ) as string[],
     alternates: { canonical: url },
     openGraph: {
       type: "article",
@@ -35,8 +38,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       url,
       publishedTime: article.date,
+      modifiedTime: article.date,
       authors: article.author ? [article.author] : undefined,
       section: article.category,
+      tags: [article.category, "Food Safety", "Regulatory Compliance"].filter(Boolean) as string[],
       images: [{ url: imageUrl, width: 1200, height: 800, alt: article.imageAlt || title }],
     },
     twitter: {
