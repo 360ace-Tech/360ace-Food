@@ -1,6 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import { sendContactEmail } from "@/lib/mail";
 
+type ContactPayload = Record<string, unknown>;
+
 async function verifyTurnstile(req: NextRequest) {
   const secret = process.env.TURNSTILE_SECRET_KEY || process.env.CLOUDFLARE_TURNSTILE_SECRET || "";
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || "";
@@ -11,7 +13,7 @@ async function verifyTurnstile(req: NextRequest) {
   const host = req.headers.get("host") || req.nextUrl.hostname || "";
   const isPreview = /\.netlify\.app$/i.test(host) || /localhost(:\d+)?$/i.test(host);
 
-  const body = await req.clone().json().catch(() => ({} as any));
+  const body = (await req.clone().json().catch(() => ({}))) as ContactPayload;
   const token = String(body["cf-turnstile-response"] || body.turnstile || "");
 
   if ((!token || !siteKey) && isPreview) {
@@ -85,7 +87,7 @@ export async function POST(req: NextRequest) {
     const v = await verifyTurnstile(req);
     if (!v.ok) return withCors(NextResponse.json({ ok: false, error: v.error }, { status: 400 }), req, allowed);
 
-    const data = await req.json().catch(() => ({}));
+    const data = (await req.json().catch(() => ({}))) as ContactPayload;
     const name = String(data.name || "").trim();
     const email = String(data.email || "").trim();
     const company = String(data.company || "").trim() || undefined;

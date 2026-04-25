@@ -9,6 +9,11 @@ import { ArrowRight, Mail } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import site from "@/data/site";
 
+type ContactResponse = {
+  ok?: boolean;
+  error?: string;
+};
+
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [error, setError] = useState<string>("");
@@ -117,13 +122,13 @@ export default function ContactPage() {
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(payload),
                 });
-                const json = await res.json().catch(() => ({} as any));
+                const json = (await res.json().catch(() => ({}))) as ContactResponse;
                 if (!res.ok || !json.ok) throw new Error(json.error || "Failed to send");
                 setStatus("success");
                 form.reset();
-              } catch (err: any) {
+              } catch (err: unknown) {
                 setStatus("error");
-                setError(err?.message || "Failed to send. Please email food@360ace.food.");
+                setError(err instanceof Error ? err.message : "Failed to send. Please email food@360ace.food.");
               }
             }}
           >
@@ -179,7 +184,7 @@ export default function ContactPage() {
                   </span>
                   <div>
                     <p className="font-display font-semibold text-sm text-emerald-900 tracking-tight">Request sent</p>
-                    <p className="font-display text-xs text-emerald-700 mt-0.5 leading-relaxed">Thank you — we'll reply within 1 business day.</p>
+                    <p className="font-display text-xs text-emerald-700 mt-0.5 leading-relaxed">Thank you — we&apos;ll reply within 1 business day.</p>
                   </div>
                 </div>
               )}
@@ -191,7 +196,7 @@ export default function ContactPage() {
                     </svg>
                   </span>
                   <div>
-                    <p className="font-display font-semibold text-sm text-red-900 tracking-tight">Couldn't send</p>
+                    <p className="font-display font-semibold text-sm text-red-900 tracking-tight">Couldn&apos;t send</p>
                     <p className="font-display text-xs text-red-700 mt-0.5 leading-relaxed">{error}</p>
                   </div>
                 </div>

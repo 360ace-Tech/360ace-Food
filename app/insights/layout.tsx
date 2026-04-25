@@ -9,6 +9,7 @@ const url = `${site.url}/insights`;
 export const metadata: Metadata = {
   title,
   description,
+  keywords: ["food safety articles", "food regulatory updates", "food safety best practices"],
   alternates: { canonical: url },
   openGraph: {
     type: "website",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     url,
     images: [{ url: `${site.url}${site.ogImage}`, width: 1200, height: 630, alt: title }],
   },
-  twitter: { card: "summary_large_image", title, description },
+  twitter: { card: "summary_large_image", title, description, images: [`${site.url}${site.ogImage}`] },
 };
 
 export default function InsightsLayout({ children }: { children: React.ReactNode }) {
