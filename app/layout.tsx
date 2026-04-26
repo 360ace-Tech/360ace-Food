@@ -72,10 +72,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.png", sizes: "16x16", type: "image/png" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", sizes: "96x96", type: "image/png" },
     ],
-    shortcut: "/favicon.png",
+    shortcut: "/favicon.ico",
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   alternates: {
@@ -158,7 +158,7 @@ export default function RootLayout({
             "@id": `${site.url}/#service`,
             name: site.name,
             url: site.url,
-            logo: `${site.url}/favicon.png`,
+            logo: `${site.url}/icon.png`,
             image: `${site.url}${site.ogImage}`,
             description: site.description,
             parentOrganization: { "@id": `${site.url}/#organization` },
