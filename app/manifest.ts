@@ -17,8 +17,8 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["business", "food"],
     icons: [
       {
-        src: "/favicon.png",
-        sizes: "16x16",
+        src: "/icon.png",
+        sizes: "96x96",
         type: "image/png",
       },
       {

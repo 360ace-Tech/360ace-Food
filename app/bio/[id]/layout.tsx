@@ -41,6 +41,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return (data as Consultant[]).map((consultant) => ({ id: consultant.id }));
+}
+
 export default function BioLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
